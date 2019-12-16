@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+
+{% block page_title %}NAA | Login{% endblock %}
+
+
+
+{% block content %}
+
+<div class="container">
+
+    <div id="page-heading">
+        <h1>Login</h1>
+    </div>
+
+    <form method="POST">
+        {% csrf_token%}
+        {% for field in login_form %}
+        <div class="form-group">
+        <label for="id_{{ field.label }}">{{ field.label }}</label>
+        {{ field|attr:'class:form-control' }}
+        </div>
+        {% endfor %}
+        <button type="submit" class="btn btn-primary">Login</button>
+    </form>
+
+    <p><a href="{% url 'password_reset' %}">Reset Password</a></p>
+
+</div>
+<!--./container-->
+
+{% endblock %}

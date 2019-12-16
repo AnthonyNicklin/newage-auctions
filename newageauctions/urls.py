@@ -19,10 +19,12 @@ from django.views import static
 from .settings import MEDIA_ROOT
 
 from home.views import index
+from accounts import urls as accounts_urls
 from auction import urls as auction_urls
 
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', index, name='index'),
+    url(r'^accounts/', include(accounts_urls)),
 ]
