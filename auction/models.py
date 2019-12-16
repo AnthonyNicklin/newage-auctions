@@ -38,6 +38,7 @@ class Auction(models.Model):
     """ Auction object """
 
     lot = models.ForeignKey(Lot, on_delete=models.CASCADE)
+    description = models.TextField(default='Newage Auctions')
     number_of_bids = models.IntegerField(default=0)
     buy_now = models.IntegerField(default=0)
     time_starting = models.DateTimeField()
