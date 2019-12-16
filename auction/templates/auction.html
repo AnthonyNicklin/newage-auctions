@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% load static from staticfiles %}
+{% load widget_tweaks %}
+
+{% block content %}
+
+<div class="container">
+
+    <div id="page-heading">
+        <h1>Auction No. {{ auction.pk }}</h1>
+    </div>
+
+    <a href="{% url 'all_auctions' %}"><i class="fas fa-chevron-left"></i> Back to auctions</a>
+
+    <p>{{ auction.description }}</p>
+
+    <div class="row">
+        
+        <div class="col-sm-12 col-md-6">
+            <div class="image-container-full">
+                <div class="lot-image" style="background-image: url('{{ MEDIA_URL }}{{ auction.lot.image }}')"></div>
+            </div>   
+        </div>
+        <div class="col-sm-12 col-md-6">
+            <div class="lot-details-box">
+                <span class="number">
+                    <span class='lot-number'>Lot No. {{ auction.lot_id }}</span>
+                </span>
+                <p class="lot-current-bid">Current Bid £{{ latest_bid.bid_amount }}</p> 
+                <p>Buy Now £{{ buy_now }}</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-12">
+            <p>{{ auction.lot.description }}</p>
+            <p>Origin {{ auction.lot.origin }}</p>
+            <p>Age {{ auction.lot.age }}</p>
+        </div>
+    </div>
+
+    <form method="POST" action="{% url 'bid' auction_id=auction.pk %}">
+            {% csrf_token %}
+            {% for field in bid_form %}
+            <div class="row">
+                <div class="col-sm-12 col-md-6">
+                    <div class="form-group">
+                        <!-- <label for="id_{{ field.label }}">{{ field.label }}</label> -->
+                        {{ field|attr:'class:form-control' }}
+                    </div>
+                </div>
+                {% endfor %}
+                <div class="col-sm-12 col-md-6">
+                    <button type="submit" class="btn btn-primary">Bid Now</button>
+                </div>
+            </div>
+    </form>
+
+</div>
+<!-- /.container -->
+{% endblock %}

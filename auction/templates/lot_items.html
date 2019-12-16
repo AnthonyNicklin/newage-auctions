@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% load static from staticfiles %}
+
+{% block content %}
+
+<div class="container">
+
+    <div id="page-heading">
+        <h1>Lots</h1>
+    </div>
+
+    {% for lot in lot_items %}
+        <div class="lot-summary">
+            <div class="image-container">
+                <div class="lot-image" style="background-image: url('{{ MEDIA_URL }}{{ lot.image }}')"></div>
+            </div>
+            <div class="data-container">
+                <span class="number">
+                    <span class='lot-number'>Lot No. {{ lot.pk }}</span>
+                </span>
+                <div class="lot-title">
+                    <span><a href="{% url 'lot' lot.pk %}">{{ lot.name }}</a></span>
+                    <p>{{ lot.description }}</p>
+                </div>
+                <div class="lot-bid">
+                    <span>Current Bid £{{ lot.current_bid }}</span>
+                    <span>Buy now £{{ lot.buy_price }}</span>
+
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+
+    <!-- Pagination -->
+    <div class="pagination">
+        <span class="step-links">
+            {% if lot_items.has_previous %}
+                <a href="?page={{ lot_items.previous_page_number }}">previous</a>
+            {% endif %}
+    
+            <span class="current">
+                Page {{ lot_items.number }} of {{ lot_items.paginator.num_pages }}
+            </span>
+    
+            {% if lot_items.has_next %}
+                <a href="?page={{ lot_items.next_page_number }}">next</a>
+            {% endif %}
+        </span>
+    </div>
+
+    <!-- End Pagination -->
+
+</div>
+<!-- ./container -->
+
+{% endblock %}

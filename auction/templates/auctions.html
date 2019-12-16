@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load static from staticfiles %}
+
+{% block content %}
+
+<div class="container">
+
+    <div id="page-heading">
+        <h1>Auctions</h1>
+    </div>
+
+    {% for auction in all_auctions %}
+        <div class="auction-summary">
+            <div class="data-container">
+                <span class="number">
+                    <span class='auction-number'>Auction No. {{ auction.pk }}</span>
+                </span>
+                <div class="auction-title">
+                    <span><a href="{% url 'auction' auction.pk %}">Auction</a></span>
+                    <p>{{ auction.description }}</p>
+                </div>
+                <div>
+                    <span>Start {{ auction.time_starting }}</span>
+                    <span>Finish {{ auction.time_ending }}</span>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+
+</div>
+<!-- ./container -->
+
+{% endblock %}
