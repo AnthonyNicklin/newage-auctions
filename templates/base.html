@@ -42,10 +42,10 @@
                                 <a class="nav-link" href="{% url 'index' %}">Home</a>
                             </li>
                             <li class="nav-item mx-2">
-                                <a class="nav-link" href="#">Auctions</a>
+                                <a class="nav-link" href="{% url 'all_auctions' %}">Auctions</a>
                             </li>
                             <li class="nav-item mx-2">
-                                <a class="nav-link" href="#">Lots</a>
+                                <a class="nav-link" href="{% url 'all_lot_items' %}">Lots</a>
                             </li>
                         {% if user.is_authenticated %}
                             <li class="nav-item mx-2">
