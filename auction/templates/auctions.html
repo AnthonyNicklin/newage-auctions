@@ -12,11 +12,8 @@
     {% for auction in all_auctions %}
         <div class="auction-summary">
             <div class="data-container">
-                <span class="number">
-                    <span class='auction-number'>Auction No. {{ auction.pk }}</span>
-                </span>
                 <div class="auction-title">
-                    <span><a href="{% url 'auction' auction.pk %}">Auction</a></span>
+                    <span><a href="{% url 'auction' auction.pk %}">Auction No. {{ auction.pk }}</a></span>
                     <p>{{ auction.description }}</p>
                 </div>
                 <div>

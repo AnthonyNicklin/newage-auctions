@@ -12,7 +12,7 @@
 
     <a href="{% url 'all_auctions' %}"><i class="fas fa-chevron-left"></i> Back to auctions</a>
 
-    <p>{{ auction.description }}</p>
+    <h1>{{ auction.lot.name }}</h1>
 
     <div class="row">
         
@@ -28,34 +28,37 @@
                 </span>
                 <p class="lot-current-bid">Current Bid £{{ latest_bid.bid_amount }}</p> 
                 <p>Buy Now £{{ buy_now }}</p>
+                <p>{{ auction.lot.description }}</p>
+                <p>Origin {{ auction.lot.origin }}</p>
+                <p>Age {{ auction.lot.age }}</p>
             </div>
         </div>
     </div>
-
+    <!-- ./row -->
+    
     <div class="row">
-        <div class="col-sm-12">
-            <p>{{ auction.lot.description }}</p>
-            <p>Origin {{ auction.lot.origin }}</p>
-            <p>Age {{ auction.lot.age }}</p>
+        <div class="col-sm-12-md-6">
+            <a id="buy-now" class="btn btn-primary" href="#">Buy Now</a>
         </div>
-    </div>
 
-    <form method="POST" action="{% url 'bid' auction_id=auction.pk %}">
-            {% csrf_token %}
-            {% for field in bid_form %}
-            <div class="row">
-                <div class="col-sm-12 col-md-6">
-                    <div class="form-group">
-                        <!-- <label for="id_{{ field.label }}">{{ field.label }}</label> -->
-                        {{ field|attr:'class:form-control' }}
+        <div class="col-sm-12 col-md-6">
+            <form method="POST" action="{% url 'bid' auction_id=auction.pk %}">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-primary">Bid Now</button>
+                {% for field in bid_form %}
+                <div class="row">
+                    <div class="col-sm-12 col-md-6">
+                        <div class="form-group">
+                            {{ field|attr:'class:form-control' }}
+                        </div>
                     </div>
-                </div>
                 {% endfor %}
-                <div class="col-sm-12 col-md-6">
-                    <button type="submit" class="btn btn-primary">Bid Now</button>
                 </div>
-            </div>
-    </form>
+            </form>
+        </div>
+
+    </div>
+    <!-- ./row -->
 
 </div>
 <!-- /.container -->
