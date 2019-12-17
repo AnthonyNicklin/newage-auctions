@@ -1,1 +1,1 @@
-web: gunicorn ms4_naa.wsgi:application
+web: gunicorn newageauctions.wsgi:application
