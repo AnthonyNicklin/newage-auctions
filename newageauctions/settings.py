@@ -45,6 +45,9 @@ INSTALLED_APPS = [
     #Custom Apps
     'auction',
     'accounts',
+
+    #Heroku
+    'newage-auctions.herokuapp.com'
 ]
 
 MIDDLEWARE = [
