@@ -1,0 +1,1 @@
+web: gunicorn MS4_NAA.wsgi:application
