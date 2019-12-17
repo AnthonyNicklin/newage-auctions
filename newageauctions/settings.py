@@ -26,7 +26,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['newage-auctions.herokuapp.com']
 
 
 # Application definition
@@ -45,9 +45,6 @@ INSTALLED_APPS = [
     #Custom Apps
     'auction',
     'accounts',
-
-    #Heroku
-    'newage-auctions.herokuapp.com'
 ]
 
 MIDDLEWARE = [
