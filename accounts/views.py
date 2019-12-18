@@ -75,24 +75,33 @@ def user_profile(request):
     """ Returns the Users profile page """
 
     user = get_object_or_404(User, id=request.user.pk)
+    user_pro = get_object_or_404(UserDetails, id=user.id)
 
-    if request.method == 'POST':
-        user_details_form = UserDetailsRegistration(request.POST, instance=request.user)
+    if not user_pro:
+        if request.method == 'POST':
+            user_details_form = UserDetailsRegistration(request.POST, instance=request.user)
 
-        if user_details_form.is_valid():
-            user_details = UserDetails()
-            user_details.user_id = user
-            user_details_form.save()
-            messages.success(
-                request,
-                f'Your account has been successfully updated')
-            return redirect('profile')
+            if user_details_form.is_valid():
+                user_details = UserDetails()
+                user_details.user_id = user
+                user_details_form.save()
+                messages.success(
+                    request,
+                    f'Your account has been successfully updated')
+                return redirect('profile')
+        else:
+            user_details_form = UserDetailsRegistration(instance=request.user)
+
+        context = {
+            'user': user,
+            'user_details_form': user_details_form,
+        }
+
+        return render(request, 'profile.html', context)
     else:
-        user_details_form = UserDetailsRegistration(instance=request.user)
+        context = {
+            'user': user,
+            'user_pro': user_pro
+        }
 
-    context = {
-        'profile': user,
-        'user_details_form': user_details_form,
-    }
-
-    return render(request, 'profile.html', context)
+        return render(request, 'profile.html', context)
