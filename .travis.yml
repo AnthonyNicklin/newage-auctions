@@ -1,8 +1,8 @@
  
 language: python
 python:
-  - "3.6.9"
+  - "3.6"
 install:
   - pip install -r requirements.txt
 script:
-  - SECRET_KEY="key" python3 manage.py test
+  - SECRET_KEY="whatkey" python3 manage.py test
