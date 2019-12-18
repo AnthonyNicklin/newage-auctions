@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     #Third-party Apps
+    'widget_tweaks',
      'storages',
      
     #Custom Apps
@@ -89,22 +90,11 @@ WSGI_APPLICATION = 'newageauctions.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-#     }
-# }
-
 if development:
-    DATABASES = {
+        DATABASES = {
         'default': {
-            'ENGINE': 'django.db.backends.postgresql_psycopg2',
-            'NAME': 'naa_db',
-            'USER': os.environ.get('DB_USER'),
-            'PASSWORD': os.environ.get('DB_USER_PASSWORD'),
-            'HOST': 'localhost',
-            'PORT': '',
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
         }
     }
 else:
