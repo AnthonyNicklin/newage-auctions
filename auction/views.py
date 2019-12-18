@@ -56,9 +56,19 @@ def auction(request, auction_id):
 
     auction = get_object_or_404(Auction, id=auction_id)
     bid = Bid.objects.filter(auction=auction_id).order_by('-bid_time')
-    latest_bid = bid[0]
     buy_now = auction.buy_now
     bid_form = BidForm()
+
+    if bid:                                 # If bid[0] False create first bid for auction
+        latest_bid = bid[0]                 
+    else:
+        bid_default = Bid()
+        bid_default.user = get_object_or_404(User, id=1)
+        bid_default.auction = auction
+        bid_default.bid_time = auction.time_starting
+        bid_default.bid_amount = 0.00
+        bid_default.save()
+        latest_bid = bid_default
 
     context = {
         'auction': auction,
