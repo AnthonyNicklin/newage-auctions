@@ -89,6 +89,7 @@ local_settings.py
 .env
 naa/
 db.sqlite3
+*.sqlite3
 .vscode
 media/
 .migrations
