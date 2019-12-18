@@ -1,1 +1,2 @@
-web: gunicorn newageauctions.wsgi:application release: python manage.py migrate
+release: python manage.py migrate
+web: gunicorn newageauctions.wsgi:application 
