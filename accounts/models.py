@@ -7,7 +7,7 @@ class UserDetails(models.Model):
 	phone = models.CharField(max_length=11)
 	address = models.CharField(max_length=255)
 	town = models.CharField(max_length=45)
-	post_code = models.CharField(max_length=45)
+	postcode = models.CharField(max_length=45)
 	country = models.CharField(max_length=45)
 
 	class Meta:
