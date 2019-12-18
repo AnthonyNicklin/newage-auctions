@@ -15,30 +15,33 @@
 
     <div>
         <p><span><b>First Name</b></span>  <span>{{ user.first_name.title }}</span></p>
-
         <p><b>Last Name</b> {{ user.last_name.title }}</p>
-    
         <p><b>Email</b> {{ user.email }}</p>
-
+        <p><b>Phone No. </b> {{ user_pro.phone }}</p>
+        <p><b>Address </b> {{ user_pro.address }}</p>
+        <p><b>Town </b> {{ user_pro.town }}</p>
+        <p><b>Postcode </b> {{ user_pro.postcode }}</p>
+        <p><b>Country </b> {{ user_pro.country }}</p>
     </div>
-
-    <form method="POST">
-    {% csrf_token %}
-    {% for field in user_details_form %}
-    <div class="form-group">
-        <label for="id_{{ field.label }}">{{ field.label }}</label>
-        {{ field|attr:'class:form-control' }}
-    </div>
-    {% endfor %}
-    {% if user_details_form.errors %}
-        <ol>
-            {% for error in user_details_form.errors %}
-                <li><strong>{{ error|escape }}</strong></li>
-            {% endfor %}
-        </ol>
-    {% endif %}
-        <button type="submit" class="btn btn-primary">Update</button>
-    </form>
+  
+        <form method="POST">
+        {% csrf_token %}
+        {% for field in user_details_form %}
+        <div class="form-group">
+            <label for="id_{{ field.label }}">{{ field.label }}</label>
+            {{ field|attr:'class:form-control' }}
+        </div>
+        {% endfor %}
+        {% if user_details_form.errors %}
+            <ol>
+                {% for error in user_details_form.errors %}
+                    <li><strong>{{ error|escape }}</strong></li>
+                {% endfor %}
+            </ol>
+        {% endif %}
+            <button type="submit" class="btn btn-primary">Update</button>
+        </form>
+ 
 
 </div>
 <!--./container-->
