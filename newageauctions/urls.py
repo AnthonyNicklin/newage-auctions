@@ -13,21 +13,22 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
-from django.conf.urls import url, include
+
+from django.urls import path, include
 from django.contrib import admin
 from django.views import static
 from .settings import MEDIA_ROOT
 
 from home.views import index
 #from home import urls as home_urls
-from accounts import urls as accounts_urls
-from auction import urls as auction_urls
+from accounts.urls import urlpatterns as accounts_urls
+from auction.urls import urlpatterns as auction_urls
 
 
 urlpatterns = [
-    url(r'^admin/', admin.site.urls),
-    url(r'^$', index, name='index'),
-    url(r'^accounts/', include(accounts_urls)),
-    url(r'^auctions/', include(auction_urls)),
-    url(r'^media/(?P<path>.*)$', static.serve,{'document_root': MEDIA_ROOT}),
+    path('admin/', admin.site.urls),
+    path('', index, name='index'),
+    path('accounts/', include(accounts_urls)),
+    path('auctions/', include(auction_urls)),
+    path('media/(?Ppath.*)', static.serve,{'document_root': MEDIA_ROOT}),
 ]
