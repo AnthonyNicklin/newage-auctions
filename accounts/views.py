@@ -1,10 +1,12 @@
 from django.shortcuts import render, redirect, reverse, get_object_or_404
-from django.contrib import auth, messages
+from django.contrib import messages, auth
+from django.contrib.auth import authenticate
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
+from django.db import transaction
 
-from .forms import UserLoginForm, UserRegistrationForm, UserDetailsRegistration
-from .models import UserDetails
+from .forms import UserLoginForm, UserRegistrationForm, ProfileForm
+from .models import Profile
 
 
 def index(request):
@@ -31,7 +33,7 @@ def login(request):
         login_form = UserLoginForm(request.POST)
 
         if login_form.is_valid():
-            user = auth.authenticate(username=request.POST['username'],
+            user = authenticate(username=request.POST['username'],
                                     password=request.POST['password'])
             if user:
                 auth.login(user=user, request=request)
@@ -44,6 +46,7 @@ def login(request):
     return render(request, 'login.html', {'login_form': login_form})
 
 
+@transaction.atomic
 def registration(request):
     """ Render the registration page """
 
@@ -51,23 +54,35 @@ def registration(request):
         return redirect(reverse('index'))
 
     if request.method == 'POST':
-        registration_form = UserRegistrationForm(request.POST)
+        form = UserRegistrationForm(request.POST)
+        profile_form = ProfileForm(request.POST)
         
-        if registration_form.is_valid():
-            registration_form.save()
-         
+        if form.is_valid() and profile_form.is_valid():
+            user = form.save()
+            user.refresh_from_db()
+            profile_form = ProfileForm(request.POST, instance=user.profile)
+            profile_form.save()
+    
             user = auth.authenticate(username=request.POST['username'],
                                     password=request.POST['password1'])
-
-            if user:
+        
+            if user: 
                 auth.login(user=user, request=request)
                 messages.success(request, 'You have successfully registered')
+                return render(request, 'index.html')
             else:
                 messages.error(request, 'Unable to register your account')
     else:
-        registration_form = UserRegistrationForm()
+        form = UserRegistrationForm()
+        profile_form = ProfileForm()
+        
 
-    return render(request, 'registration.html', {'registration_form': registration_form})
+    context = {
+        'form': form,
+        'profile_form': profile_form
+    }
+
+    return render(request, 'registration.html', context)
 
 
 @login_required
@@ -75,33 +90,9 @@ def user_profile(request):
     """ Returns the Users profile page """
 
     user = get_object_or_404(User, id=request.user.pk)
-    user_pro = get_object_or_404(UserDetails, id=user.id)
 
-    if not user_pro:
-        if request.method == 'POST':
-            user_details_form = UserDetailsRegistration(request.POST, instance=request.user)
+    context = {
+        'user': user,
+    }
 
-            if user_details_form.is_valid():
-                user_details = UserDetails()
-                user_details.user_id = user
-                user_details_form.save()
-                messages.success(
-                    request,
-                    f'Your account has been successfully updated')
-                return redirect('profile')
-        else:
-            user_details_form = UserDetailsRegistration(instance=request.user)
-
-        context = {
-            'user': user,
-            'user_details_form': user_details_form,
-        }
-
-        return render(request, 'profile.html', context)
-    else:
-        context = {
-            'user': user,
-            'user_pro': user_pro
-        }
-
-        return render(request, 'profile.html', context)
+    return render(request, 'profile.html', context)

@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from django.core.exceptions import ValidationError
 
-from .models import UserDetails
+from .models import Profile
 
 
 class UserLoginForm(forms.Form):
@@ -46,7 +46,8 @@ class UserRegistrationForm(UserCreationForm):
 
         return password2
 
-class UserDetailsRegistration(forms.ModelForm):
+
+class ProfileForm(forms.ModelForm):
 
     phone = forms.CharField(max_length=11, label="Phone")                                                                                                                                                                                                                                                                             
     address = forms.CharField(max_length=255, label="Address")
@@ -55,7 +56,7 @@ class UserDetailsRegistration(forms.ModelForm):
     country = forms.CharField(max_length=45, label="Country")
 
     class Meta:
-        model = UserDetails
+        model = Profile
         fields = ['phone', 'address', 'town', 'postcode', 'country']
 
     def clean_phone(self):

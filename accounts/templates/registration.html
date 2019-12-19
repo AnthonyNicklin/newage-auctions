@@ -8,26 +8,48 @@
 <div class="container">
     
     <div id="page-heading">
-            <h1>Register</h1>
-        </div>
+        <h1>Register</h1>
+    </div>
 
     <form method="POST">
-            {% csrf_token %}
-            {% for field in registration_form %}
-            <div class="form-group">
-                <label for="id_{{ field.label }}">{{ field.label }}</label>
-                {{ field|attr:'class:form-control' }}
-            </div>
-            {% endfor %}
-            {% if registration_form.errors %}
-                <ol>
-                    {% for error in registration_form.errors %}
-                        <li><strong>{{ error|escape }}</strong></li>
-                    {% endfor %}
-                </ol>
-            {% endif %}
-            <button type="submit" class="btn btn-primary">Register</button>
-        </form>
+
+        <!-- User form -->
+        {% csrf_token %}
+        {% for field in form %}
+        <div class="form-group">
+            <label for="id_{{ field.label }}">{{ field.label }}</label>
+            {{ field|attr:'class:form-control' }}
+        </div>
+        {% endfor %}
+        {% if form.errors %}
+            <ol>
+                {% for error in form.errors %}
+                    <li><strong>{{ error|escape }}</strong></li>
+                {% endfor %}
+            </ol>
+        {% endif %}
+        <!--/ End User form -->
+
+        <!-- User Details form -->
+        {% csrf_token %}
+        {% for field in profile_form %}
+        <div class="form-group">
+            <label for="id_{{ field.label }}">{{ field.label }}</label>
+            {{ field|attr:'class:form-control' }}
+        </div>
+        {% endfor %}
+        {% if user_details_form.errors %}
+            <ol>
+                {% for error in profile_form.errors %}
+                    <li><strong>{{ error|escape }}</strong></li>
+                {% endfor %}
+            </ol>
+        {% endif %}
+        <!-- /User Details form -->
+
+        <button type="submit" class="btn btn-primary">Register</button>
+
+    </form>
 
 </div>
 <!--./container-->

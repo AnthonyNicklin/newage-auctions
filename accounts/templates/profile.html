@@ -17,14 +17,14 @@
         <p><span><b>First Name</b></span>  <span>{{ user.first_name.title }}</span></p>
         <p><b>Last Name</b> {{ user.last_name.title }}</p>
         <p><b>Email</b> {{ user.email }}</p>
-        <p><b>Phone No. </b> {{ user_pro.phone }}</p>
-        <p><b>Address </b> {{ user_pro.address }}</p>
-        <p><b>Town </b> {{ user_pro.town }}</p>
-        <p><b>Postcode </b> {{ user_pro.postcode }}</p>
-        <p><b>Country </b> {{ user_pro.country }}</p>
+        <p><b>Phone No. </b> {{ user.profile.phone }}</p>
+        <p><b>Address </b> {{ user.profile.address }}</p>
+        <p><b>Town </b> {{ user.profile.town }}</p>
+        <p><b>Postcode </b> {{ user.profile.postcode }}</p>
+        <p><b>Country </b> {{ user.profile.country }}</p>
     </div>
   
-        <form method="POST">
+        <!-- <form method="POST">
         {% csrf_token %}
         {% for field in user_details_form %}
         <div class="form-group">
@@ -41,7 +41,7 @@
         {% endif %}
             <button type="submit" class="btn btn-primary">Update</button>
         </form>
- 
+  -->
 
 </div>
 <!--./container-->
