@@ -24,25 +24,6 @@
         <p><b>Country </b> {{ user.profile.country }}</p>
     </div>
   
-        <!-- <form method="POST">
-        {% csrf_token %}
-        {% for field in user_details_form %}
-        <div class="form-group">
-            <label for="id_{{ field.label }}">{{ field.label }}</label>
-            {{ field|attr:'class:form-control' }}
-        </div>
-        {% endfor %}
-        {% if user_details_form.errors %}
-            <ol>
-                {% for error in user_details_form.errors %}
-                    <li><strong>{{ error|escape }}</strong></li>
-                {% endfor %}
-            </ol>
-        {% endif %}
-            <button type="submit" class="btn btn-primary">Update</button>
-        </form>
-  -->
-
 </div>
 <!--./container-->
 
