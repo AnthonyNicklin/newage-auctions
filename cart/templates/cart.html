@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block content %}
+
+<div class="container">
+    {% for item in cart_items %}
+
+    <div id="page-heading">
+        <h1>Auction No. {{ item.auction.pk }}</h1>
+    </div>
+
+    <a href="{% url 'all_auctions' %}"><i class="fas fa-chevron-left"></i> Back to auctions</a>
+
+    <h1>{{ item.auction.lot.name }}</h1>
+
+    <div class="row">
+        
+        <div class="col-sm-12 col-md-6">
+            <div class="image-container-full">
+                <div class="lot-image" style="background-image: url('{{ MEDIA_URL }}{{ item.auction.lot.image }}')"></div>
+            </div>   
+        </div>
+        <div class="col-sm-12 col-md-6">
+            <div class="lot-details-box">
+                <span class="number">
+                    <span class='lot-number'>Lot No. {{ item.auction.lot_id }}</span>
+                </span>
+                <p>Buy Now £{{ item.auction.buy_now }}</p>
+                <p>{{ item.auction.lot.description }}</p>
+                <p>Origin {{ item.auction.lot.origin }}</p>
+                <p>Age {{ item.auction.lot.age }}</p>
+            </div>
+        </div>
+
+    </div>
+    <!-- ./row -->
+    {% endfor %}
+
+    <div class="row">
+        <p>Total</p>
+        <p><span class="glyphicon glyphicon-euro" aria-hidden="true"></span>{{ total }}</p>
+        <a href="{% url 'checkout' %}" id="buy-now" class="btn btn-primary" role="button"><span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span>Checkout</a>
+    </div>
+    <!-- ./row -->
+
+</div>
+<!-- /.container -->
+
+{% endblock %}
