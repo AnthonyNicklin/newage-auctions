@@ -22,6 +22,8 @@ from .settings import MEDIA_ROOT
 from home.views import index
 #from home import urls as home_urls
 from accounts.urls import urlpatterns as accounts_urls
+from cart.urls import urlpatterns as cart_urls
+from checkout.urls import urlpatterns as checkout_urls
 from auction.urls import urlpatterns as auction_urls
 
 
@@ -30,5 +32,7 @@ urlpatterns = [
     path('', index, name='index'),
     path('accounts/', include(accounts_urls)),
     path('auctions/', include(auction_urls)),
+    path('cart/', include(cart_urls)),
+    path('checkout/', include(checkout_urls)),
     path('media/(?Ppath.*)', static.serve,{'document_root': MEDIA_ROOT}),
 ]
