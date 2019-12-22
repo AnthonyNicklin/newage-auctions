@@ -17,7 +17,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <!--Custom CSS-->
     <link rel="stylesheet" href="{% static 'css/custom.css' %}">
-    <!--Favicon--> 
+    <!--Stripe JS -->
+    {% block head_js %}
+    {% endblock head_js %}
     
     <title>{% block page_title %}{% endblock %}</title>
 
@@ -48,12 +50,17 @@
                                 <a class="nav-link" href="{% url 'all_lot_items' %}">Lots</a>
                             </li>
                         {% if user.is_authenticated %}
-                            <li class="nav-item mx-2">
-                                <a class="nav-link" href="{% url 'logout' %}">Logout</a>
-                            </li>
-                            <li class="nav-item mx-2">
-                                <a class="nav-link" href="{% url 'profile' %}">Profile</a>
-                            </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                              Account
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                              <a class="dropdown-item" href="{% url 'profile' %}">{{ user.first_name }}</a>
+                              <div class="dropdown-divider"></div>
+                              <a class="dropdown-item" href="{% url 'view_cart' %}">Shopping Cart</a>
+                              <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
+                            </div>
+                        </li>
                         {% else %}
                             <li class="nav-item mx-2">
                                 <a class="nav-link" href="{% url 'login' %}">Login</a>
