@@ -75,3 +75,29 @@
 .lot-current-bid {
     margin-top: 1rem;
 }
+
+/*---------------------------------------------------------------- Checkout */
+.checkout-box {
+    border: 2px solid #bbc9d7;
+    border-radius: 2px;
+    box-shadow: 0 2px 0 rgba(0,0,0,.15);
+    position: relative;
+    margin: 1rem 0 1.5rem 0;
+    padding-left: 0.8rem;
+}
+.checkout-lot-image {
+    width: 100%;
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    transition: all .3s ease-in-out;
+    -moz-transition: all .3s ease-in-out;
+    -webkit-transition: all .3s ease-in-out;
+    -o-transition: all .3s ease-in-out; 
+    display: inline-block;
+    vertical-align: top;
+}
+.checkout-contents {
+    padding: 1rem;
+}
