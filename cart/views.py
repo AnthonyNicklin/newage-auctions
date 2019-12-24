@@ -38,3 +38,15 @@ def adjust_cart(request, id):
     
     request.session['cart'] = cart
     return redirect(reverse('view_cart'))
+
+
+def remove_from_cart(request, id):
+    """ Remove items from cart """
+
+    auction = get_object_or_404(Auction, pk=id)
+    cart = request.session.get('cart', {})
+
+    del cart[id]
+    request.session['cart'] = cart
+    messages.success(request, '{0} was removed from the cart'.format(auction.lot.name))
+    return redirect('view_cart')
