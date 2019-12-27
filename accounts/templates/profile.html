@@ -9,21 +9,43 @@
 
 <div class="container">
 
-    <div id="page-heading">
-        <h1>Profile</h1>
-    </div>
+    <div class="row">
 
-    <div>
-        <p><span><b>First Name</b></span>  <span>{{ user.first_name.title }}</span></p>
-        <p><b>Last Name</b> {{ user.last_name.title }}</p>
-        <p><b>Email</b> {{ user.email }}</p>
-        <p><b>Phone No. </b> {{ user.profile.phone }}</p>
-        <p><b>Address </b> {{ user.profile.address }}</p>
-        <p><b>Town </b> {{ user.profile.town }}</p>
-        <p><b>Postcode </b> {{ user.profile.postcode }}</p>
-        <p><b>Country </b> {{ user.profile.country }}</p>
+        <div class="col-sm-12 col-md-6">
+            <div id="page-heading">
+                <h1>Profile</h1>
+            </div>
+
+            <div>
+                <p><span><b>First Name</b></span>  <span>{{ user.first_name.title }}</span></p>
+                <p><b>Last Name</b> {{ user.last_name.title }}</p>
+                <p><b>Email</b> {{ user.email }}</p>
+                <p><b>Phone No. </b> {{ user.profile.phone }}</p>
+                <p><b>Address </b> {{ user.profile.address }}</p>
+                <p><b>Town </b> {{ user.profile.town }}</p>
+                <p><b>Postcode </b> {{ user.profile.postcode }}</p>
+                <p><b>Country </b> {{ user.profile.country }}</p>
+            </div>
+        </div>
+
+        <div class="col-sm-12 col-md-6">
+            <div id="page-heading">
+                <h1>Bidding History</h1>
+            </div>
+
+            <div>
+                {% for bid in user_bids %}
+                <ul>
+                    <li><h4>{{ bid.auction.lot.name }}</h4></li>
+                    <li>{{ bid.bid_amount }} </li> 
+                    <li>{{ bid.bid_time }}</li>
+                </ul>
+                {% endfor %}
+            </div>
+        </div>
+
     </div>
-  
+    <!--./row-->
 </div>
 <!--./container-->
 
