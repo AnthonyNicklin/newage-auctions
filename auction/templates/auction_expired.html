@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="container">
+
+    <div id="page-heading">
+        <h1>Auction No. {{ auction.pk }}</h1>
+    </div>
+
+    <div class="text-center">
+        <h1>{{ auction.lot.name }}</h1>
+        <p>Sorry this auction has expired. Please use the link below to view all current auctoins.</p>
+        <p><a href="{% url 'all_auctions' %}"><i class="fas fa-chevron-left"></i> Back to auctions</a></p>
+    </div>
+
+</div>
+<!-- /.container -->
+{% endblock %}
