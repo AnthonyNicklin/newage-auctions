@@ -1,11 +1,27 @@
 from django.shortcuts import render, redirect, reverse, get_object_or_404
 from django.contrib import messages
+from django.contrib.auth.models import User
+from django.utils import timezone
+from django.contrib.auth.decorators import login_required
 
-from auction.models import Auction
+from auction.models import Auction, Bid
 
 
+@login_required
 def view_cart(request):
     """A View that renders the cart contents page"""
+
+    auctions = Auction.objects.all()
+    user = User.objects.get(pk=request.user.id)
+
+    for auction in auctions:
+        if auction.expired:
+            if auction.winner == user:
+                add_to_cart(request, auction.pk)
+            else:
+                return render(request, "cart.html")
+        else:
+            return render(request, 'cart.html')
     return render(request, "cart.html")
 
 

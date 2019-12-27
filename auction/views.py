@@ -11,6 +11,7 @@ from django.contrib import auth
 from auction.models import Auction, Lot, Bid
 from home.views import index
 from .forms import BidForm
+#from .functions import remaining_time
 
 @login_required
 def all_lot_items(request):
@@ -46,8 +47,13 @@ def all_auctions(request):
     """ Render all auctions """
 
     all_auctions = Auction.objects.all()
+    current_auctions = []
 
-    return render(request, 'auctions.html', {'all_auctions': all_auctions})
+    for auction in all_auctions:
+        if auction.time_ending > timezone.now():
+            current_auctions.append(auction)
+
+    return render(request, 'auctions.html', {'current_auctions': current_auctions})
 
 
 @login_required
@@ -59,25 +65,39 @@ def auction(request, auction_id):
     buy_now = auction.buy_now
     bid_form = BidForm()
 
-    if bid:                                 # If bid[0] False create first bid for auction
-        latest_bid = bid[0]                 
+    if auction.time_ending > timezone.now():   
+        if bid:                                 # If bid[0] False create first bid for auction
+            latest_bid = bid[0]                 
+        else:
+            bid_default = Bid()
+            bid_default.user = get_object_or_404(User, id=1)
+            bid_default.auction = auction
+            bid_default.bid_time = auction.time_starting
+            bid_default.bid_amount = 0.00
+            bid_default.save()
+            latest_bid = bid_default
+
+        context = {
+            'auction': auction,
+            'latest_bid': latest_bid,
+            'buy_now': buy_now,
+            'bid_form': bid_form
+        }
+
+        return render(request, 'auction.html', context)
     else:
-        bid_default = Bid()
-        bid_default.user = get_object_or_404(User, id=1)
-        bid_default.auction = auction
-        bid_default.bid_time = auction.time_starting
-        bid_default.bid_amount = 0.00
-        bid_default.save()
-        latest_bid = bid_default
+        context = {
+            'auction': auction,
+        }
 
-    context = {
-        'auction': auction,
-        'latest_bid': latest_bid,
-        'buy_now': buy_now,
-        'bid_form': bid_form
-    }
+        return render(request, 'auction_expired.html', context)
 
-    return render(request, 'auction.html', context)
+
+@login_required
+def auction_expired(request):
+    """ Display auction_expired page if auction has expired """
+
+    return render(request, 'auction_expired.html')    
 
 
 @login_required
@@ -108,5 +128,4 @@ def bid(request, auction_id):
         bid_form = BidForm()
 
     return redirect('auction', auction_id=auction_id)
-
 

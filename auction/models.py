@@ -43,6 +43,8 @@ class Auction(models.Model):
     buy_now = models.IntegerField(default=0)
     time_starting = models.DateTimeField()
     time_ending = models.DateTimeField()
+    expired = models.BooleanField(default=False)
+    winner = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
 
     class Meta:
         verbose_name_plural = "Auctions"
