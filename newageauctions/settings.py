@@ -78,7 +78,6 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'django.template.context_processors.media',
-                'cart.contexts.cart_contents'
             ],
         },
     },
@@ -188,10 +187,5 @@ CELERY_BEAT_SCHEDULE = {
     'task_set_auction_to_expire': {
        'task': 'auction.tasks.task_set_auction_to_expire',
        'schedule': crontab(minute="*"),
-    },
-    # Executes every minute
-    # 'task_set_winner_of_auction': { 
-    #      'task': 'auction.tasks.task_set_winner_of_auction', 
-    #      'schedule': crontab(minute="*"),
-    #     },          
+    },         
 }
