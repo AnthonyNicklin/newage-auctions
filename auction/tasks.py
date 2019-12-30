@@ -31,6 +31,8 @@ def task_set_auction_to_expire():
             else:
                 logger.info("Auction not expired, aborted function")
                 return
-
+        else:
+            logger.info("Auction expired")
+            return
 
     
