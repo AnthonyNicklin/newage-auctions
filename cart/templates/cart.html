@@ -5,7 +5,7 @@
 {% block content %}
 
 <div class="container">
-    {% for item in cart_items %}
+    {% for item in cart %}
 
     <div id="page-heading">
         <h1>Auction No. {{ item.auction.pk }}</h1>
@@ -33,7 +33,7 @@
                 <p>Age {{ item.auction.lot.age }}</p>
             </div>
         </div>
-
+        <a href="{% url 'remove_from_cart' auction_id=item.auction.pk %}" class="btn btn-primary" role="button"><span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span>Remove</a>
     </div>
     <!-- ./row -->
     {% endfor %}
