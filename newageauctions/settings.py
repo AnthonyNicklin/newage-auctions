@@ -177,7 +177,13 @@ EMAIL_PORT = 587
 STRIPE_PUBLISHABLE = os.environ.get('STRIPE_PUBLISHABLE')
 STRIPE_SECRET = os.environ.get('STRIPE_SECRET')
 
-CELERY_BROKER_URL = os.environ.get('CELERY_BROKER_URL') 
+if "CLOUDAMQP_URL" in os.environ:
+    CLOUDAMQP_URL = {'default': dj_database_url.parse(os.environ.get('CLOUDAMQP_URL'))}
+    BROKER_POOL_LIMIT = 1
+else:
+    print("Working locally")
+    CELERY_BROKER_URL = os.environ.get('CELERY_BROKER_URL') 
+
 CELERY_TIMEZONE = 'Europe/London'  
 CELERY_IMPORTS = [
     'auction.tasks',
