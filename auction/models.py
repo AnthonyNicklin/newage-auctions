@@ -45,6 +45,7 @@ class Auction(models.Model):
     time_ending = models.DateTimeField()
     expired = models.BooleanField(default=False)
     winner = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
+    paid = models.BooleanField(default=False)
 
     class Meta:
         verbose_name_plural = "Auctions"
