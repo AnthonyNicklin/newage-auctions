@@ -11,7 +11,7 @@ from django.contrib import auth
 from auction.models import Auction, Lot, Bid
 from home.views import index
 from .forms import BidForm
-#from .functions import remaining_time
+
 
 @login_required
 def all_lot_items(request):
