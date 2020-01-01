@@ -1,14 +1,79 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block page_title %}NAA | Newage Auctions{% endblock %}
 
 {% block content %}
 
+<div>
+    <img id ="landing-picture" src="{% static 'images/adventure-2528477.jpg' %}">
+</div>
+
 <div class="container">
 
-    <div id="page-heading">
-        <h1>Home</h1>
-    </div>
+    <!--Categories-->
+    <section id=categories>
+        <div class="row">
+
+            <div class="col-sm-12 col-md-6 col-lg-3">
+                <a href="{% url 'category' category='RLE' %}">
+                    <div class="category-box text-center">
+                        <p>Real Estate</p>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-sm-12 col-md-6 col-lg-3">
+                <a href="{% url 'category' category='MIL' %}">
+                    <div class="category-box text-center">
+                        <p>Military</p>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-sm-12 col-md-6 col-lg-3">
+                <a href="{% url 'category' category='CUL' %}">
+                    <div class="category-box text-center">
+                        <p>Cultural</p>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-sm-12 col-md-6 col-lg-3">
+                <a href="{% url 'category' category='WEA' %}">
+                    <div class="category-box text-center">
+                        <p>Weapons</p>
+                    </div>
+                </a>
+            </div>
+
+        </div>
+        <!--./row-->
+    </section>
+    <!--End Categories-->
+
+    <!--Featured Lots-->
+    <section id="featured-lots">
+        <div class="row">
+
+            {% for lot in featured_lots %}
+            <dic class="col-sm-12 col-md-4">
+                <div class="card" style="width: 18rem;">
+                    <img src="{{ MEDIA_URL }}{{ lot.image }}" class="card-img-top" alt="Lot Image">
+                    <div class="card-body">
+                        <a href="{% url 'lot' lot.pk %}"><h5 class="card-title">{{ lot.name }}</h5></a>
+                        <p class="card-text">{{ lot.description }}</p>
+                        <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
+                    </div>
+                </div>
+            </dic>
+            {% endfor %}
+
+        </div>
+        <!--./row-->
+    </section>
+    <!--End Featured Lots-->
 
 </div>
+<!--./container-->
 {% endblock %}

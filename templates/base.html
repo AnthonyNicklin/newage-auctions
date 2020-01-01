@@ -82,10 +82,36 @@
             </div>
         {% endif %}
        
-        <br>
         <div class="mt-5">
             {% block content %}{% endblock %}
         </div>
+    <!--Footer-->
+    <footer id="footer">
+        <div class="container">
+            <div class="social-links">
+                    
+                <a href="https://facebook.com" target="_blank">
+                <i class="fab fa-facebook-f"></i>
+                </a>
+                <a href="https://instagram.com" target="_blank">
+                <i class="fab fa-instagram"></i>
+                </a>
+                <a href="https://twitter.com" target="_blank">
+                <i class="fab fa-twitter"></i>
+                </a>
+                    
+            </div>
+            <!--./social-links-->    
+            
+            <div class="copyright">
+                <a href="https://github.com/AnthonyNicklin" target="_blank">&copy;2019 Anthony Nicklin</a>
+            </div>
+            <!--./copyright-->
+            
+        </div>
+        <!--./container-->
+    </footer>
+    <!--End of footer-->   
 
     <!--Scripts-->
     <!--JQuery-->
@@ -97,6 +123,9 @@
     <!--Stripe JS -->
     {% block head_js %}
     {% endblock %}
+    <!--Custom JS-->
+    <script src="{% static 'js/custom.js' %}" type="text/javascript"></script>
+
 </body>
 
 </html>

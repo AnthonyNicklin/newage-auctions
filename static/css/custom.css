@@ -7,10 +7,44 @@
     color: #ffffff;
 }
 
+/*---------------------------Background Image*/
+/* Backgroud image. Free for commercial use from https://pixabay.com/photos/adventure-treasure-map-old-world-map-2528477/ */
+#landing-picture {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 100%;
+    height: 250px;
+    transition: all .3s ease-in-out;
+    -moz-transition: all .3s ease-in-out;
+    -webkit-transition: all .3s ease-in-out;
+    -o-transition: all .3s ease-in-out; }
+
 /*---------------------------------------------------------------- Headings */
 #page-heading {
     border-bottom: 1px solid #000000;
     margin-bottom: 2.5rem;
+    margin-top: 5rem;
+}
+
+/*---------------------------------------------------------------- Index */
+.category-box {
+    font-size: 2.5rem;
+    border: 1px solid #000000;
+    border-radius: 1rem;
+    height: 8rem;
+    padding-top: 2rem;
+    margin-top: 2rem;
+}
+.card {
+    margin: 1rem 0rem 0rem 2.5rem;
+    height: 250px
+}
+.card-img {
+    height: 250px;
+}
+.card-img-top {
+    height: 15rem;
 }
 
 /*---------------------------------------------------------------- Lot */
@@ -100,4 +134,44 @@
 }
 .checkout-contents {
     padding: 1rem;
+}
+
+/*---------------------------Footer*/
+#footer {
+    background-color: #004390;
+    text-align: center;
+    display: block;
+}
+.copyright a {
+    color: #ffffff; 
+}
+.social-links a {
+    color: #ffffff;
+    font-size: 20px;
+    padding: 5px 5px 5px 5px;
+    text-decoration: none;
+}
+
+.social-links a .fa-facebook-f:hover {
+    color: #3b5998;
+}
+
+.social-links a .fa-instagram:hover {
+    color: #833AB4;
+}
+.social-links a .fa-twitter:hover {
+    color: #1da1f2;
+}
+
+/*---------------------------------------------------------------------------------------Media Queries*/
+@media (min-width: 767px) {
+    #landing-picture {
+        height: 400px; 
+    }
+    .category-box {
+        font-size: 2rem;
+        height: 7rem;
+        padding-top: 2rem;
+        margin: 1rem;
+    }
 }
