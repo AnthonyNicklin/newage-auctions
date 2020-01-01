@@ -1,19 +1,28 @@
+import os
+import stripe
+
 from django.shortcuts import render, get_object_or_404, reverse, redirect
 from django.contrib.auth.decorators import login_required
 from django.conf import settings
 from django.utils import timezone
-from django.contrib import messages
-
-import stripe
+from django.contrib import messages, auth
 
 from .forms import MakePaymentForm, OrderForm
 from .models import OrderLineItem
 from auction.models import Auction
 
-stripe.api_key = settings.STRIPE_SECRET
+stripe.api_key = os.environ.get('STRIPE_SECRET')
+
 
 @login_required()
 def checkout(request):
+
+    user = auth.get_user(request)
+    auctions = Auction.objects.filter(winner=user).filter(paid=False)
+    total = 0 
+
+    for auction in auctions:
+        total += auction.winning_bid
 
     if request.method == "POST":
         order_form = OrderForm(request.POST)
@@ -24,15 +33,11 @@ def checkout(request):
             order.date = timezone.now()
             order.save()
 
-            cart = request.session.get('cart', {})
-            total = 0
-            for id, quantity in cart.items():
-                auction = get_object_or_404(Auction, pk=id)
-                total += quantity * auction.buy_now
+            for auction in auctions:
                 order_line_item = OrderLineItem(
                     order=order,
                     auction=auction,
-                    quantity=quantity
+                    quantity=1
                 )
                 order_line_item.save()
             
@@ -40,15 +45,17 @@ def checkout(request):
                 customer = stripe.Charge.create(
                     amount=int(total * 100),
                     currency="EUR",
-                    description=request.user.email,
-                    card=payment_form.cleaned_data['stripe_id']
+                    description=user.email,
+                    card=payment_form.cleaned_data['stripe_id'],
                 )
             except stripe.error.CardError:
                 messages.error(request, "Your card was declined!")
             
             if customer.paid:
                 messages.error(request, "You have successfully paid")
-                request.session['cart'] = {}
+                for auction in auctions:
+                    auction.paid = True
+                    auction.save()
                 return redirect(reverse('all_auctions'))
             else:
                 messages.error(request, "Unable to take payment")
@@ -58,5 +65,12 @@ def checkout(request):
     else:
         payment_form = MakePaymentForm()
         order_form = OrderForm()
+
+    context = {
+        "order_form": order_form,
+        "payment_form": payment_form,
+        "publishable": os.environ.get('STRIPE_PUBLISHABLE'),
+        "total": total
+    }
     
-    return render(request, "checkout.html", {"order_form": order_form, "payment_form": payment_form, "publishable": settings.STRIPE_PUBLISHABLE})
+    return render(request, "checkout.html", context)
