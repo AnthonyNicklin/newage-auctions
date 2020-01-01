@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.contrib import auth
 
-from auction.models import Auction
+from auction.models import Auction, Bid
 
 
 @login_required
@@ -12,15 +12,15 @@ def view_cart(request):
     """A View that renders the cart contents page"""
 
     user = auth.get_user(request)
-    auctions = Auction.objects.all()
-    cart = []
+    auctions = Auction.objects.filter(winner=user).filter(paid=False)
+    total = 0 
 
     for auction in auctions:
-        if user == auction.winner and auction.paid == False:
-            cart.append({'auction': auction})
+        total += auction.winning_bid
 
     context = {
-        'cart': cart
+        'auctions': auctions,
+        'total': total
     }
     return render(request, "cart.html", context)
 
