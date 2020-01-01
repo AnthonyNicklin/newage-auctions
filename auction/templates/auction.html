@@ -26,10 +26,16 @@
                 <span class="number">
                     <span class='lot-number'>Lot No. {{ auction.lot_id }}</span>
                 </span>
-                <p class="lot-current-bid">Current Bid £{{ latest_bid.bid_amount }}</p> 
+                <p class="lot-current-bid"><b>Current Bid</b></p>
+                <p>€{{ latest_bid.bid_amount }}</p>
+                <p><b>Number of bids</b></p>
+                <p> {{ auction.number_of_bids }}</p>
+                <p><b>Origin</b></p>
+                <p> {{ auction.lot.origin }}</p>
+                <p><b>Age</b></p>
+                <p>{{ auction.lot.age }}</p> 
+                <p><b>Description</b></p>
                 <p>{{ auction.lot.description }}</p>
-                <p>Origin {{ auction.lot.origin }}</p>
-                <p>Age {{ auction.lot.age }}</p>
             </div>
         </div>
     </div>
@@ -37,10 +43,9 @@
     
     <div class="row">
 
-        <div class="col-sm-12 col-md-6">
+        <div class="col-sm-12 col-md-6 mt-5">
             <form method="POST" action="{% url 'bid' auction_id=auction.pk %}">
                 {% csrf_token %}
-                <button type="submit" class="btn btn-primary">Bid Now</button>
                 {% for field in bid_form %}
                 <div class="row">
                     <div class="col-sm-12 col-md-6">
@@ -49,6 +54,7 @@
                         </div>
                     </div>
                 {% endfor %}
+                <button type="submit" class="btn btn-primary ml-3 mb-5">Bid Now</button>
                 </div>
             </form>
         </div>

@@ -10,20 +10,24 @@
     </div>
 
     {% for auction in current_auctions %}
-        <div class="auction-summary">
-            <div class="data-container">
-                <div class="auction-title">
-                    <span><a href="{% url 'auction' auction.pk %}">Auction No. {{ auction.pk }}</a></span>
-                    <p>{{ auction.description }}</p>
+    <div class="auction-event-summary">
+        <a class="no-blue" href="{% url 'auction' auction.pk %}">
+            <div class="online-auctions">NEWAGE AUCTIONS</div>
+            <div class="event-summary-body">
+                <div class="auctions-image">
+                    <img class="auctions-img" src='{{ MEDIA_URL }}{{ auction.lot.image }}' alt="auction event image">
                 </div>
-                <div>
-                    <span>Start {{ auction.time_starting }}</span>
-                    <span>Finish {{ auction.time_ending }}</span>
+                <div class="data-container">
+                    <div class="name">Auction No. {{ auction.pk }}</div>
+                        <div>{{ auction.description }}</div>                                         
+                        <div class="time"><span class="timed-start">Starts: </span>{{ auction.time_starting }}</div>
+                       
                 </div>
-            </div>
-        </div>
-    {% endfor %}
 
+            </div>
+        </a>
+    </div>
+    {% endfor %}
 </div>
 <!-- ./container -->
 

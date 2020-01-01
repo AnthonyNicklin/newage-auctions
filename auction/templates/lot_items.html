@@ -17,8 +17,7 @@
           </div>
           <div class="col-md-8">
             <div class="card-body">
-                <a href="{% url 'lot' lot.pk %}"><h5 class="card-title">{{ lot.name }}</h5></a>
-              <p class="card-text">{{ lot.description }}</p>
+              <a href="{% url 'lot' lot.pk %}"><h3 class="card-title">{{ lot.name }}</h3></a>
               <p class="card-text">Age: {{ lot.age }}</p>
               <p class="card-text">Origin: {{ lot.origin }}</p>
               
