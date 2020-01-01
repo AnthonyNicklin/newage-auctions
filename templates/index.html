@@ -6,73 +6,125 @@
 {% block content %}
 
 <div>
-    <img id ="landing-picture" src="{% static 'images/adventure-2528477.jpg' %}">
+    <img id="landing-picture" src="{% static 'images/analytics-3088958.jpg' %}">
 </div>
 
 <div class="container">
 
-    <!--Categories-->
-    <section id=categories>
-        <div class="row">
-
-            <div class="col-sm-12 col-md-6 col-lg-3">
-                <a href="{% url 'category' category='RLE' %}">
-                    <div class="category-box text-center">
-                        <p>Real Estate</p>
-                    </div>
-                </a>
-            </div>
-
-            <div class="col-sm-12 col-md-6 col-lg-3">
-                <a href="{% url 'category' category='MIL' %}">
-                    <div class="category-box text-center">
-                        <p>Military</p>
-                    </div>
-                </a>
-            </div>
-
-            <div class="col-sm-12 col-md-6 col-lg-3">
-                <a href="{% url 'category' category='CUL' %}">
-                    <div class="category-box text-center">
-                        <p>Cultural</p>
-                    </div>
-                </a>
-            </div>
-
-            <div class="col-sm-12 col-md-6 col-lg-3">
-                <a href="{% url 'category' category='WEA' %}">
-                    <div class="category-box text-center">
-                        <p>Weapons</p>
-                    </div>
-                </a>
-            </div>
-
-        </div>
-        <!--./row-->
+    <!--Landing Content-->
+    <section id="landing-content">
+        <h1 class="text-center mt-5 pt-2 pb-2">Bringing Auctions in to the new age</h1>
+        <p class="mt-5 mb-5 pt-2 pb-2">Newage Auctions bring the fun and excitment of auctions from old into the modern digital
+            world. Sign-up, login, and bid on some of the worlds oldest and rarest artifacts, real estate
+            and more.
+        </p>
     </section>
-    <!--End Categories-->
-
+    <!--End Landing Content-->
+    
     <!--Featured Lots-->
-    <section id="featured-lots">
+    <section id="featured-lots mb-5">
+        <h1 id="page-heading">Featured Lots</h1>
         <div class="row">
 
             {% for lot in featured_lots %}
-            <dic class="col-sm-12 col-md-4">
+            <div class="col-sm-12 col-md-4">
                 <div class="card" style="width: 18rem;">
                     <img src="{{ MEDIA_URL }}{{ lot.image }}" class="card-img-top" alt="Lot Image">
                     <div class="card-body">
                         <a href="{% url 'lot' lot.pk %}"><h5 class="card-title">{{ lot.name }}</h5></a>
-                        <p class="card-text">{{ lot.description }}</p>
-                        <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
                     </div>
                 </div>
-            </dic>
+            </div>
             {% endfor %}
 
         </div>
         <!--./row-->
     </section>
     <!--End Featured Lots-->
+
+    <!--Military-->
+    <section id="featured-lots mb-5">
+        <h1 id="page-heading">Military</h1>
+        <div class="row">
+
+            {% for lot in military %}
+            <div class="col-sm-12 col-md-4">
+                <div class="card" style="width: 18rem;">
+                    <img src="{{ MEDIA_URL }}{{ lot.image }}" class="card-img-top" alt="Lot Image">
+                    <div class="card-body">
+                        <a href="{% url 'lot' lot.pk %}"><h5 class="card-title">{{ lot.name }}</h5></a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+
+        </div>
+        <!--./row-->
+    </section>
+    <!--End Military-->
+
+    <!--Cultural-->
+    <section id="featured-lots mb-5">
+        <h1 id="page-heading">Cultural</h1>
+        <div class="row">
+
+            {% for lot in cultural %}
+            <div class="col-sm-12 col-md-4">
+                <div class="card" style="width: 18rem;">
+                    <img src="{{ MEDIA_URL }}{{ lot.image }}" class="card-img-top" alt="Lot Image">
+                    <div class="card-body">
+                        <a href="{% url 'lot' lot.pk %}"><h5 class="card-title">{{ lot.name }}</h5></a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+
+        </div>
+        <!--./row-->
+    </section>
+    <!--End Cultural-->
+
+    <!--Weapons-->
+    <section id="featured-lots mb-5">
+        <h1 id="page-heading">Weapons</h1>
+        <div class="row">
+
+            {% for lot in weapons %}
+            <div class="col-sm-12 col-md-4">
+                <div class="card" style="width: 18rem;">
+                    <img src="{{ MEDIA_URL }}{{ lot.image }}" class="card-img-top" alt="Lot Image">
+                    <div class="card-body">
+                        <a href="{% url 'lot' lot.pk %}"><h5 class="card-title">{{ lot.name }}</h5></a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+
+        </div>
+        <!--./row-->
+    </section>
+    <!--End Weapons-->
+
+    <!--Real Estate-->
+    <section id="featured-lots mb-5">
+        <h1 id="page-heading">Real Estate</h1>
+        <div class="row">
+
+            {% for lot in real_estate %}
+            <div class="col-sm-12 col-md-4">
+                <div class="card" style="width: 18rem;">
+                    <img src="{{ MEDIA_URL }}{{ lot.image }}" class="card-img-top" alt="Lot Image">
+                    <div class="card-body">
+                        <a href="{% url 'lot' lot.pk %}"><h5 class="card-title">{{ lot.name }}</h5></a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+
+        </div>
+        <!--./row-->
+    </section>
+    <!--End Real Estate-->
 
 </div>
 <!--./container-->
