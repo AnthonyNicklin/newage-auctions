@@ -6,5 +6,18 @@ def index(request):
     """ Return render index page """
 
     featured_lots = Lot.objects.filter(featured=True)
+    military = Lot.objects.filter(category='Military')
+    cultural = Lot.objects.filter(category='Cultural')
+    weapons = Lot.objects.filter(category='Weapons')
+    real_estate = Lot.objects.filter(category='Real Estate')
 
-    return render(request, 'index.html', {'featured_lots': featured_lots})
+    context = {
+        'featured_lots': featured_lots,
+        'military': military,
+        'cultural': cultural,
+        'weapons': weapons,
+        'real_estate': real_estate
+
+    }
+
+    return render(request, 'index.html', context)
