@@ -46,7 +46,8 @@ INSTALLED_APPS = [
     #Third-party Apps
     'widget_tweaks',
      'storages',
-     
+     'crispy_forms',
+
     #Custom Apps
     'auction',
     'accounts',
@@ -159,6 +160,8 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "static"),
 )
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 MESSAGE_STOREAGE = "django.contrib.messages.storage.session.SessionStorage"
 
