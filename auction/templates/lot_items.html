@@ -10,26 +10,23 @@
     </div>
 
     {% for lot in lot_items %}
-        <div class="lot-summary">
-            <div class="image-container">
-                <div class="lot-image" style="background-image: url('{{ MEDIA_URL }}{{ lot.image }}')"></div>
+    <div class="card mb-3" style="max-width: 800px;">
+        <div class="row no-gutters">
+          <div class="col-md-4">
+            <img src="{{ MEDIA_URL }}{{ lot.image }}" class="card-img" alt="Lot Image">
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+                <a href="{% url 'lot' lot.pk %}"><h5 class="card-title">{{ lot.name }}</h5></a>
+              <p class="card-text">{{ lot.description }}</p>
+              <p class="card-text">Age: {{ lot.age }}</p>
+              <p class="card-text">Origin: {{ lot.origin }}</p>
+              
             </div>
-            <div class="data-container">
-                <span class="number">
-                    <span class='lot-number'>Lot No. {{ lot.pk }}</span>
-                </span>
-                <div class="lot-title">
-                    <span><a href="{% url 'lot' lot.pk %}">{{ lot.name }}</a></span>
-                    <p>{{ lot.description }}</p>
-                </div>
-                <div class="lot-bid">
-                    <span>Current Bid £{{ lot.current_bid }}</span>
-                    <span>Buy now £{{ lot.buy_price }}</span>
-
-                </div>
-            </div>
+          </div>
         </div>
-    {% endfor %}
+      </div>
+      {% endfor %}
 
     <!-- Pagination -->
     <div class="pagination">

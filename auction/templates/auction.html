@@ -27,7 +27,6 @@
                     <span class='lot-number'>Lot No. {{ auction.lot_id }}</span>
                 </span>
                 <p class="lot-current-bid">Current Bid £{{ latest_bid.bid_amount }}</p> 
-                <p>Buy Now £{{ buy_now }}</p>
                 <p>{{ auction.lot.description }}</p>
                 <p>Origin {{ auction.lot.origin }}</p>
                 <p>Age {{ auction.lot.age }}</p>
@@ -37,9 +36,6 @@
     <!-- ./row -->
     
     <div class="row">
-        <div class="col-sm-12-md-6">
-            <a id="buy-now" class="btn btn-primary" href="{% url 'add_to_cart' auction.id %}">Buy Now</a>
-        </div>
 
         <div class="col-sm-12 col-md-6">
             <form method="POST" action="{% url 'bid' auction_id=auction.pk %}">

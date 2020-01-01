@@ -7,14 +7,14 @@
 <div class="container">
 
     <div id="page-heading">
-        <h1>{{lot.lot_name }}</h1>
+        <h1>{{lot.name }}</h1>
     </div>
 
-    <a href="{% url 'all_lot_items' %}"><i class="fas fa-chevron-left"></i> Back to listings</a>
+    <a href="{% url 'all_lot_items' %}"><i class="fas fa-chevron-left mb-3"></i> Back to listings</a>
 
     <div class="row">
         
-        <div class="col-sm-12 col-md-6">
+        <div class="col-sm-12 col-md-6 mt-3">
             <div class="image-container-full">
                 <div class="lot-image" style="background-image: url('{{ MEDIA_URL }}{{ lot.image }}')"></div>
             </div>   
@@ -24,11 +24,12 @@
                 <span class="number">
                     <span class='lot-number'>Lot No. {{ lot.pk }}</span>
                 </span>
-                <p class="lot-current-bid">Current Bid £{{ lot.current_bid }}</p> 
-                <p>Buy Now £{{ lot.buy_price }}</p>
+                <h3 class="mt-3">Auction</h3>
+                <p><b>Starts:</b> {{ auction.time_starting }}</p>
+                <p><b>Ends:</b> {{ auction.time_ending }}</p>
+                <p><b>Origin:</b> {{ lot.origin }}</p>
+                <p><b>Age:</b> {{ lot.age }}</p>
                 <p>{{ lot.description }}</p>
-                <p>Origin {{ lot.origin }}</p>
-                <p>Age {{ lot.age }}</p>
             </div>
             
         </div>
