@@ -2,7 +2,7 @@ from datetime import datetime
 
 from django.utils import timezone
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from django.shortcuts import render, redirect, reverse, get_object_or_404
+from django.shortcuts import render, redirect, reverse, get_object_or_404, get_list_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.contrib.auth.models import User
@@ -29,7 +29,7 @@ def category(request, category):
         # If page is not an integer, deliver first page.
         lot_items = paginator.page(paginator.num_pages)
 
-    return render(request, 'category.html', {'lot_items': lot_items})
+    return render(request, 'category.html', {'lot_items': lot_items, 'category': category})
 
     
 @login_required
@@ -57,12 +57,10 @@ def lot(request, lot_id):
     """ Return a detailed view of a lot item """
 
     lot = get_object_or_404(Lot, pk=lot_id)
-    auction = get_object_or_404(Auction, lot=lot_id)
     
-    return render(request, 'lot.html', {'lot': lot, 'auction': auction})
+    return render(request, 'lot.html', {'lot': lot})
 
 
-@login_required
 def all_auctions(request):
     """ Render all auctions """
 
@@ -82,7 +80,6 @@ def auction(request, auction_id):
 
     auction = get_object_or_404(Auction, id=auction_id)
     bid = Bid.objects.filter(auction=auction_id).order_by('-bid_time')
-    buy_now = auction.buy_now
     bid_form = BidForm()
 
     if auction.time_ending > timezone.now():   
@@ -100,7 +97,6 @@ def auction(request, auction_id):
         context = {
             'auction': auction,
             'latest_bid': latest_bid,
-            'buy_now': buy_now,
             'bid_form': bid_form
         }
 
@@ -125,8 +121,8 @@ def bid(request, auction_id):
     """ Bid on auction. Bid must be higher than current bid """
 
     auction = get_object_or_404(Auction, id=auction_id)
-    bid = get_object_or_404(Bid, id=auction_id)
-    current_bid = bid.bid_amount
+    bid = Bid.objects.filter(auction=auction_id).order_by('-bid_time')
+    current_bid = bid[0].bid_amount
     current_user = auth.get_user(request)
 
     if request.method == 'POST':
@@ -140,6 +136,8 @@ def bid(request, auction_id):
             bid.bid_time = datetime.now()
             bid.bid_amount = bid_form.cleaned_data['bid_amount']
             bid.save()
+            auction.number_of_bids += 1
+            auction.save()
             messages.success(request, 'Bid successfull. Good Luck!')
         else:
             messages.success(request, 'Bid must be higher than current bid')
