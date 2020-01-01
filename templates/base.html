@@ -12,6 +12,8 @@
 
     <!--Bootstrap CDN-->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!--Google Fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Audiowide&display=swap" rel="stylesheet">
     <!--Fontawesome CDN-->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -25,55 +27,65 @@
 <body>
 
     <header>
-            <nav class="navbar navbar-expand-lg bg-blue fixed-top">
-                
-                <div class="navbar-brand">
-                    <a href="{% url 'index' %}"><img class="logo" src="" alt="NAA logo"></a>
-                </div>
-                
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-        
-                <div class="collapse navbar-collapse justify-content-end" id="navbarTogglerDemo02">
-                    <ul class="navbar-nav text-uppercase">
-                            <li class="nav-item mx-2">
-                                <a class="nav-link" href="{% url 'index' %}">Home</a>
-                            </li>
-                            <li class="nav-item mx-2">
-                                <a class="nav-link" href="{% url 'all_auctions' %}">Auctions</a>
-                            </li>
-                            <li class="nav-item mx-2">
-                                <a class="nav-link" href="{% url 'all_lot_items' %}">Lots</a>
-                            </li>
-                        {% if user.is_authenticated %}
+        <nav class="navbar navbar-expand-lg bg-custom">
+            
+            <div class="navbar-brand">
+                <a href="{% url 'index' %}">NAA</a>
+            </div>
+            
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+    
+            <div class="collapse navbar-collapse justify-content-end" id="navbarTogglerDemo02">
+                <ul class="navbar-nav text-uppercase">
+                        <li class="nav-item mx-2">
+                            <a class="nav-link" href="{% url 'index' %}">Home</a>
+                        </li>
+                        <li class="nav-item mx-2">
+                            <a class="nav-link" href="{% url 'all_auctions' %}">Auctions</a>
+                        </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                              Account
+                                Lots
                             </a>
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                              <a class="dropdown-item" href="{% url 'profile' %}">{{ user.first_name }}</a>
-                              <div class="dropdown-divider"></div>
-                              <a class="dropdown-item" href="{% url 'view_cart' %}">Shopping Cart</a>
-                              <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
+                                <a class="dropdown-item" href="{% url 'all_lot_items' %}">All Lots</a>
+                                <a class="dropdown-item" href="{% url 'category' category='Military' %}">Military</a>
+                                <a class="dropdown-item" href="{% url 'category' category='Cultural' %}">Cultural</a>
+                                <a class="dropdown-item" href="{% url 'category' category='Weapons' %}">Weapons</a>
+                                <a class="dropdown-item" href="{% url 'category' category='Real Estate' %}">Real Estate</a>
                             </div>
                         </li>
-                        {% else %}
-                            <li class="nav-item mx-2">
-                                <a class="nav-link" href="{% url 'login' %}">Login</a>
-                            </li>
-                            <li class="nav-item mx-2">
-                                <a class="nav-link" href="{% url 'registration' %}">Register</a>
-                            </li>
-                        {% endif %}
-                    </ul>
-                </div>
-                <!--./collapse-->
-                
-            </nav>
-            <!--End of header and Navigation-->
-        </header>
+                    {% if user.is_authenticated %}
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Account
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="{% url 'profile' %}">{{ user.first_name }}</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="{% url 'view_cart' %}">Shopping Cart</a>
+                            <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
+                        </div>
+                    </li>
+                    {% else %}
+                        <li class="nav-item mx-2">
+                            <a class="nav-link" href="{% url 'login' %}">Login</a>
+                        </li>
+                        <li class="nav-item mx-2">
+                            <a class="nav-link" href="{% url 'registration' %}">Register</a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </div>
+            <!--./collapse-->
+            
+        </nav>
+        <!--End of header and Navigation-->
+    </header> 
         
+    <!-- <section id=errors>
         {% if messages %}
             <div>
                 {% for message in messages %}
@@ -81,10 +93,16 @@
                 {% endfor %}
             </div>
         {% endif %}
-       
-        <div class="mt-5">
+    </section> -->
+
+     <!--Main -->
+     <main>
+        <div>
             {% block content %}{% endblock %}
         </div>
+    </main>
+    <!-- End Main -->
+
     <!--Footer-->
     <footer id="footer">
         <div class="container">
@@ -124,7 +142,7 @@
     {% block head_js %}
     {% endblock %}
     <!--Custom JS-->
-    <script src="{% static 'js/custom.js' %}" type="text/javascript"></script>
+    <!-- <script src="{% static 'js/custom.js' %}" type="text/javascript"></script> -->
 
 </body>
 
