@@ -4,10 +4,10 @@ from django.contrib.auth.models import User
 class Lot(models.Model):
     """ Lot object """
 
-    MILITARY = 'MIL'
-    REAL_ESTATE = 'RLE'
-    WEAPONS = 'WEA'
-    CULTURAL = 'CUL'
+    MILITARY = 'Military'
+    REAL_ESTATE = 'Real Estate'
+    WEAPONS = 'Weapons'
+    CULTURAL = 'Cultural'
     NONE = 'NUL'
     CATEGORIES = (
         (NONE, 'Select a category'),
@@ -22,7 +22,7 @@ class Lot(models.Model):
     description = models.TextField()
     age = models.IntegerField(blank=False)
     image = models.ImageField()
-    category = models.CharField(max_length=3, choices=CATEGORIES, blank=False)
+    category = models.CharField(max_length=11, choices=CATEGORIES, blank=False)
     date_added = models.DateField(auto_now_add=True, blank=True)
     featured = models.BooleanField(default=False)
 
@@ -32,7 +32,7 @@ class Lot(models.Model):
     def __str__(self):
         """ Return a string of the model """
 
-        return "Lot " + str(self.pk)
+        return "Lot " + str(self.pk) + " " + self.name
 
 
 class Auction(models.Model):
@@ -54,7 +54,7 @@ class Auction(models.Model):
     def __str__(self):
         """ Return a string of the model """
 
-        return "Auction " + str(self.pk)
+        return "Auction " + str(self.pk) + " Lot " + str(self.lot.pk) + " " + self.lot.name
 
 
 class Bid(models.Model):
@@ -71,5 +71,5 @@ class Bid(models.Model):
     def __str__(self):
         """ Return a string of the model """
 
-        return "Bid " + str(self.pk)
+        return "Bid " + str(self.pk) + " Auction " + str(self.auction.pk) + " " + self.auction.lot.name
 
