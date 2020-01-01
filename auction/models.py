@@ -24,6 +24,7 @@ class Lot(models.Model):
     image = models.ImageField()
     category = models.CharField(max_length=3, choices=CATEGORIES, blank=False)
     date_added = models.DateField(auto_now_add=True, blank=True)
+    featured = models.BooleanField(default=False)
 
     class Meta:
         verbose_name_plural = 'lot items'
@@ -40,11 +41,11 @@ class Auction(models.Model):
     lot = models.ForeignKey(Lot, on_delete=models.CASCADE)
     description = models.TextField(default='Newage Auctions')
     number_of_bids = models.IntegerField(default=0)
-    buy_now = models.IntegerField(default=0)
     time_starting = models.DateTimeField()
     time_ending = models.DateTimeField()
     expired = models.BooleanField(default=False)
     winner = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
+    winning_bid = models.IntegerField(default=0)
     paid = models.BooleanField(default=False)
 
     class Meta:
