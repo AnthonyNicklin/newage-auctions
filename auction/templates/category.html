@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="container">
+
+    <div id="page-heading">
+        <h1>Lots</h1>
+    </div>
+
+    {% for lot in lot_items %}
+    <div class="card mb-3" style="max-width: 800px;">
+        <div class="row no-gutters">
+          <div class="col-md-4">
+            <img src="{{ MEDIA_URL }}{{ lot.image }}" class="card-img" alt="Lot Image">
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+                <a href="{% url 'lot' lot.pk %}"><h5 class="card-title">{{ lot.name }}</h5></a>
+              <p class="card-text">{{ lot.description }}</p>
+              <p class="card-text">Age: {{ lot.age }}</p>
+              <p class="card-text">Origin: {{ lot.origin }}</p>
+              
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+
+    <!-- Pagination -->
+    <div class="pagination">
+        <span class="step-links">
+            {% if lot_items.has_previous %}
+                <a href="?page={{ lot_items.previous_page_number }}">previous</a>
+            {% endif %}
+    
+            <span class="current">
+                Page {{ lot_items.number }} of {{ lot_items.paginator.num_pages }}
+            </span>
+    
+            {% if lot_items.has_next %}
+                <a href="?page={{ lot_items.next_page_number }}">next</a>
+            {% endif %}
+        </span>
+    </div>
+
+    <!-- End Pagination -->
+
+</div>
+<!-- ./container -->
+
+{% endblock %}
