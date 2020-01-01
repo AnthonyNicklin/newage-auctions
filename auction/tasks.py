@@ -24,15 +24,13 @@ def task_set_auction_to_expire():
                 if bid:                                 
                     latest_bid = bid[0]
                     auction.winner = latest_bid.user
+                    auction.winning_bid = latest_bid.bid_amount
                     auction.save()
                     logger.info("Expired and winner set.")
                 else:
                     logger.info("Bid not found")
             else:
                 logger.info("Auction not expired, aborted function")
-                return
-        else:
-            logger.info("Auction expired")
-            return
+            
 
     
