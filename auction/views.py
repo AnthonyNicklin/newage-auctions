@@ -32,7 +32,6 @@ def category(request, category):
     return render(request, 'category.html', {'lot_items': lot_items, 'category': category})
 
     
-@login_required
 def all_lot_items(request):
     """ Return all lot items in the DB """
 
@@ -52,7 +51,6 @@ def all_lot_items(request):
     return render(request, 'lot_items.html', {'lot_items': lot_items})
 
 
-@login_required
 def lot(request, lot_id):
     """ Return a detailed view of a lot item """
 
@@ -74,7 +72,6 @@ def all_auctions(request):
     return render(request, 'auctions.html', {'current_auctions': current_auctions})
 
 
-@login_required
 def auction(request, auction_id):
     """ Render the auction """
 
@@ -107,13 +104,6 @@ def auction(request, auction_id):
         }
 
         return render(request, 'auction_expired.html', context)
-
-
-@login_required
-def auction_expired(request):
-    """ Display auction_expired page if auction has expired """
-
-    return render(request, 'auction_expired.html')    
 
 
 @login_required
