@@ -51,10 +51,10 @@
                             </a>
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" href="{% url 'all_lot_items' %}">All Lots</a>
-                                <a class="dropdown-item" href="{% url 'category' category='Military' %}">Military</a>
-                                <a class="dropdown-item" href="{% url 'category' category='Cultural' %}">Cultural</a>
-                                <a class="dropdown-item" href="{% url 'category' category='Weapons' %}">Weapons</a>
-                                <a class="dropdown-item" href="{% url 'category' category='Real Estate' %}">Real Estate</a>
+                                <a class="dropdown-item" href="{% url 'category' category='military' %}">Military</a>
+                                <a class="dropdown-item" href="{% url 'category' category='cultural' %}">Cultural</a>
+                                <a class="dropdown-item" href="{% url 'category' category='weapons' %}">Weapons</a>
+                                <a class="dropdown-item" href="{% url 'category' category='real estate' %}">Real Estate</a>
                             </div>
                         </li>
                     {% if user.is_authenticated %}
