@@ -26,7 +26,10 @@
                 <span class="number">
                     <span class='lot-number'>Lot No. {{ auction.lot_id }}</span>
                 </span>
-                <p class="lot-current-bid"><b>Current Bid</b></p>
+                <h3>Auction</h3>
+                <p><b>Starts </b>{{ auction.time_starting }}</p>
+                <p><b>Ends </b>{{ auction.time_ending }}</p>
+                <p><b>Current Bid</b></p>
                 <p>€{{ latest_bid.bid_amount }}</p>
                 <p><b>Number of bids</b></p>
                 <p> {{ auction.number_of_bids }}</p>
