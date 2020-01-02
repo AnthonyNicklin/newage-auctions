@@ -4,10 +4,10 @@ from django.contrib.auth.models import User
 class Lot(models.Model):
     """ Lot object """
 
-    MILITARY = 'Military'
-    REAL_ESTATE = 'Real Estate'
-    WEAPONS = 'Weapons'
-    CULTURAL = 'Cultural'
+    MILITARY = 'military'
+    REAL_ESTATE = 'real estate'
+    WEAPONS = 'weapons'
+    CULTURAL = 'cultural'
     NONE = 'NUL'
     CATEGORIES = (
         (NONE, 'Select a category'),
