@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.db import transaction
 
-from .forms import UserLoginForm, UserRegistrationForm, ProfileForm
+from .forms import UserLoginForm, UserRegistrationForm, ProfileForm, UpdateUserForm, UpdateProfileForm
 from .models import Profile
 from auction.models import Bid
 
@@ -91,11 +91,42 @@ def user_profile(request):
     """ Returns the Users profile page """
 
     user = get_object_or_404(User, id=request.user.pk)
-    user_bids = get_list_or_404(Bid, user_id=request.user.pk)
+    bid = Bid.objects.filter(user=user)
+
+    if bid:
+        user_bids = get_list_or_404(Bid, user_id=user)
+        context = {
+            'user': user,
+            'user_bids': user_bids
+        }
+        return render(request, 'profile.html', context)
+    else:
+        return render(request, 'profile.html', {'user': user})
+        
+
+@login_required
+def edit_user_profile(request):
+    """ Update user profile """
+
+    if request.method == 'POST':
+        form = UpdateUserForm(request.POST, instance=request.user)
+        profile_form = UpdateProfileForm(request.POST, instance=request.user.profile)
+
+        if form.is_valid() and profile_form.is_valid():
+            form.save()
+            profile_form.save()
+            return redirect(reverse('profile'))
+        else:
+            messages.error(request, 'Invalid form submitted')
+            return render(request, 'profile.html')
+    else:
+        form = UpdateUserForm(instance=request.user)
+        profile_form = ProfileForm(instance=request.user.profile)
 
     context = {
-        'user': user,
-        'user_bids': user_bids
+        'form': form,
+        'profile_form': profile_form
     }
 
-    return render(request, 'profile.html', context)
+    return render(request, 'edit_profile.html', context)
+
