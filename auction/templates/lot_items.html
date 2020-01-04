@@ -5,46 +5,56 @@
 
 <div class="container">
 
-    <div id="page-heading">
-        <h1>Lots</h1>
-    </div>
+  <div id="page-heading">
+      <h1>Lots</h1>
+  </div>
 
-    {% for lot in lot_items %}
-    <div class="card mb-3" style="max-width: 800px;">
-        <div class="row no-gutters">
-          <div class="col-md-4">
-            <img src="{{ MEDIA_URL }}{{ lot.image }}" class="card-img" alt="Lot Image">
+  {% for lot in lot_items %}
+    <div class="event-summary">
+      <a href="{% url 'lot' lot.pk %}">
+        {% if lot.category == 'military' %}
+          <div class="online-lots-mil">NEWAGE AUCTIONS</div>
+          {% elif lot.category == 'real estate' %}
+            <div class="online-lots-rle">NEWAGE AUCTIONS</div>
+          {% elif lot.category == 'weapons' %}
+            <div class="online-lots-wea">NEWAGE AUCTIONS</div>
+        {% else %}
+          <div class="online-lots-cul">NEWAGE AUCTIONS</div>
+        {% endif %}
+        <div class="event-summary-body">
+          <div class="auctions-image">
+            <img class="small-img" src='{{ MEDIA_URL }}{{ lot.image }}' alt="Lot image">
           </div>
-          <div class="col-md-8">
-            <div class="card-body">
-              <a href="{% url 'lot' lot.pk %}"><h3 class="card-title">{{ lot.name }}</h3></a>
-              <p class="card-text">Age: {{ lot.age }}</p>
-              <p class="card-text">Origin: {{ lot.origin }}</p>
-              
-            </div>
-          </div>
-        </div>
-      </div>
-      {% endfor %}
-
-    <!-- Pagination -->
-    <div class="pagination">
-        <span class="step-links">
-            {% if lot_items.has_previous %}
-                <a href="?page={{ lot_items.previous_page_number }}">previous</a>
-            {% endif %}
-    
-            <span class="current">
-                Page {{ lot_items.number }} of {{ lot_items.paginator.num_pages }}
+          <div class="data-container-lots">
+            <span class="number">
+              <span class='lot-number'>Lot No. {{ lot.pk }}</span>
             </span>
-    
-            {% if lot_items.has_next %}
-                <a href="?page={{ lot_items.next_page_number }}">next</a>
-            {% endif %}
-        </span>
-    </div>
+            <div class="name pl-3 pt-3">{{ lot.name }}</div>
+            <div class="pl-3 pt-1">{{ lot.description }}</div>                                            
+          </div>
 
-    <!-- End Pagination -->
+          </div>
+        </a>
+    </div>
+  {% endfor %}
+
+  <!-- Pagination -->
+  <div class="pagination">
+      <span class="step-links">
+          {% if lot_items.has_previous %}
+              <a href="?page={{ lot_items.previous_page_number }}">Previous</a>
+          {% endif %}
+  
+          <span class="current">
+              Page {{ lot_items.number }} of {{ lot_items.paginator.num_pages }}
+          </span>
+  
+          {% if lot_items.has_next %}
+              <a href="?page={{ lot_items.next_page_number }}">Next</a>
+          {% endif %}
+      </span>
+  </div>
+  <!-- End Pagination -->
 
 </div>
 <!-- ./container -->

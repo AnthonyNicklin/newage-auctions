@@ -9,18 +9,26 @@
         <h1>Auctions</h1>
     </div>
 
-    {% for auction in current_auctions %}
-    <div class="auction-event-summary">
-        <a class="no-blue" href="{% url 'auction' auction.pk %}">
-            <div class="online-auctions">NEWAGE AUCTIONS</div>
+    {% for auction in current_items %}
+    <div class="event-summary">
+        <a href="{% url 'auction' auction.pk %}">
+        {% if auction.lot.category == 'military' %}
+          <div class="online-lots-mil">NEWAGE AUCTIONS</div>
+          {% elif auction.lot.category == 'real estate' %}
+            <div class="online-lots-rle">NEWAGE AUCTIONS</div>
+          {% elif auction.lot.category == 'weapons' %}
+            <div class="online-lots-wea">NEWAGE AUCTIONS</div>
+        {% else %}
+          <div class="online-lots-cul">NEWAGE AUCTIONS</div>
+        {% endif %}
             <div class="event-summary-body">
                 <div class="auctions-image">
-                    <img class="auctions-img" src='{{ MEDIA_URL }}{{ auction.lot.image }}' alt="auction event image">
+                    <img class="small-img" src='{{ MEDIA_URL }}{{ auction.lot.image }}' alt="auction event image">
                 </div>
                 <div class="data-container">
                     <div class="name">Auction No. {{ auction.pk }}</div>
                         <div>{{ auction.description }}</div>                                         
-                        <div class="time"><span class="timed-start">Starts: </span>{{ auction.time_starting }}</div>
+                        <div class="time"><span class="time-ends">Ends: </span>{{ auction.time_ending }}</div>
                        
                 </div>
 
@@ -28,6 +36,25 @@
         </a>
     </div>
     {% endfor %}
+
+    <!-- Pagination -->
+    <div class="pagination">
+        <span class="step-links">
+            {% if current_items.has_previous %}
+                <a href="?page={{ current_items.previous_page_number }}">Previous</a>
+            {% endif %}
+    
+            <span class="current">
+                Page {{ current_items.number }} of {{ current_items.paginator.num_pages }}
+            </span>
+    
+            {% if current_items.has_next %}
+                <a href="?page={{ current_items.next_page_number }}">Next</a>
+            {% endif %}
+        </span>
+    </div>
+    <!-- End Pagination -->
+
 </div>
 <!-- ./container -->
 

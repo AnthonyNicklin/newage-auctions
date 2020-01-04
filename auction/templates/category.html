@@ -10,23 +10,33 @@
     </div>
 
     {% for lot in lot_items %}
-    <div class="card mb-3" style="max-width: 800px;">
-        <div class="row no-gutters">
-          <div class="col-md-4">
-            <img src="{{ MEDIA_URL }}{{ lot.image }}" class="card-img" alt="Lot Image">
+    <div class="event-summary">
+      <a href="{% url 'lot' lot.pk %}">
+        {% if lot.category == 'military' %}
+          <div class="online-lots-mil">NEWAGE AUCTIONS</div>
+          {% elif lot.category == 'real estate' %}
+            <div class="online-lots-rle">NEWAGE AUCTIONS</div>
+          {% elif lot.category == 'weapons' %}
+            <div class="online-lots-wea">NEWAGE AUCTIONS</div>
+        {% else %}
+          <div class="online-lots-cul">NEWAGE AUCTIONS</div>
+        {% endif %}
+        <div class="event-summary-body">
+          <div class="auctions-image">
+            <img class="small-img" src='{{ MEDIA_URL }}{{ lot.image }}' alt="Lot image">
           </div>
-          <div class="col-md-8">
-            <div class="card-body">
-                <a href="{% url 'lot' lot.pk %}"><h5 class="card-title">{{ lot.name }}</h5></a>
-              <p class="card-text">{{ lot.description }}</p>
-              <p class="card-text">Age: {{ lot.age }}</p>
-              <p class="card-text">Origin: {{ lot.origin }}</p>
-              
-            </div>
+          <div class="data-container-lots">
+            <span class="number">
+              <span class='lot-number'>Lot No. {{ lot.pk }}</span>
+            </span>
+            <div class="name pl-3 pt-3">{{ lot.name }}</div>
+            <div class="pl-3 pt-1">{{ lot.description }}</div>                                            
           </div>
-        </div>
-      </div>
-      {% endfor %}
+
+          </div>
+        </a>
+    </div>
+  {% endfor %}
 
     <!-- Pagination -->
     <div class="pagination">
