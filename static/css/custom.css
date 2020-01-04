@@ -9,8 +9,9 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    background-color: #eeeeee;
+    background-color: #ffffff;
     width: 100%;
+    font-family: 'Audiowide', cursive;
      }
  
  main {
@@ -28,6 +29,9 @@ body {
 a {
     text-decoration: none !important;
     color: #47525E
+}
+.b-radius-10 {
+    border-radius: 10px;
 }
 /*---------------------------------------------------------------- Navbar */
 .bg-custom {
@@ -127,8 +131,8 @@ a {
     position: relative;
     margin: 0 0 20px 0;
 }
-.number {
-    position: absolute;
+.lots-number {
+    position: relative;
     right: 0px;
 }
 .lot-number {
@@ -155,16 +159,18 @@ a {
 .lot-current-bid {
     margin-top: 1rem;
 }
-
-
-/*---------------------------------------------------------------- Auction */
-.auction-event-summary {
-    border: 1px solid #bbc9d7;
-    border-radius: 2px;
-    box-shadow: 0 2px 0 rgba(0,0,0,.15);
-    margin: 1rem 0 1.5rem 0;
-    background-color: #ffffff;
+.online-lots {
+    background-color: #cc773c;
+    border-color: #cc773c;
+    color: #ffffff;
+    padding-left: 0.5rem;
 }
+.data-container-lots {
+    display: inline-block;
+    width: 100%;
+}
+
+/*---------------------------------------------------------------- Auctions */
 .online-auctions {
     background-color: #c23b22;
     border-color: #c23b22;
@@ -172,13 +178,22 @@ a {
     padding-left: 0.5rem;
 
 }
+
+/*---------------------------------------------------------------- Summary Cards */
+.event-summary {
+    border: 1px solid #bbc9d7;
+    border-radius: 2px;
+    box-shadow: 0 2px 0 rgba(0,0,0,.15);
+    margin: 1rem 0 1.5rem 0;
+    background-color: #ffffff;
+}
 .event-summary-body {
     display: flex;
     -ms-flex-wrap: nowrap;
     -webkit-flex-wrap: nowrap;
     flex-wrap: nowrap;
 }
-.auctions-img {
+.small-img {
     height: 150px;
     width: 150px;;
 }
@@ -193,6 +208,43 @@ a {
     font-weight: bold;
     font-size: 1.6em;
     margin-bottom: 6px;
+}
+.lot-number-np {
+    background-color: #004390;
+    color: #fff;
+    float: right;
+    z-index: 50;
+    min-width: 100px;
+    text-align: center;
+}
+.card-body {
+    padding-top: 0.5rem;
+}
+
+/*---------------------------------------------------------------- Categories */
+.online-lots-mil {
+    background-color: #6d9138;
+    border-color: #6d9138;
+    color: #ffffff;
+    padding-left: 0.5rem;
+}
+.online-lots-wea {
+    background-color: #b8860b;
+    border-color: #b8860b;
+    color: #ffffff;
+    padding-left: 0.5rem;
+}
+.online-lots-rle {
+    background-color: #66548b;
+    border-color: #66548b;
+    color: #ffffff;
+    padding-left: 0.5rem;
+}
+.online-lots-cul {
+    background-color: #555d50;
+    border-color: #555d50;
+    color: #ffffff;
+    padding-left: 0.5rem;
 }
 
 /*---------------------------------------------------------------- Checkout */
