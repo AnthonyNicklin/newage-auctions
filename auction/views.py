@@ -62,14 +62,20 @@ def lot(request, lot_id):
 def all_auctions(request):
     """ Render all auctions """
 
-    all_auctions = Auction.objects.all()
-    current_auctions = []
+    today = datetime.today()
+    auctions_obj = Auction.objects.filter(time_ending__gte=today)
+    paginator = Paginator(auctions_obj, 10)
 
-    for auction in all_auctions:
-        if auction.time_ending > timezone.now():
-            current_auctions.append(auction)
+    page = request.GET.get('page')
 
-    return render(request, 'auctions.html', {'current_auctions': current_auctions})
+    try:
+        current_items = paginator.page(page)
+    except PageNotAnInteger:
+        current_items = paginator.page(1)
+    except EmptyPage:
+        current_items = paginator.page(paginator.num_pages)
+
+    return render(request, 'auctions.html', {'current_items': current_items})
 
 
 def auction(request, auction_id):
