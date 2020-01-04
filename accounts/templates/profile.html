@@ -1,5 +1,4 @@
 {% extends 'base.html' %}
-{% load widget_tweaks %}
 
 {% block page_title %}NAA | Profile{% endblock %}
 
@@ -20,12 +19,16 @@
                 <p><span><b>First Name</b></span>  <span>{{ user.first_name.title }}</span></p>
                 <p><b>Last Name</b> {{ user.last_name.title }}</p>
                 <p><b>Email</b> {{ user.email }}</p>
+                <p><b>Username </b>{{ user.username }}</p>
                 <p><b>Phone No. </b> {{ user.profile.phone }}</p>
                 <p><b>Address </b> {{ user.profile.address }}</p>
                 <p><b>Town </b> {{ user.profile.town }}</p>
                 <p><b>Postcode </b> {{ user.profile.postcode }}</p>
                 <p><b>Country </b> {{ user.profile.country }}</p>
             </div>
+
+            <a href="{% url 'edit_profile' %}" class="btn btn-primary">Edit</a>
+            
         </div>
 
         <div class="col-sm-12 col-md-6">

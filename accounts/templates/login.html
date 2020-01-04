@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% load widget_tweaks %}
+{% load crispy_forms_tags %}
 
 {% block page_title %}NAA | Login{% endblock %}
 
@@ -9,24 +9,40 @@
 
 <div class="container">
 
-    <div id="page-heading">
-        <h1>Login</h1>
-    </div>
+    <div class="row">
+        <div class="col col-10 offset-1 col-md-8 offset-md-2 col-lg-6 offset-lg-3 mt-5 mb-5 p-4 bg-light b-radius-10">
 
-    <form method="POST">
-        {% csrf_token%}
-        {% for field in login_form %}
-        <div class="form-group">
-        <label for="id_{{ field.label }}">{{ field.label }}</label>
-        {{ field|attr:'class:form-control' }}
+            <div class="row">
+                <div class="co col-12 text-center m-3">
+                    <h1>Login</h1>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col col-12">
+
+                    <form method="POST">
+                        {% csrf_token%}
+                        <div class="form-group">
+                        {{ login_form | crispy }}
+                        </div>
+                        <div class="text-right">
+                            <a class="text-secondary" href="{% url 'password_reset' %}">Forgot your password?</a>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100 my-3">Login</button>
+                        <div class="text-center mt-4">
+                            <p class="text-secondary">Don't have an account? <a href="{% url 'registration' %}">Sign Up</a></p>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+            <!--./row-->
         </div>
-        {% endfor %}
-        <button type="submit" class="btn btn-primary">Login</button>
-    </form>
 
-    <p><a href="{% url 'password_reset' %}">Reset Password</a></p>
+    </div>
+    <!--./row-->
 
 </div>
 <!--./container-->
-
 {% endblock %}

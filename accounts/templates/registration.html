@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% load widget_tweaks %}
+{% load crispy_forms_tags %}
 
 {% block page_title %}NAA | Registration{% endblock %}
 
@@ -7,49 +7,35 @@
 {% block content %}
 <div class="container">
     
-    <div id="page-heading">
-        <h1>Register</h1>
+    <div class="row">
+        <div class="col col-10 offset-1 col-md-8 offset-md-2 col-lg-6 offset-lg-3 mt-5 mb-5 p-4 bg-light b-radius-10">
+
+            <div class="row">
+                <div class="col col-12 text-center m-3">
+                    <h1>Register</h1>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="co col-12">
+
+                    <form method="POST">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            {{ form | crispy  }}
+                            {{ profile_form | crispy }}
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100 my-3">Register</button>
+                        <div class="text-center mt-4">
+                            <p class="text-secondary">Already have an account? <a href="{% url 'login' %}">Login</a></p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        </div>
     </div>
-
-    <form method="POST">
-
-        <!-- User form -->
-        {% csrf_token %}
-        {% for field in form %}
-        <div class="form-group">
-            <label for="id_{{ field.label }}">{{ field.label }}</label>
-            {{ field|attr:'class:form-control' }}
-        </div>
-        {% endfor %}
-        {% if form.errors %}
-            <ol>
-                {% for error in form.errors %}
-                    <li><strong>{{ error|escape }}</strong></li>
-                {% endfor %}
-            </ol>
-        {% endif %}
-        <!--/ End User form -->
-
-        <!-- User Details form -->
-        {% csrf_token %}
-        {% for field in profile_form %}
-        <div class="form-group">
-            <label for="id_{{ field.label }}">{{ field.label }}</label>
-            {{ field|attr:'class:form-control' }}
-        </div>
-        {% endfor %}
-        {% if user_details_form.errors %}
-            <ol>
-                {% for error in profile_form.errors %}
-                    <li><strong>{{ error|escape }}</strong></li>
-                {% endfor %}
-            </ol>
-        {% endif %}
-        <!-- /User Details form -->
-
-        <button type="submit" class="btn btn-primary">Register</button>
-
-    </form>
+    <!--./row-->
 
 </div>
 <!--./container-->

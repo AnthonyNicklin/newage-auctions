@@ -83,3 +83,55 @@ class ProfileForm(forms.ModelForm):
         country = self.cleaned_data['country']
 
         return country
+
+
+class UpdateUserForm(forms.ModelForm):
+    """ Update user details """
+
+    email = forms.EmailField()
+    first_name = forms.CharField(max_length=50)
+    last_name = forms.CharField(max_length=50)
+    username = forms.CharField(max_length=50)
+
+    class Meta:
+        model = User
+        fields = ["first_name", "last_name", "email", "username"]
+
+
+class UpdateProfileForm(forms.ModelForm):
+    """ Update the user details """
+
+    phone = forms.CharField(max_length=11, label="Phone")                                                                                                                                                                                                                                                                             
+    address = forms.CharField(max_length=255, label="Address")
+    town = forms.CharField(max_length=45, label="Town")
+    postcode = forms.CharField(max_length=45, label="Postcode")
+    country = forms.CharField(max_length=45, label="Country")
+
+    class Meta:
+        model = Profile
+        fields = ['phone', 'address', 'town', 'postcode', 'country']
+
+    def clean_phone(self):
+        phone = self.cleaned_data['phone']
+
+        return phone
+
+    def clean_address(self):
+        address = self.cleaned_data['address']
+
+        return address
+
+    def clean_town(self):
+        town = self.cleaned_data['town']
+
+        return town
+
+    def clean_postcode(self):
+        postcode = self.cleaned_data['postcode']
+
+        return postcode
+
+    def clean_country(self):
+        country = self.cleaned_data['country']
+
+        return country
