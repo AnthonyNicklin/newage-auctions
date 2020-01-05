@@ -135,3 +135,19 @@ class UpdateProfileForm(forms.ModelForm):
         country = self.cleaned_data['country']
 
         return country
+
+
+class ChangePassword(forms.ModelForm):
+    """ Change password form """
+
+    password1 = forms.CharField(
+        label="Password", 
+        widget=forms.PasswordInput)
+    password2 = forms.CharField(
+        label="Password Confirmation", 
+        widget=forms.PasswordInput)
+
+    class Meta:
+        model = User
+        fields = ['password1', 'password2']
+        

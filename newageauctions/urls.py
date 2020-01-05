@@ -18,6 +18,7 @@ from django.urls import path, include
 from django.contrib import admin
 from django.views import static
 from .settings import MEDIA_ROOT
+from django.contrib.auth import views as auth_views
 
 from home.views import index
 from accounts.urls import urlpatterns as accounts_urls
@@ -30,6 +31,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', index, name='index'),
     path('accounts/', include(accounts_urls)),
+    path('accounts/', include('django.contrib.auth.urls')),
     path('auctions/', include(auction_urls)),
     path('cart/', include(cart_urls)),
     path('checkout/', include(checkout_urls)),

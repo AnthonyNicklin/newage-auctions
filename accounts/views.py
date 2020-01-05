@@ -4,8 +4,9 @@ from django.contrib.auth import authenticate
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.db import transaction
+from django.core.exceptions import ValidationError
 
-from .forms import UserLoginForm, UserRegistrationForm, ProfileForm, UpdateUserForm, UpdateProfileForm
+from .forms import UserLoginForm, UserRegistrationForm, ProfileForm, UpdateUserForm, UpdateProfileForm, ChangePassword
 from .models import Profile
 from auction.models import Bid
 
@@ -129,4 +130,7 @@ def edit_user_profile(request):
     }
 
     return render(request, 'edit_profile.html', context)
+
+
+
 
