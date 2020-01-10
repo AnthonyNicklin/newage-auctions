@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.db import transaction
 from django.core.exceptions import ValidationError
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 from .forms import UserLoginForm, UserRegistrationForm, ProfileForm, UpdateUserForm, UpdateProfileForm, ChangePassword
 from .models import Profile
@@ -89,24 +90,6 @@ def registration(request):
 
 @login_required
 def user_profile(request):
-    """ Returns the Users profile page """
-
-    user = get_object_or_404(User, id=request.user.pk)
-    bid = Bid.objects.filter(user=user)
-
-    if bid:
-        user_bids = get_list_or_404(Bid, user_id=user)
-        context = {
-            'user': user,
-            'user_bids': user_bids
-        }
-        return render(request, 'profile.html', context)
-    else:
-        return render(request, 'profile.html', {'user': user})
-        
-
-@login_required
-def edit_user_profile(request):
     """ Update user profile """
 
     if request.method == 'POST':
@@ -129,8 +112,27 @@ def edit_user_profile(request):
         'profile_form': profile_form
     }
 
-    return render(request, 'edit_profile.html', context)
+    return render(request, 'profile.html', context)
 
+
+@login_required
+def bid_history(request):
+    """ Render the bidding history for the user """
+
+    bid_obj = Bid.objects.filter(user=request.user.pk).order_by('-bid_time')
+    paginator = Paginator(bid_obj, 25)
+
+    page = request.GET.get('page')
+    try:
+        bid_items = paginator.page(page)
+    except PageNotAnInteger:
+        # If the page is not an integer, deliver first page.
+        bid_items = paginator.page(1)
+    except EmptyPage:
+        # If page is not an integer, deliver first page.
+        bid_items = paginator.page(paginator.num_pages)
+
+    return render(request, 'bid_history.html', {'bid_items': bid_items})
 
 
 
