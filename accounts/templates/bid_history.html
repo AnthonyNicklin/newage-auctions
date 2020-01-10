@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+{% block page_title %}NAA | Bidding History{% endblock %}
+
+
+{% block content %}
+
+<div class="container">
+
+    <div class="row">
+        <div class="col-sm-12">
+
+            <div id="page-heading">
+                <h1>Bidding History</h1>
+            </div>
+
+            <div class="table-responsive">
+                <table class="table text-center">
+                  <thead>
+                    <tr>
+                      <th scope="col">Auction No.</th>
+                      <th scope="col">Lot Name</th>
+                      <th scope="col">Time</th>
+                      <th scope="col">Bid</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for bid in bid_items %}
+                        <tr class="{% cycle 'bid-item-1' 'bid-item-2'%}">
+                            <td>{{ bid.auction.pk }}</td>
+                            <td>{{ bid.auction.lot.name }}</td>
+                            <td>{{ bid.bid_time }}</td>
+                            <td>€{{ bid.bid_amount }}</td>
+                        </tr>
+                   {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+
+            <!-- Pagination -->
+            <div class="pagination">
+                <span class="step-links">
+                    {% if bid_items.has_previous %}
+                        <a href="?page={{ bid_items.previous_page_number }}">Previous</a>
+                    {% endif %}
+            
+                    <span class="current">
+                        Page {{ bid_items.number }} of {{ bid_items.paginator.num_pages }}
+                    </span>
+            
+                    {% if bid_items.has_next %}
+                        <a href="?page={{ bid_items.next_page_number }}">Next</a>
+                    {% endif %}
+                </span>
+            </div>
+            <!-- End Pagination -->
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}
