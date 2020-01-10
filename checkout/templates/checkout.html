@@ -14,52 +14,44 @@
 
 {% block content %}
 <div class="container">
-    
+
     <div class="row">
-    {% for item in cart_items %}
-        <div class="col-sm-12">
-            <div id="page-heading">
-                <h1>Auction No. {{ item.auction.pk }}</h1>
-            </div>
+        <div class="col col-10 offset-1 col-md-8 offset-md-2 col-lg-6 offset-lg-3 mt-5 mb-5 p-4 bg-light b-radius-10">
 
-            <h3>{{ item.auction.lot.name }}</h3>
-            <p>Price <i class="fas fa-euro-sign"></i> {{ item.auction.buy_now }}</p>
-        </div>
-    {% endfor %}
-    </div>
-    <!-- ./row -->
-    
-    <br>
-    <br>
-    <div>
-        <h3>Total</h3>
-        <p><i class="fas fa-euro-sign"></i> {{ total }}</p>
-    </div>
-
-    <form role="form" method="POST" id="payment-form" action="{% url 'checkout' %}">
-        {% csrf_token %}
-        <legend class="title">Payment Details</legend>
-        <div id="credit-card-errors" style="display: none;">
-            <div id="alert-message block-message error" id="stripe-error-message"></div>
-        </div>
-        <div class="form-group col-md-6">
-            {{ order_form | crispy }}
-        </div>
-        <div class="form-group col-md-6">
-            {{ payment_form | crispy }}
-        </div>
-        <div class="form-group col-md-12">
             <div class="row">
-                <div class="col">
-                    <h3 class="title">Total</h3>
-                    <p class="price"><i class="fas fa-euro-sign"></i> {{ total }}</p>
+                <div class="col col-12 text-center m-3">
+                    <h1>Checkout</h1>
                 </div>
-                <div class="col">
-                    <input class="btn btn-primary" id="submit_payment_btn" name="commit" type="submit"
-                        value="Submit Payment"></div>
             </div>
+
+            <form role="form" method="POST" id="payment-form" action="{% url 'checkout' %}">
+                {% csrf_token %}
+                <legend class="title">Payment Details</legend>
+                <div id="credit-card-errors" style="display: none;">
+                    <div id="alert-message block-message error" id="stripe-error-message"></div>
+                </div>
+                <div class="form-group">
+                    {{ order_form | crispy }}
+                </div>
+                <div class="form-group">
+                    {{ payment_form | crispy }}
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col">
+                            <h3 class="title">Total</h3>
+                            <p class="price"><i class="fas fa-euro-sign"></i> {{ total }}</p>
+                        </div>
+                        <div class="col">
+                            <input class="btn btn-primary w-100 my-3" id="submit_payment_btn" name="commit" type="submit"
+                                value="Submit Payment"></div>
+                    </div>
+                </div>
+            </form>
+
         </div>
-    </form>
+    </div>
+    <!--./row-->
 
 </div>
 <!--./container-->
