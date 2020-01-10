@@ -16,7 +16,7 @@
 
     <div class="row">
         
-        <div class="col-sm-12 col-md-6">
+        <div class="col-sm-12 col-md-6 mb-sm-2">
             <div class="image-container-full">
                 <div class="lot-image" style="background-image: url('{{ MEDIA_URL }}{{ auction.lot.image }}')"></div>
             </div>   
@@ -26,11 +26,12 @@
                 <span class="number">
                     <span class='lot-number'>Lot No. {{ auction.lot_id }}</span>
                 </span>
-                <h3>Auction</h3>
-                <p><b>Starts </b>{{ auction.time_starting }}</p>
-                <p><b>Ends </b>{{ auction.time_ending }}</p>
-                <p><b>Current Bid</b></p>
+                <h3 class="pt-4"><b>Current Bid</b></h3>
                 <p>€{{ latest_bid.bid_amount }}</p>
+                <p><b>Auction Starts</b></p>
+                <p>{{ auction.time_starting }}</p>
+                <p><b>Auction Ends</b></p>
+                <p>{{ auction.time_ending }}</p>
                 <p><b>Number of bids</b></p>
                 <p> {{ auction.number_of_bids }}</p>
                 <p><b>Origin</b></p>
@@ -44,7 +45,7 @@
     </div>
     <!-- ./row -->
     
-    <div class="row">
+    <div class="row justify-content-center">
 
         <div class="col-sm-12 col-md-6 mt-5">
             <form method="POST" action="{% url 'bid' auction_id=auction.pk %}">
@@ -56,8 +57,8 @@
                             {{ field|attr:'class:form-control' }}
                         </div>
                     </div>
+                    <button type="submit" class="btn btn-primary ml-3 mb-5">Bid Now</button>
                 {% endfor %}
-                <button type="submit" class="btn btn-primary ml-3 mb-5">Bid Now</button>
                 </div>
             </form>
         </div>
