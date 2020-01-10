@@ -97,11 +97,17 @@ def auction(request, auction_id):
             bid_default.save()
             latest_bid = bid_default
 
-        context = {
-            'auction': auction,
-            'latest_bid': latest_bid,
-            'bid_form': bid_form
-        }
+        if auction.time_starting < timezone.now():  # If the auction has not started yet
+            context = {                             # hide the bid form.
+                'auction': auction,
+                'latest_bid': latest_bid,
+                'bid_form': bid_form
+            }
+        else: 
+            context = {
+                'auction': auction,
+                'latest_bid': latest_bid
+            }
 
         return render(request, 'auction.html', context)
     else:
@@ -126,7 +132,8 @@ def bid(request, auction_id):
 
     if bid_form.is_valid():
         bid = Bid()
-        if current_bid < bid_form.cleaned_data['bid_amount']:
+        if current_bid < bid_form.cleaned_data['bid_amount'] and \
+            auction.time_starting < timezone.now():
             bid.user = current_user
             bid.auction = auction
             bid.bid_time = datetime.now()
