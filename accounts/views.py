@@ -24,7 +24,7 @@ def logout(request):
 
     auth.logout(request)
     messages.success(request, 'You have been successfully logged out')
-    return redirect(reverse('index'))
+    return redirect('login')
 
 
 def login(request):
@@ -40,7 +40,6 @@ def login(request):
                                     password=request.POST['password'])
             if user:
                 auth.login(user=user, request=request)
-                messages.success(request, "You have successfully logged in!")
                 return redirect(reverse('index'))
             else:
                 login_form.add_error(None, "Your username or password is incorrect")
@@ -71,7 +70,6 @@ def registration(request):
         
             if user: 
                 auth.login(user=user, request=request)
-                messages.success(request, 'You have successfully registered')
                 return render(request, 'index.html')
             else:
                 messages.error(request, 'Unable to register your account')
