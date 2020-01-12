@@ -10,6 +10,17 @@
         <h1>Auction No. {{ auction.pk }}</h1>
     </div>
 
+    <!-- Message Box -->
+    {% for message in messages %}
+    <div class="alert {{ message.tags }} alert-dismissible text-center" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        {{ message }}
+    </div>
+    {% endfor %}
+    <!-- End Message Box -->
+
     <a href="{% url 'all_auctions' %}"><i class="fas fa-chevron-left"></i> Back to auctions</a>
 
     <h1>{{ auction.lot.name }}</h1>

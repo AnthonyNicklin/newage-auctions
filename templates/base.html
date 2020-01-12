@@ -45,7 +45,7 @@
                         <li class="nav-item mx-2">
                             <a class="nav-link" href="{% url 'all_auctions' %}">Auctions</a>
                         </li>
-                        <!-- <li class="nav-item dropdown mx-2">
+                        <li class="nav-item dropdown mx-2">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Lots
                             </a>
@@ -56,7 +56,7 @@
                                 <a class="dropdown-item" href="{% url 'category' category='weapons' %}">Weapons</a>
                                 <a class="dropdown-item" href="{% url 'category' category='real estate' %}">Real Estate</a>
                             </div>
-                        </li> -->
+                        </li>
                     {% if user.is_authenticated %}
                     <li class="nav-item dropdown mx-2">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -83,22 +83,20 @@
             <!--./collapse-->
             
         </nav>
-        <!--End of header and Navigation-->
     </header> 
-        
-    <!-- <section id=errors>
-        {% if messages %}
-            <div>
-                {% for message in messages %}
-                    {{ message }}
-                {% endfor %}
-            </div>
-        {% endif %}
-    </section> -->
+    <!--End of header and Navigation-->
 
-     <!--Main -->
-     <main>
+    <!--Main -->
+    <main>
         <div>
+            
+            <!--To the top button-->
+            <div id="topBtn">
+                <button class="btn top-btn" onclick="topFunction()" title="Go to top">
+                    <i class="fas fa-arrow-up"></i>
+                </button>
+            </div>
+
             {% block content %}{% endblock %}
         </div>
     </main>

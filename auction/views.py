@@ -7,6 +7,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib import auth
+from django.db.models import Q
 
 from auction.models import Auction, Lot, Bid
 from home.views import index
@@ -143,10 +144,11 @@ def bid(request, auction_id):
             auction.save()
             messages.success(request, 'Bid successfull. Good Luck!')
         else:
-            messages.success(request, 'Bid must be higher than current bid')
+            messages.error(request, 'Bid must be higher than current bid')
             return redirect('auction', auction_id=auction_id)
     else:
         bid_form = BidForm()
 
     return redirect('auction', auction_id=auction_id)
+
 

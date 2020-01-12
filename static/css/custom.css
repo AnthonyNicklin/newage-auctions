@@ -47,6 +47,25 @@ a {
     font-size: 3rem;
 }
 
+/*---------------------------------------------------------------- To Top Button */
+#topBtn {
+    background-color: #ffffff;
+    display: none;
+    position: fixed;
+    bottom: 5em;
+    right: 0px;
+    z-index: 99;
+    border-radius: 10px;
+    border: 0.063em solid black; 
+}    
+#topBtn:hover {
+    background-color: #000000;
+    cursor: pointer; 
+}
+#topBtn:hover .fa-arrow-up {
+    color: #ffffff; 
+}
+
 /*---------------------------------------------------------------- Navbar */
 .bg-custom {
     background-color: #004390;
@@ -367,5 +386,9 @@ a {
     }
     .margin-top-2 {
         margin-top: 2.6rem;
+    }
+    #topBtn {
+        padding: 0.2rem;
+        right: 5px;
     }
 }

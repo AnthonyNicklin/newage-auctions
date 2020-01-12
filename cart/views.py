@@ -35,7 +35,7 @@ def remove_from_cart(request, auction_id):
     if auction:
         auction.winner = user_default
         auction.save()
-        messages.success(request, '{0} was removed from the cart'.format(auction_id))
+        messages.success(request, 'Auction No. {0} was removed from the cart'.format(auction_id))
         return redirect('view_cart')
     else:
         messages.error(request, 'Sorry we are unable remove this form your cart')

@@ -25,6 +25,7 @@ from accounts.urls import urlpatterns as accounts_urls
 from cart.urls import urlpatterns as cart_urls
 from checkout.urls import urlpatterns as checkout_urls
 from auction.urls import urlpatterns as auction_urls
+from search.urls import urlpatterns as search_urls
 
 
 urlpatterns = [
@@ -35,5 +36,6 @@ urlpatterns = [
     path('auctions/', include(auction_urls)),
     path('cart/', include(cart_urls)),
     path('checkout/', include(checkout_urls)),
+    path('search/', include(search_urls)),
     path('media/(?Ppath.*)', static.serve,{'document_root': MEDIA_ROOT}),
 ]

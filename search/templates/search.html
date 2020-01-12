@@ -6,7 +6,7 @@
 <div class="container">
 
     <div id="page-heading">
-        <h1>Auctions</h1>
+        <h1>Search Results</h1>
     </div>
 
     <!-- Message Box -->
@@ -44,27 +44,27 @@
     </div>
     <!--End of Search Bar -->
 
-    {% for auction in current_items %}
+    {% for lot in current_items %}
     <div class="event-summary">
-        <a href="{% url 'auction' auction.pk %}">
-        {% if auction.lot.category == 'military' %}
+        <a href="{% url 'lot' lot.pk %}">
+        {% if lot.category == 'military' %}
           <div class="online-lots-mil">Newage Auctions - MILITARY</div>
-          {% elif auction.lot.category == 'real estate' %}
+          {% elif lot.category == 'real estate' %}
             <div class="online-lots-rle">Newage Auctions - REAL ESTATE</div>
-          {% elif auction.lot.category == 'weapons' %}
+          {% elif lot.category == 'weapons' %}
             <div class="online-lots-wea">Newage Auctions - WEAPONS</div>
         {% else %}
           <div class="online-lots-cul">Newage Auctions - CULTURAL</div>
         {% endif %}
             <div class="event-summary-body">
                 <div class="auctions-image">
-                    <img class="small-img" src='{{ MEDIA_URL }}{{ auction.lot.image }}' alt="Auction event image">
+                    <img class="small-img" src='{{ MEDIA_URL }}{{ lot.image }}' alt="Auction event image">
                 </div>
                 <div class="data-container">
-                    <div class="name">Auction No. {{ auction.pk }}</div>
-                        <div class="pb-2">{{ auction.description }}</div>
-                        <div class="time"><span class="time-ends"><b>Start:</b> </span>{{ auction.time_starting }}</div>                                         
-                        <div class="time"><span class="time-ends"><b>End:</b> </span>{{ auction.time_ending }}</div>
+                    <div class="name">Lot No. {{ lot.pk }}</div>
+                        <div class="pb-2">{{ lot.description }}</div>
+                        <div class="time"><span class="time-ends"><b>Start:</b> </span>{{ lot.auction.time_starting }}</div>                                         
+                        <div class="time"><span class="time-ends"><b>End:</b> </span>{{ lot.auction.time_ending }}</div>
                        
                 </div>
 

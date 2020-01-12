@@ -7,7 +7,7 @@
 <div class="container">
 
     <div id="page-heading">
-        <h1>Lot No. {{lot.pk }}</h1>
+        <h1>Lot No. {{ lot.pk }}</h1>
     </div>
 
     <a href="{% url 'all_lot_items' %}"><i class="fas fa-chevron-left mb-3"></i> Back to listings</a>
@@ -26,6 +26,7 @@
                 <span class="number">
                     <span class='lot-number'>Lot No. {{ lot.pk }}</span>
                 </span>
+                <a href="{% url 'auction' lot.auction.pk %}"><p><b>Auction No. {{ lot.auction.pk }}</b></p></a>
                 <p><b>Origin</b></p>
                 <p> {{ lot.origin }}</p>
                 <p><b>Age</b></p>
