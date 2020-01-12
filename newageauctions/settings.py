@@ -27,7 +27,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get('DEBUG', False)
 
 ALLOWED_HOSTS = [os.environ.get('HOSTNAME'),
                 '127.0.0.1']
@@ -45,14 +45,15 @@ INSTALLED_APPS = [
 
     #Third-party Apps
     'widget_tweaks',
-     'storages',
-     'crispy_forms',
+    'storages',
+    'crispy_forms',
 
     #Custom Apps
     'auction',
     'accounts',
     'cart',
     'checkout',
+    'search',
 ]
 
 MIDDLEWARE = [
