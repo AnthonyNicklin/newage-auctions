@@ -9,29 +9,7 @@
       <h1>Lots</h1>
   </div>
 
-    <!-- Search Bar-->
-    <div class="row justify-content-center mx-1">
-
-      <div class="col col-12 justify-content-center filter p-3">
-          <form method="GET" action="{% url 'keyword_search' %}" value="{{ request.GET.q} ">
-              <div class="row form-group">
-                  <div class="col-sm-12 col-md-6 offset-md-2 margin-bottom-1 margin-bottom-0">
-                      <p class="text-center">Search Lots</p>
-                      <input type="text" class="form-control" id="keyword-search" 
-                          name="q" placeholder="Keyword" value="{{ request.GET.q }}">
-                  </div>
-
-                  <div class="col-sm-12 col-md-4 margin-top-2 margin-top-1">
-                      <button class="btn btn-primary" type="search">Search</button>
-                  </div>
-
-              </div>
-              <!--./row-->
-          </form>
-
-      </div>
-  </div>
-  <!--End of Search Bar -->
+  {% block search_bar %}{% include 'search_bar.html' %}{% endblock %}
 
   {% for lot in lot_items %}
     <div class="event-summary">
