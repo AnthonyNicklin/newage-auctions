@@ -3,7 +3,7 @@
 
 html
 body {
-    color: #47525E;
+    color: #100C08;
     margin: 0;
     padding: 0;
     display: flex;
@@ -46,7 +46,16 @@ a {
     color: #ffffff;
     font-size: 3rem;
 }
-
+.bold {
+    color: #100C08;
+}
+.btn-blue {
+    background-color: #004390;
+    color: #ffffff;
+}
+input {
+    box-shadow: 0 2px 0 rgba(0,0,0,.15);
+}
 /*---------------------------------------------------------------- To Top Button */
 #topBtn {
     background-color: #ffffff;
@@ -120,7 +129,8 @@ a {
 }
 .card {
     margin: 1rem 0rem 0rem 2.5rem;
-    height: 250px
+    height: 250px;
+    box-shadow: 0 2px 0 rgba(0,0,0,.15);
 }
 .card-img {
     height: 250px;
@@ -139,6 +149,9 @@ a {
     -webkit-transition: all .3s ease-in-out;
     -o-transition: all .3s ease-in-out; 
     border-radius: 1rem;
+}
+.featured-lots {
+    background-color: #F7F7F7;
 }
 
 /*---------------------------------------------------------------- Lot */
@@ -386,6 +399,9 @@ a {
     }
     .margin-top-2 {
         margin-top: 2.6rem;
+    }
+    .margin-top-sm-0 {
+        margin-top: 0rem;
     }
     #topBtn {
         padding: 0.2rem;
