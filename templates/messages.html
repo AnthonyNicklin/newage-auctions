@@ -1,0 +1,12 @@
+{% block messages %}
+<!-- Message Box -->
+{% for message in messages %}
+<div class="alert {{ message.tags }} alert-dismissible text-center mt-5" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+    {{ message }}
+</div>
+{% endfor %}
+<!-- End Message Box -->
+{%  endblock %}
