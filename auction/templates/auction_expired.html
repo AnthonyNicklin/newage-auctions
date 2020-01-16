@@ -11,7 +11,7 @@
 
     <div class="text-center">
         <h1>{{ auction.lot.name }}</h1>
-        <p>Sorry this auction has expired. Please use the link below to view all current auctoins.</p>
+        <p>Sorry this auction has <span class="text-danger">EXPIRED</span>. Please use the link below to view all current auctoins.</p>
         <p><a href="{% url 'all_auctions' %}"><i class="fas fa-chevron-left"></i> Back to auctions</a></p>
     </div>
 

@@ -10,65 +10,104 @@
         <h1>Auction No. {{ auction.pk }}</h1>
     </div>
 
-    {% block messages %}{% include 'messages.html' %}{% endblock %}
-
-    <a href="{% url 'all_auctions' %}"><i class="fas fa-chevron-left"></i> Back to auctions</a>
-
-    <h1>{{ auction.lot.name }}</h1>
-
-    <div class="row">
-        
-        <div class="col-sm-12 col-md-6 mb-sm-2">
-            <div class="image-container-full">
-                <div class="lot-image" style="background-image: url('{{ MEDIA_URL }}{{ auction.lot.image }}')"></div>
-            </div>   
-        </div>
-        <div class="col-sm-12 col-md-6">
-            <div class="lot-details-box">
-                <span class="number">
-                    <span class='lot-number'>Lot No. {{ auction.lot_id }}</span>
-                </span>
-                <h3 class="pt-4"><b>Current Bid</b></h3>
-                <p>€{{ latest_bid.bid_amount }}</p>
-                <p><b>Auction Starts</b></p>
-                <p>{{ auction.time_starting }}</p>
-                <p><b>Auction Ends</b></p>
-                <p>{{ auction.time_ending }}</p>
-                <p><b>Number of bids</b></p>
-                <p> {{ auction.number_of_bids }}</p>
-                <p><b>Origin</b></p>
-                <p> {{ auction.lot.origin }}</p>
-                <p><b>Age</b></p>
-                <p>{{ auction.lot.age }}</p> 
-                <p><b>Description</b></p>
-                <p>{{ auction.lot.description }}</p>
-            </div>
-        </div>
-    </div>
-    <!-- ./row -->
-    
-    <div class="row justify-content-center mx-1">
-
-        <div class="col col-12 justify-content-center filter p-4">
-            <form method="POST" action="{% url 'bid' auction_id=auction.pk %}">
-                {% csrf_token %}
-                {% for field in bid_form %}
-                <div class="row">
-                    <div class="col-sm-12 col-md-6 offset-md-2">
-                        {{ field|attr:'class:form-control' }}
-                    </div>
-
-                    <div class="col-sm-12 col-md-4 margin-top-sm-0 margin-top-1">
-                        <button type="submit" class="btn btn-primary">Bid Now</button>
-                    </div>
-                {% endfor %}
-                </div>
-            </form>
-        </div>
-
-    </div>
-    <!-- ./row -->
+    <a href="{% url 'all_auctions' %}"><i class="fas fa-chevron-left my-3"></i> Back to auctions</a>
 
 </div>
 <!-- /.container -->
+
+<!-- Auction Card -->
+<section class="featured-lots pb-3">
+    <div class="container">
+        {% block messages %}{% include 'messages.html' %}{% endblock %}
+
+        <h1 class="pt-3">{{ auction.lot.name }}</h1>
+
+        <div class="row my-3">
+            
+            <div class="col-sm-12 col-md-6 mb-sm-2">
+                <div class="image-container-full">
+                    <div class="lot-image" style="background-image: url('{{ MEDIA_URL }}{{ auction.lot.image }}')"></div>
+                </div>   
+            </div>
+            <div class="col-sm-12 col-md-6">
+                <div class="lot-details-box">
+                    <span class="number">
+                        <a href="{% url 'lot' auction.lot_id %}"><span class='lot-number'>Lot No. {{ auction.lot_id }}</span></a>
+                    </span>
+                    <div class="p-3">
+                        <h3 class="text-center text-bold">Auction Card</h3>
+                        <p><b>Current Bid</b></p>
+                        <p>€{{ latest_bid.bid_amount }}</p>
+                        <p><b>Auction Starts</b></p>
+                        <p>{{ auction.time_starting }}</p>
+                        <p><b>Auction Ends</b></p>
+                        <p>{{ auction.time_ending }}</p>
+                        <p><b>Number of bids</b></p>
+                        <p> {{ auction.number_of_bids }}</p>
+                        <p><b>Origin</b></p>
+                        <p> {{ auction.lot.origin }}</p>
+                        <p><b>Age</b></p>
+                        <p>{{ auction.lot.age }} years old</p> 
+                        <p><b>Description</b></p>
+                        <p>{{ auction.lot.description }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- ./row -->
+    </div>
+    <!--./container-->
+</section>
+<!--End Auction Card-->
+
+<!--Bid-->
+<section id="bid">
+    <div class="container">
+
+        <div class="row my-4 p-1">
+            <div class="co col-12 text-center">
+                <h1>Bidding</h1>
+            </div>
+
+            <div class="col col-12 text-center">
+                <p>The current bid is <b>€{{ latest_bid.bid_amount }}</b>. Place a bid
+                    higher then the current bid in order to win the auction.
+                </p>
+                <p>Good Luck!</p>
+                <p class="text-secondary">Bids cannot be taken back once 
+                    submitted. Please ensure before bidding you have the means 
+                    and funds of paying the full amount of the bid you submit.
+                </p>
+            </div>
+        </div>
+
+        <div class="row justify-content-center mx-1 my-2">
+
+            <div class="col col-12 justify-content-center filter p-4">
+                <form method="POST" action="{% url 'bid' auction_id=auction.pk %}">
+                    <p class="text-center">Bid</p>
+                    {% csrf_token %}
+                    {% for field in bid_form %}
+                    <div class="row">
+                        <div class="col-sm-12 col-md-6 offset-md-2">
+                            {{ field|attr:'class:form-control' }}
+                        </div>
+
+                        <div class="col-sm-12 col-md-4 margin-top-sm-0 margin-top-1">
+                            <button type="submit" class="btn btn-primary">Bid Now</button>
+                        </div>
+                    {% endfor %}
+                    </div>
+                </form>
+            </div>
+
+        </div>
+        <!-- ./row -->
+
+    </div>
+    <!--./container-->
+</section>
+<!--End Bid-->
+
+
 {% endblock %}

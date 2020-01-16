@@ -28,8 +28,10 @@
                         {{ profile_form | crispy }}
                         <button type="submit" class="btn btn-primary w-100 my-3">Update</button>
                     </form>
-                    <a href="{% url 'password_change' %}" class="btn btn-info w-100 my-3">Change Password</a>
-                    <a href="{% url 'index' %}" class="btn btn-danger w-100 my-3">Cancel</a>
+                    <a href="{% url 'password_change' %}" class="btn btn-outline-primary w-100 my-3">Change Password</a>
+                    <div class="row justify-content-center">
+                        <a href="{% url 'index' %}" class="btn text-danger my-3">Cancel</a>
+                    </div>
                 </div>
             </div>
 
