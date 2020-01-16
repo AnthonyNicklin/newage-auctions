@@ -20,7 +20,7 @@ from django.views import static
 from .settings import MEDIA_ROOT
 from django.contrib.auth import views as auth_views
 
-from home.views import index
+from home.urls import urlpatterns as home_urls
 from accounts.urls import urlpatterns as accounts_urls
 from cart.urls import urlpatterns as cart_urls
 from checkout.urls import urlpatterns as checkout_urls
@@ -30,7 +30,7 @@ from search.urls import urlpatterns as search_urls
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', index, name='index'),
+    path('', include(home_urls)),
     path('accounts/', include(accounts_urls)),
     path('accounts/', include('django.contrib.auth.urls')),
     path('auctions/', include(auction_urls)),
