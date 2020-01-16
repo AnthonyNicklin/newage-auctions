@@ -44,7 +44,6 @@ a {
 }
 .trash-icon {
     color: #ffffff;
-    font-size: 3rem;
 }
 .bold {
     color: #100C08;
@@ -320,7 +319,7 @@ input {
 
 /*---------------------------------------------------------------- Bid history */
 .bid-item-1 {
-    background-color:#D6D4D4;
+    background-color:#eff3f7;
 }
 
 .bid-item-2 {
