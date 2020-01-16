@@ -120,6 +120,18 @@ def auction(request, auction_id):
 
 
 @login_required
+def lot_sold(request, auction_id):
+    """ Render page stating the lot has expired and lot has been sold """
+
+    auction = get_object_or_404(Auction, id=auction_id)
+
+    if auction.paid:
+        return render(request, 'lot_sold.html', {'auction': auction})
+    else:
+        return render(request, '404.html')
+
+
+@login_required
 def bid(request, auction_id):
     """ Bid on auction. Bid must be higher than current bid """
 
