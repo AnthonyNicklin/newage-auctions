@@ -10,34 +10,74 @@
         <h1>Lot No. {{ lot.pk }}</h1>
     </div>
 
-    <a href="{% url 'all_lot_items' %}"><i class="fas fa-chevron-left mb-3"></i> Back to listings</a>
-
-    <h1>{{ lot.name }}</h1>
-
-    <div class="row">
-        
-        <div class="col-sm-12 col-md-6">
-            <div class="image-container-full">
-                <div class="lot-image" style="background-image: url('{{ MEDIA_URL }}{{ lot.image }}')"></div>
-            </div>   
-        </div>
-        <div class="col-sm-12 col-md-6">
-            <div class="lot-details-box">
-                <span class="number">
-                    <span class='lot-number'>Lot No. {{ lot.pk }}</span>
-                </span>
-                <a href="{% url 'auction' lot.auction.pk %}"><p><b>Auction No. {{ lot.auction.pk }}</b></p></a>
-                <p><b>Origin</b></p>
-                <p> {{ lot.origin }}</p>
-                <p><b>Age</b></p>
-                <p>{{ lot.age }}</p> 
-                <p><b>Description</b></p>
-                <p>{{ lot.description }}</p>
-            </div>
-        </div>
-    </div>
-    <!-- ./row -->
+    <a href="{% url 'all_lot_items' %}"><i class="fas fa-chevron-left my-3"></i> Back to listings</a>
 
 </div>
-<!-- /.container -->
+<!--./container-->
+
+<!--Lot Card -->
+<section class="featured-lots pb-3">
+    <div class="container">
+
+        <h1 class="pt-3">{{ lot.name }}</h1>
+
+        <div class="row my-3">
+            
+            <div class="col-sm-12 col-md-6">
+                <div class="image-container-full">
+                    <div class="lot-image" style="background-image: url('{{ MEDIA_URL }}{{ lot.image }}')"></div>
+                </div>   
+            </div>
+            <div class="col-sm-12 col-md-6">
+                <div class="lot-details-box">
+                    <span class="number">
+                        <span class='lot-number'>Lot No. {{ lot.pk }}</span>
+                    </span>
+                    <div class="p-3">
+                        <h3 class="text-center text-bold">Lot Card</h3>
+                        <p><b>Origin</b></p>
+                        <p> {{ lot.origin }}</p>
+                        <p><b>Age</b></p>
+                        <p>{{ lot.age }} years old</p> 
+                        <p><b>Description</b></p>
+                        <p>{{ lot.description }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- ./row -->
+
+    </div>
+    <!-- /.container -->
+</section>
+<!-- End Lot Card -->
+
+
+<!--Auction-->
+<section>
+    <div class="container">
+
+        <div class="row my-4 p-1">
+            <div class="co col-12 text-center">
+                <h1>Auction</h1>
+            </div>
+
+            <div class="col col-12 text-center">
+                <p>This lot will be auctioned off in <a href="{% url 'auction' lot.auction.pk %}">
+                    <b>Auction No. {{ lot.auction.pk }}</b></a>
+                </p>
+                <p>If you wish to take part in this auction then please 
+                    <a href="{% url 'login' %}">
+                        <b>login</b></a> or <a href="{% url 'registration' %}">
+                        <b>register</b></a> register for account using the link below.
+                </p>
+            </div>
+        </div>
+        <!-- ./row -->
+
+    </div>
+    <!--./container-->
+</section>
+<!--End Auction-->
+
 {% endblock %}
