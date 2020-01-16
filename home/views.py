@@ -21,3 +21,15 @@ def index(request):
     }
 
     return render(request, 'index.html', context)
+
+
+def not_found(request):
+    """ Return 404 page not found """
+
+    return render(request, '404.html')
+
+
+def server_error(request):
+    """ Return 500 internal server error """
+
+    return render(request, '500.html')
