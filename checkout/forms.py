@@ -5,11 +5,12 @@ from .models import Order, OrderLineItem
 class MakePaymentForm(forms.Form):
 
     MONTH_CHOICES = [(i, i) for i in range(1, 13)]
-    YEAR_CHOICES = [(j, j) for j in range(2019, 2029)]
+    YEAR_CHOICES = [(j, j) for j in range(2020, 2030)]
 
     credit_card_number = forms.CharField(
                                          label='Credit Card Number:',
-                                         required=False)
+                                         required=False,
+                                         help_text="We only accept Visa")
     cvv = forms.CharField(
                           label='Security code (CVV): ',
                           required=False)
@@ -21,7 +22,7 @@ class MakePaymentForm(forms.Form):
                                     label='Year',
                                     choices=YEAR_CHOICES,
                                     required=False)
-    stripe_id = forms.CharField(widget=forms.HiddenInput)
+    # stripe_id = forms.CharField(widget=forms.HiddenInput)
 
 
 class OrderForm(forms.ModelForm):
