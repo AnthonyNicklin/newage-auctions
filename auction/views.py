@@ -86,38 +86,40 @@ def auction(request, auction_id):
     bid = Bid.objects.filter(auction=auction_id).order_by('-bid_time')
     bid_form = BidForm()
 
-    if auction.time_ending > timezone.now():   
-        if bid:                                 # If bid[0] False create first bid for auction
-            latest_bid = bid[0]                 
-        else:
-            bid_default = Bid()
-            bid_default.user = get_object_or_404(User, id=1)
-            bid_default.auction = auction
-            bid_default.bid_time = auction.time_starting
-            bid_default.bid_amount = 0.00
-            bid_default.save()
-            latest_bid = bid_default
+    if auction:
+        if auction.time_ending > timezone.now():   
+            if bid:                                 # If bid[0] False create first bid for auction
+                latest_bid = bid[0]                 
+            else:
+                bid_default = Bid()
+                bid_default.user = get_object_or_404(User, id=1)
+                bid_default.auction = auction
+                bid_default.bid_time = auction.time_starting
+                bid_default.bid_amount = 0.00
+                bid_default.save()
+                latest_bid = bid_default
 
-        if auction.time_starting < timezone.now():  # If the auction has not started yet
-            context = {                             # hide the bid form.
-                'auction': auction,
-                'latest_bid': latest_bid,
-                'bid_form': bid_form
-            }
-        else: 
+            if auction.time_starting < timezone.now():  # If the auction has not started yet
+                context = {                             # hide the bid form.
+                    'auction': auction,
+                    'latest_bid': latest_bid,
+                    'bid_form': bid_form
+                }
+            else: 
+                context = {
+                    'auction': auction,
+                    'latest_bid': latest_bid
+                }
+
+            return render(request, 'auction.html', context)
+        else:
             context = {
                 'auction': auction,
-                'latest_bid': latest_bid
             }
 
-        return render(request, 'auction.html', context)
+            return render(request, 'auction_expired.html', context)
     else:
-        context = {
-            'auction': auction,
-        }
-
-        return render(request, 'auction_expired.html', context)
-
+        return render(request, '404.html')
 
 @login_required
 def lot_sold(request, auction_id):
