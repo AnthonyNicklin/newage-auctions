@@ -1,10 +1,8 @@
 
 let elements = stripe.elements();
-
-$('document').ready(function () {
-    stripe.redirectToCheckout({
-        sessionId: sessionId
-    });
+    
+stripe.redirectToCheckout({
+    sessionId: sessionId
 });
 
 // $(function(){

@@ -20,7 +20,7 @@ def checkout(request):
 
     user = auth.get_user(request)
     session = stripe.checkout.Session.create(
-        customer=user.email,
+        client_reference_id=user,
         payment_method_types=['card'],
         line_items=[{
             'name': 'T-shirt',
@@ -32,10 +32,10 @@ def checkout(request):
         success_url='https://newage-auctions.herokuapp.com/checkout/success/',
         cancel_url='https://newage-auctions.herokuapp.com/checkout/cancel',
     )
-    session_id = session.index
+    session_id = session.id
  
-    return render(request, 'strip_checkout.html', {"session_id": session_id})
-    
+    return render(request, 'stripe_checkout.html', {"session_id": session_id})
+
 
 @login_required
 def payment_successful(request):
