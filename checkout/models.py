@@ -15,7 +15,7 @@ class Order(models.Model):
     payment_id = models.CharField(max_length=250, default="00000")
 
     def __str__(self):
-        return "{0}:{1}-{2}".format(self.pk, self.date, self.full_name.title())
+        return "{0}: {1} {2}".format(self.pk, self.date, self.full_name.title())
 
 
 class OrderLineItem(models.Model):
