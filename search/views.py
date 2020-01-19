@@ -42,3 +42,20 @@ def keyword_search(request):
         return redirect('all_auctions')
 
 
+def category(request, category):
+    """ Render lots based on category the user has clicked on """
+
+    lot_objects = Lot.objects.filter(category=category)
+    paginator = Paginator(lot_objects, 10)
+
+    page = request.GET.get('page')
+    try:
+        lot_items = paginator.page(page)
+    except PageNotAnInteger:
+        # If the page is not an integer, deliver first page.
+        lot_items = paginator.page(1)
+    except EmptyPage:
+        # If page is not an integer, deliver first page.
+        lot_items = paginator.page(paginator.num_pages)
+
+    return render(request, 'category.html', {'lot_items': lot_items, 'category': category})
