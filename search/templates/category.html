@@ -9,6 +9,8 @@
         <h1>{{ category.title }}</h1>
     </div>
 
+    {% block search_bar %}{% include 'search_bar.html' %}{% endblock %}
+
     {% for lot in lot_items %}
     <div class="event-summary">
         {% if lot.category == 'military' %}
