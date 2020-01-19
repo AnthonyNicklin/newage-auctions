@@ -1,0 +1,180 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block page_title %}NAA | Newage Auctions{% endblock %}
+
+{% block content %}
+
+<div>
+    <img id="landing-picture" src="{% static 'images/analytics-3088958.jpg' %}">
+</div>
+
+<!--Landing Content-->
+<section id="landing-content">
+    <div class="container p-5">
+        <h1 class="text-center p-2 bold">Bringing Auctions in to the new age</h1>
+        <p class="p-2">Newage Auctions bring the fun and excitment of auctions from old into the modern digital
+            world. Sign-up, login, and bid on some of the worlds oldest and rarest artifacts, real estate
+            and more.
+        </p>
+    </div>
+    <!--./container-->
+</section>
+<!--End Landing Content-->
+    
+<!--Featured Lots-->
+<section class="featured-lots p-1">
+    <div class="container">
+
+        <h1 id="page-heading">Featured Lots</h1>
+        <div class="row">
+
+            {% for lot in featured_lots %}
+            <div class="col-sm-12 col-md-4">
+             
+                <div class="card" style="width: 20rem;">
+                    {% if lot.category == 'military' %}
+                    <div class="online-lots-mil">NEWAGE AUCTIONS<span class='lot-number-np'>Lot No. {{ lot.pk }}</span></div>
+                    {% elif lot.category == 'real estate' %}
+                        <div class="online-lots-rle">NEWAGE AUCTIONS<span class='lot-number-np'>Lot No. {{ lot.pk }}</span></div>
+                    {% elif lot.category == 'weapons' %}
+                        <div class="online-lots-wea">NEWAGE AUCTIONS<span class='lot-number-np'>Lot No. {{ lot.pk }}</span></div>
+                    {% else %}
+                    <div class="online-lots-cul">NEWAGE AUCTIONS<span class='lot-number-np'>Lot No. {{ lot.pk }}</span></div>
+                    {% endif %}
+                    <img src="{{ MEDIA_URL }}{{ lot.image }}" class="card-img-top" alt="Lot Image">
+                    <div class="card-body">
+                        <a href="{% url 'lot' lot.pk %}"><h5 class="card-title text-center">{{ lot.name }}</h5></a>
+                    </div>
+                </div>
+
+            </div>
+            {% endfor %}
+
+        </div>
+        <!--./row-->
+
+    </div>
+    <!--./container-->
+</section>
+<!--End Featured Lots-->
+
+    <!--Military-->
+<section class="featured-lots p-1">
+    <div class="container">
+
+        <h1 id="page-heading">Military</h1>
+        <div class="row">
+
+            {% for lot in military %}
+            <div class="col-sm-12 col-md-4">
+             
+                <div class="card" style="width: 20rem;">
+                    <div class="online-lots-mil">NEWAGE AUCTIONS<span class='lot-number-np'>Lot No. {{ lot.pk }}</span></div>
+                    <img src="{{ MEDIA_URL }}{{ lot.image }}" class="card-img-top" alt="Lot Image">
+                    <div class="card-body">
+                        <a href="{% url 'lot' lot.pk %}"><h5 class="card-title text-center">{{ lot.name }}</h5></a>
+                    </div>
+                </div>
+
+            </div>
+            {% endfor %}
+
+        </div>
+        <!--./row-->
+
+    </div>
+    <!--./container-->
+</section>
+<!--End Military-->
+
+<!--Cultural-->
+<section class="featured-lots p-1">
+    <div class="container">
+
+        <h1 id="page-heading">Cultural</h1>
+        <div class="row">
+
+            {% for lot in cultural %}
+            <div class="col-sm-12 col-md-4">
+             
+                <div class="card" style="width: 20rem;">
+                    <div class="online-lots-cul">NEWAGE AUCTIONS<span class='lot-number-np'>Lot No. {{ lot.pk }}</span></div>
+                    <img src="{{ MEDIA_URL }}{{ lot.image }}" class="card-img-top" alt="Lot Image">
+                    <div class="card-body">
+                        <a href="{% url 'lot' lot.pk %}"><h5 class="card-title text-center">{{ lot.name }}</h5></a>
+                    </div>
+                </div>
+
+            </div>
+            {% endfor %}
+
+        </div>
+        <!--./row-->
+
+    </div>
+    <!--./container-->
+</section>
+<!--End Cultural-->
+
+<!--Weapons-->
+<section class="featured-lots p-1">
+    <div class="container">
+
+        <h1 id="page-heading">Weapons</h1>
+        <div class="row">
+
+            {% for lot in weapons %}
+            <div class="col-sm-12 col-md-4">
+             
+                <div class="card" style="width: 20rem;">
+                    <div class="online-lots-wea">NEWAGE AUCTIONS<span class='lot-number-np'>Lot No. {{ lot.pk }}</span></div>
+                    <img src="{{ MEDIA_URL }}{{ lot.image }}" class="card-img-top" alt="Lot Image">
+                    <div class="card-body">
+                        <a href="{% url 'lot' lot.pk %}"><h5 class="card-title text-center">{{ lot.name }}</h5></a>
+                    </div>
+                </div>
+
+            </div>
+            {% endfor %}
+
+        </div>
+        <!--./row-->
+
+    </div>
+    <!--./container-->
+</section>
+<!--End Weapons-->
+
+<!--Real Estate-->
+<section class="featured-lots p-1">
+    <div class="container">
+
+        <h1 id="page-heading">Real Estate</h1>
+        <div class="row">
+
+            {% for lot in real_estate %}
+            <div class="col-sm-12 col-md-4">
+             
+                <div class="card" style="width: 20rem;">
+                    <div class="online-lots-rle">NEWAGE AUCTIONS<span class='lot-number-np'>Lot No. {{ lot.pk }}</span></div>
+                    <img src="{{ MEDIA_URL }}{{ lot.image }}" class="card-img-top" alt="Lot Image">
+                    <div class="card-body">
+                        <a href="{% url 'lot' lot.pk %}"><h5 class="card-title text-center">{{ lot.name }}</h5></a>
+                    </div>
+                </div>
+
+            </div>
+            {% endfor %}
+
+        </div>
+        <!--./row-->
+        
+    </div>
+    <!--./container-->
+</section>
+<!--End Real Estate-->
+
+</div>
+<!--./container-->
+{% endblock %}
