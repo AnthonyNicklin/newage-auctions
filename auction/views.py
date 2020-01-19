@@ -14,29 +14,15 @@ from home.views import index
 from .forms import BidForm
 
 
-def category(request, category):
-    """ Render lots based on category the user has clicked on """
-
-    lot_objects = Lot.objects.filter(category=category)
-    paginator = Paginator(lot_objects, 10)
-
-    page = request.GET.get('page')
-    try:
-        lot_items = paginator.page(page)
-    except PageNotAnInteger:
-        # If the page is not an integer, deliver first page.
-        lot_items = paginator.page(1)
-    except EmptyPage:
-        # If page is not an integer, deliver first page.
-        lot_items = paginator.page(paginator.num_pages)
-
-    return render(request, 'category.html', {'lot_items': lot_items, 'category': category})
-
-    
 def all_lot_items(request):
     """ Return all lot items in the DB """
 
-    lot_objects = Lot.objects.all()
+    try:
+        lot_objects = Lot.objects.all()
+    except:
+        messages.info(request, 'Sorry there are Lots in stock at this time')
+        return redirect('lots')
+
     paginator = Paginator(lot_objects, 10)
 
     page = request.GET.get('page')
