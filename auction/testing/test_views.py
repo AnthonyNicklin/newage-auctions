@@ -29,12 +29,6 @@ class LotViewTest(TestCase):
         auction.save()
         auction_expired.save()
 
-
-    def test_category_view_returns_correct_template(self):
-        response = self.client.get('/auctions/military')
-        self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'category.html')
-
     
     def test_all_lot_items_view_returns_correct_template(self):
         user = User.objects.get(pk=1)
