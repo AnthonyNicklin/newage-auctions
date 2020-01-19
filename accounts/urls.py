@@ -1,7 +1,7 @@
 from django.urls import path, include
 from django.contrib.auth import views as auth_views
 
-from .views import logout, login, registration, user_profile, bid_history
+from .views import logout, login, registration, user_profile, bid_history, delete_account
 
 
 urlpatterns = [
@@ -10,6 +10,7 @@ urlpatterns = [
     path('register/', registration, name='registration'),
     path('profile/', user_profile, name='profile'),
     path('bid_history/', bid_history, name='bid_history'),
+    path('delete-account/', delete_account, name='delete_account' ),
     path('change-password/', auth_views.PasswordChangeView.as_view()),
     path('change-password/done', auth_views.PasswordChangeDoneView.as_view()),
     path('password-reset/', auth_views.PasswordResetView.as_view()),

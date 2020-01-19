@@ -29,6 +29,9 @@
                         <button type="submit" class="btn btn-primary w-100 my-3">Update</button>
                     </form>
                     <a href="{% url 'password_change' %}" class="btn btn-outline-primary w-100 my-3">Change Password</a>
+                    <button type="button" class="btn btn-outline-danger w-100 my-3" onclick="modal()">
+                        Delete
+                    </button>
                     <div class="row justify-content-center">
                         <a href="{% url 'index' %}" class="btn text-danger my-3">Cancel</a>
                     </div>
@@ -40,5 +43,29 @@
     <!--./row-->
 </div>
 <!--./container-->
+
+<!-- Modal -->
+<div id="myModal" class="modal">
+          
+    <div class="modal-content">
+        <div class="row">
+    
+                <span class="close-cross col-1">&times;</span>
+                
+                <div class="text-center col-11">
+                    <h3 class="pb-2">Confirm Deletion</h3>
+                    <p>We're sorry to see you go. If you wish to continue and
+                        delete your account then please click the Delete button below.</p>
+                    <a href="{% url 'delete_account' %}" class="btn btn-danger m-3">Delete</a>
+                    <button id="close" class="btn btn-outline-primary m-3" type="button">Cancel</button>
+                </div>
+
+        </div>
+        <!--./row-->
+    </div>
+    <!--./modal-content-->
+    
+</div>
+<!--#/myModal-->
 
 {% endblock %}

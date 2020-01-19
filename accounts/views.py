@@ -133,4 +133,19 @@ def bid_history(request):
     return render(request, 'bid_history.html', {'bid_items': bid_items})
 
 
+@login_required
+def delete_account(request):
+    """ Delete User account """
+
+    try:
+        user = auth.get_user(request)
+        user.delete()
+        messages.success(request, 'Your account has been deleted')
+        
+        return redirect('index')
+    except User.DoesNotExist:
+        messages.error(request, 'User does not exist')
+
+        return redirect('login')
+
 
