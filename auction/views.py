@@ -20,7 +20,7 @@ def all_lot_items(request):
     try:
         lot_objects = Lot.objects.all()
     except:
-        messages.info(request, 'Sorry there are Lots in stock at this time')
+        messages.info(request, 'Sorry there are no Lots in stock at this time')
         return redirect('lots')
 
     paginator = Paginator(lot_objects, 10)
