@@ -2,6 +2,8 @@
 {% load static %}
 {% load widget_tweaks %}
 
+{% block page_title %}NAA | Lot No. {{ lot.pk }}{% endblock %}
+
 {% block content %}
 
 <div class="container">
@@ -19,7 +21,7 @@
 <section class="featured-lots pb-3">
     <div class="container">
 
-        <h1 class="pt-3">{{ lot.name }}</h1>
+        <h1 class="py-3">{{ lot.name }}</h1>
 
         <div class="row my-3">
             
@@ -29,12 +31,12 @@
                 </div>   
             </div>
             <div class="col-sm-12 col-md-6">
-                <div class="lot-details-box">
+                <div class="lot-details-box margin-top-sm-0 margin-top-1">
                     <span class="number">
                         <span class='lot-number'>Lot No. {{ lot.pk }}</span>
                     </span>
-                    <div class="p-3">
-                        <h3 class="text-center text-bold">Lot Card</h3>
+                    <div class="py-3 px-1">
+                        <h3 class="text-md-center text-bold">Lot Card</h3>
                         <p><b>Origin</b></p>
                         <p> {{ lot.origin }}</p>
                         <p><b>Age</b></p>
@@ -63,13 +65,17 @@
             </div>
 
             <div class="col col-12 text-center">
-                <p>This lot will be auctioned off in <a href="{% url 'auction' lot.auction.pk %}">
-                    <b>Auction No. {{ lot.auction.pk }}</b></a>
-                </p>
-                <p>If you wish to take part in this auction then please 
-                    <a href="{% url 'login' %}">
-                        <b>login</b></a> or <a href="{% url 'registration' %}">
-                        <b>register</b></a> register for account using the link below.
+                {% if lot.auction %}
+                    <p>This lot will be auctioned off in <a href="{% url 'auction' lot.auction.pk %}">
+                        <b>Auction No. {{ lot.auction.pk }}</b></a>
+                    <p>If you wish to take part in this auction then please 
+                        <a href="{% url 'login' %}">
+                            <b>login</b></a> or <a href="{% url 'registration' %}">
+                            <b>register</b></a> register for account using the link below.
+                    </p>
+                {% else %}
+                    <p>This lot will be on auction soon</p>
+                {% endif %}
                 </p>
             </div>
         </div>

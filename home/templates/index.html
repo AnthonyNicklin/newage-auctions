@@ -30,9 +30,9 @@
         <div class="row">
 
             {% for lot in featured_lots %}
-            <div class="col-sm-12 col-md-4">
+            <div class="card-desk">
              
-                <div class="card" style="width: 20rem;">
+                <div class="card">
                     {% if lot.category == 'military' %}
                     <div class="online-lots-mil">NEWAGE AUCTIONS<span class='lot-number-np'>Lot No. {{ lot.pk }}</span></div>
                     {% elif lot.category == 'real estate' %}
@@ -67,9 +67,9 @@
         <div class="row">
 
             {% for lot in military %}
-            <div class="col-sm-12 col-md-4">
+            <div class="card-desk">
              
-                <div class="card" style="width: 20rem;">
+                <div class="card">
                     <div class="online-lots-mil">NEWAGE AUCTIONS<span class='lot-number-np'>Lot No. {{ lot.pk }}</span></div>
                     <img src="{{ MEDIA_URL }}{{ lot.image }}" class="card-img-top" alt="Lot Image">
                     <div class="card-body">
@@ -96,9 +96,9 @@
         <div class="row">
 
             {% for lot in cultural %}
-            <div class="col-sm-12 col-md-4">
+            <div class="card-desk">
              
-                <div class="card" style="width: 20rem;">
+                <div class="card">
                     <div class="online-lots-cul">NEWAGE AUCTIONS<span class='lot-number-np'>Lot No. {{ lot.pk }}</span></div>
                     <img src="{{ MEDIA_URL }}{{ lot.image }}" class="card-img-top" alt="Lot Image">
                     <div class="card-body">
@@ -125,9 +125,9 @@
         <div class="row">
 
             {% for lot in weapons %}
-            <div class="col-sm-12 col-md-4">
+            <div class="card-desk">
              
-                <div class="card" style="width: 20rem;">
+                <div class="card">
                     <div class="online-lots-wea">NEWAGE AUCTIONS<span class='lot-number-np'>Lot No. {{ lot.pk }}</span></div>
                     <img src="{{ MEDIA_URL }}{{ lot.image }}" class="card-img-top" alt="Lot Image">
                     <div class="card-body">
@@ -154,9 +154,9 @@
         <div class="row">
 
             {% for lot in real_estate %}
-            <div class="col-sm-12 col-md-4">
+            <div class="card-desk">
              
-                <div class="card" style="width: 20rem;">
+                <div class="card">
                     <div class="online-lots-rle">NEWAGE AUCTIONS<span class='lot-number-np'>Lot No. {{ lot.pk }}</span></div>
                     <img src="{{ MEDIA_URL }}{{ lot.image }}" class="card-img-top" alt="Lot Image">
                     <div class="card-body">

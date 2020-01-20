@@ -112,8 +112,7 @@ input {
 /*---------------------------------------------------------------- Headings */
 #page-heading {
     border-bottom: 1px solid #000000;
-    margin-bottom: 2.5rem;
-    margin-top: 5rem;
+    margin: 50px 0px;
 }
 
 /*---------------------------------------------------------------- Index */
@@ -127,9 +126,10 @@ input {
     color: #fff;   
 }
 .card {
-    margin: 1rem 0rem 0rem 2.5rem;
+    margin: 1rem;
     height: 250px;
     box-shadow: 0 2px 0 rgba(0,0,0,.15);
+    width: 20rem;
 }
 .card-img {
     height: 250px;

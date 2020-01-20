@@ -1,6 +1,8 @@
 {% extends 'base.html' %}
 {% load static %}
 
+{% block page_title %}NAA | Search Results{% endblock %}
+
 {% block content %}
 
 <div class="container">
@@ -27,14 +29,18 @@
           <div class="online-lots-cul">Newage Auctions - CULTURAL</div>
         {% endif %}
             <div class="event-summary-body">
-                <div class="auctions-image">
+                <div class="auctions-image d-none d-md-block">
                     <img class="small-img" src='{{ MEDIA_URL }}{{ lot.image }}' alt="Auction event image">
                 </div>
                 <div class="data-container">
                     <div class="name">Lot No. {{ lot.pk }}</div>
                         <div class="pb-2">{{ lot.description }}</div>
-                        <div class="time"><span class="time-ends"><b>Start:</b> </span>{{ lot.auction.time_starting }}</div>                                         
-                        <div class="time"><span class="time-ends"><b>End:</b> </span>{{ lot.auction.time_ending }}</div>
+                        {% if lot.auction %}
+                            <div class="time"><span class="time-ends"><b>Start:</b> </span>{{ lot.auction.time_starting }}</div>                                         
+                            <div class="time"><span class="time-ends"><b>End:</b> </span>{{ lot.auction.time_ending }}</div>
+                        {% else %}
+                            <p>On auction soon</p>
+                        {% endif %}
                        
                 </div>
 
