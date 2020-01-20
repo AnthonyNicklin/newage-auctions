@@ -19,8 +19,8 @@
             <div class="online-lots-rle">NEWAGE AUCTIONS</div>
           {% elif lot.category == 'weapons' %}
             <div class="online-lots-wea">NEWAGE AUCTIONS</div>
-        {% else %}
-          <div class="online-lots-cul">NEWAGE AUCTIONS</div>
+          {% elif lot.category == 'cultural' %}
+            <div class="online-lots-cul">NEWAGE AUCTIONS</div>
         {% endif %}
         <div class="event-summary-body">
           <div class="auctions-image">
