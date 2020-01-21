@@ -22,7 +22,6 @@ class MakePaymentForm(forms.Form):
                                     label='Year',
                                     choices=YEAR_CHOICES,
                                     required=False)
-    # stripe_id = forms.CharField(widget=forms.HiddenInput)
 
 
 class OrderForm(forms.ModelForm):
