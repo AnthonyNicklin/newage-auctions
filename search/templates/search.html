@@ -15,7 +15,6 @@
 
     {% block search_bar %}{% include 'search_bar.html' %}{% endblock %}
 
-
     {% for lot in current_items %}
     <div class="event-summary">
         <a href="{% url 'lot' lot.pk %}">
