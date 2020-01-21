@@ -1,8 +1,13 @@
-from django.test import TestCase, Client
+from django.test import TestCase
 
 
 class SearchViewTest(TestCase):
     """ Tests views in search app """
+    
+    def test_search_view_returns_correct_template(self):
+        response = self.client.get('/search/?q=watch')
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'search.html')
 
     def test_category_view_returns_correct_template(self):
         response = self.client.get('/search/military')
