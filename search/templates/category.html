@@ -32,7 +32,9 @@
             <span class="number">
               <span class='lot-number'>Lot No. {{ lot.pk }}</span>
             </span>
-            <div class="name pl-3 pt-3"><a href="{% url 'lot' lot.pk %}">{{ lot.name }}</a></div>
+            <a href="{% url 'lot' lot.pk %}">
+              <div class="name pl-3 pt-3">{{ lot.name }}</div>
+            </a>
             <div class="pl-3 pt-1">{{ lot.description }}</div>
             <div class="row justify-content-center">
               

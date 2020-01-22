@@ -30,6 +30,9 @@ a {
     text-decoration: none !important;
     color: #47525E
 }
+a:hover, a > .name:hover {
+    color: dodgerblue;
+}
 .b-radius-10 {
     border-radius: 10px;
 }
@@ -216,7 +219,6 @@ input {
 }
 .online-lots {
     background-color: #cc773c;
-    border-color: #cc773c;
     color: #ffffff;
     padding-left: 0.5rem;
 }
@@ -228,7 +230,6 @@ input {
 /*---------------------------------------------------------------- Auctions */
 .online-auctions {
     background-color: #c23b22;
-    border-color: #c23b22;
     color: #ffffff;
     padding-left: 0.5rem;
 
@@ -287,32 +288,25 @@ input {
     min-width: 100px;
     text-align: center;
 }
-.card-body {
-    padding-top: 0.5rem;
-}
 
 /*---------------------------------------------------------------- Categories */
 .online-lots-mil {
     background-color: #6d9138;
-    border-color: #6d9138;
     color: #ffffff;
     padding-left: 0.5rem;
 }
 .online-lots-wea {
     background-color: #b8860b;
-    border-color: #b8860b;
     color: #ffffff;
     padding-left: 0.5rem;
 }
 .online-lots-rle {
     background-color: #66548b;
-    border-color: #66548b;
     color: #ffffff;
     padding-left: 0.5rem;
 }
 .online-lots-cul {
     background-color: #555d50;
-    border-color: #555d50;
     color: #ffffff;
     padding-left: 0.5rem;
 }

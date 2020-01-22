@@ -17,7 +17,6 @@
 
     {% for auction in current_items %}
     <div class="event-summary">
-        <a href="{% url 'auction' auction.pk %}">
         {% if auction.lot.category == 'military' %}
           <div class="online-lots-mil">Newage Auctions - MILITARY</div>
           {% elif auction.lot.category == 'real estate' %}
@@ -32,14 +31,15 @@
                     <img class="small-img" src='{{ MEDIA_URL }}{{ auction.lot.image }}' alt="Auction event image">
                 </div>
                 <div class="data-container">
-                    <div class="name">Auction No. {{ auction.pk }}</div>
+                    <a href="{% url 'auction' auction.pk %}">
+                        <div class="name">Auction No. {{ auction.pk }}</div>
+                    </a>
                     <div class="pb-2">{{ auction.description }}</div>
                     <div class="time"><span class="time-ends"><b>Start:</b> </span>{{ auction.time_starting }}</div>                                         
                     <div class="time"><span class="time-ends"><b>End:</b> </span>{{ auction.time_ending }}</div>
                 </div>
 
             </div>
-        </a>
     </div>
     {% endfor %}
 
