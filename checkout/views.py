@@ -47,6 +47,7 @@ def checkout(request):
                 order = order_form.save(commit=False)
                 order.date = datetime.now()
                 order.payment_id = customer.id
+                order.total = customer.amount / 100
                 order.save()
 
                 for auction in auctions:

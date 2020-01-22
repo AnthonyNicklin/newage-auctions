@@ -13,6 +13,7 @@ class Order(models.Model):
     street_address = models.CharField(max_length=40, blank=False)
     date = models.DateTimeField()
     payment_id = models.CharField(max_length=250, default="00000")
+    total = models.DecimalField(max_digits=9, decimal_places=2, default=0.00)
 
     def __str__(self):
         return "{0}: {1} {2}".format(self.pk, self.date, self.full_name.title())
