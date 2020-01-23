@@ -35,34 +35,24 @@
             <a href="{% url 'lot' lot.pk %}">
               <div class="name pl-3 pt-3">{{ lot.name }}</div>
             </a>
-            <div class="pl-3 pt-1">{{ lot.description }}</div>
-            <div class="row justify-content-center">
-              
+            <div class="pl-3 pt-1">{{ lot.description|truncatewords:25 }}</div>
+            
+            <div class="text-center py-3">
               {% if lot.auction %}
-                {% if lot.auction.paid %}
-                  <a href="{% url 'lot_sold' lot.auction.pk %}">
-                    <div class="text-info pt-3"><b>SOLD</b></div>
-                  </a>
-                {% elif lot.auction.expired%}
-                  <a href="{% url 'auction' lot.auction.pk %}">
-                    <div class="text-danger pt-3"><b>Auction Expired</b></div>
-                  </a>
-                  {% else %}
-                  <a href="{% url 'auction' lot.auction.pk %}">
-                    <div class="text-center pt-3"><b>Auction No.</b> {{ lot.auction.pk }}</div>
-                    <div class="text-center">Starting {{ lot.auction.time_starting }}</div>
-                  </a>
-                {% endif %}
+                <a href="{% url 'auction' lot.auction.pk %}">
+                  <div><b>Auction No.</b> {{ lot.auction.pk }}</div>
+                  <div>Starts {{ lot.auction.time_starting }}</div>
+                </a>
               {% else %}
-                  <div class="text-center pt-3"><b>On auction soon</b></div>
+                <div>On Auction Soon</div>
               {% endif %}
-                
-              </div>                                            
+            </div>
+                                                 
+            </div>
+  
           </div>
-
-          </div>
-    </div>
-  {% endfor %}
+      </div>
+    {% endfor %}
 
     <!-- Pagination -->
     <div class="pagination">

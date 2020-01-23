@@ -17,8 +17,10 @@ from .forms import BidForm
 def all_lot_items(request):
     """ Return all lot items in the DB """
 
+    today = datetime.today()
+
     try:
-        lot_objects = Lot.objects.all()
+        lot_objects = Lot.objects.all().exclude(auction__time_ending__lt=today)
     except:
         messages.info(request, 'Sorry there are no Lots in stock at this time')
         return redirect('lots')
