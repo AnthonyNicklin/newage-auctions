@@ -68,11 +68,17 @@
                 {% if lot.auction %}
                     <p>This lot will be auctioned off in <a href="{% url 'auction' lot.auction.pk %}">
                         <b>Auction No. {{ lot.auction.pk }}</b></a>
-                    <p>If you wish to take part in this auction then please 
-                        <a href="{% url 'login' %}">
-                            <b>login</b></a> or <a href="{% url 'registration' %}">
-                            <b>register</b></a> register for account using the link below.
-                    </p>
+                    {% if user.is_authenticated %}
+                        <div class="d-none">
+                    {% else %}
+                        <div class="d-block">
+                    {% endif %}
+                            <p>If you wish to take part in this auction then please 
+                                <a href="{% url 'login' %}">
+                                    <b>login</b></a> or <a href="{% url 'registration' %}">
+                                    <b>register</b></a> register for account using the link below.
+                            </p>
+                        </div>
                 {% else %}
                     <p>This lot will be on auction soon</p>
                 {% endif %}
