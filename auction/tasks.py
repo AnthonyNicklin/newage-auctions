@@ -28,6 +28,7 @@ def task_set_auction_to_expire():
                     auction.save()
                     logger.info("Expired and winner set.")
                 else:
+                    auction.save()
                     logger.info("Bid not found")
             else:
                 logger.info("Auction not expired, aborted function")

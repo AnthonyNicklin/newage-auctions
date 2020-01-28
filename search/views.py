@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from django.shortcuts import render, redirect
 from django.db.models import Q
 from django.contrib import messages
@@ -45,7 +47,15 @@ def keyword_search(request):
 def category(request, category):
     """ Render lots based on category the user has clicked on """
 
+    today = datetime.today()
     lot_objects = Lot.objects.filter(category=category)
+    
+    try:
+        lot_objects = Lot.objects.filter(category=category).exclude(auction__time_ending__lt=today)
+    except:
+        messages.info(request, 'Sorry there are no Lots in this category at this time')
+        return redirect('lots')
+
     paginator = Paginator(lot_objects, 10)
 
     page = request.GET.get('page')
