@@ -1,4 +1,4 @@
 release: python manage.py migrate
 web: gunicorn newageauctions.wsgi:application 
-worker: celery -A newageauctions.celery worker --beat
+main_worker: python manage.py celery worker --beat --loglevel=info
 
