@@ -40,7 +40,7 @@
         <hr>
         {% endfor %}
 
-        <p class="mt-3">Total</p>
+        <h3 class="mt-3">Total</h3>
         <p><span class="glyphicon glyphicon-euro" aria-hidden="true"></span>€{{ total }}</p>
         <a href="{% url 'checkout' %}" id="buy-now" class="btn btn-primary my-3" role="button"><span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span>Checkout</a>
     {% else %}
