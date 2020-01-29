@@ -12,9 +12,9 @@
 <!--Landing Content-->
 <section id="landing-content">
     <div class="container p-5">
-        <h1 class="text-center p-2 bold">Bringing Auctions in to the new age</h1>
-        <p class="p-2">Newage Auctions bring the fun and excitment of auctions from old into the modern digital
-            world. Sign-up, login, and bid on some of the worlds oldest and rarest artifacts, real estate
+        <h1 class="text-center p-2 bold">Bringing Auctions into the New Age</h1>
+        <p class="p-2">Newage Auctions brings the fun and excitement of auctions from old, into the modern digital
+            world. Sign-up, login, and bid on some of the world's oldest and rarest artifacts, real estate, weapons,
             and more.
         </p>
     </div>
@@ -30,14 +30,26 @@
         <div class="row mb-4">
 
             {% for lot in featured_lots %}
-            <div class="col-sm-12 col-md-4">
-                <div class="row justify-content-center">
-                    <div class="card">
-                        <img src="{{ MEDIA_URL }}{{ lot.image }}" class="card-img-top" alt="Lot Image">
-                        <div class="card-body">
-                            <a href="{% url 'lot' lot.pk %}"><h5 class="card-title text-center">{{ lot.name }}</h5></a>
+            <div class="col-sm-12 col-md-6 col-lg-4">
+                <div class="event-summary">
+                    {% if lot.category == 'military' %}
+                    <div class="online-lots-mil">MILITARY</div>
+                    {% elif lot.category == 'real estate' %}
+                        <div class="online-lots-rle">REAL ESTATE</div>
+                    {% elif lot.category == 'weapons' %}
+                        <div class="online-lots-wea">WEAPONS</div>
+                    {% else %}
+                    <div class="online-lots-cul">CULTURAL</div>
+                    {% endif %}
+                        <div class="text-center">
+                            <div class="auctions-image">
+                                <img class="small-img" src='{{ MEDIA_URL }}{{ lot.image }}' alt="Lot image">
+                            </div>
+                            <div class="data-container">
+                                <a href="{% url 'lot' lot.pk %}"><h5 class="card-title text-center">{{ lot.name }}</h5></a>
+                            </div>
+
                         </div>
-                    </div>
                 </div>
             </div>
             {% endfor %}
@@ -49,5 +61,50 @@
     <!----./container-->
 </section>
 <!--End Featured Lots-->
+
+<!-- Landing Content Two -->
+<div class="pb-5">
+    <div class="container">
+            <h1 class="text-center py-4 bold">New Age Auctions</h1>
+
+        <div class="text-center p-2">
+            <p>Find the relic you have been looking for, bid fast and bold, and win auctions
+                you will not find else where. 
+            <p>Welcome to New Age Auctions!</p>
+        </div>
+
+        <div class="row m-0">
+            <div class="col-sm-12 col-md-6 col-lg-3 p-2">
+                <div class="text-center">
+                    <img class="landing-icons" src="{% static 'images/lightning-303595_1280.png' %}" alt="Lighting Bolt">
+                    <p class="pt-3">Fast Paced</p>
+                </div>
+            </div>
+
+            <div class="col-sm-12 col-md-6 col-lg-3 p-2">
+                <div class="text-center">
+                    <img class="landing-icons" src="{% static 'images/technology-2468063_1920.png' %}" alt="Devices">
+                    <p class="pt-3">Device Friendly</p>
+                </div>
+            </div>
+
+            <div class="col-sm-12 col-md-6 col-lg-3 p-2">
+                <div class="text-center">
+                    <img class="landing-icons" src="{% static 'images/read-only-98443_1280.png' %}" alt="Padlock">
+                    <p class="pt-3">Secure</p>
+                </div>
+            </div>
+
+            <div class="col-sm-12 col-md-6 col-lg-3 p-2">
+                <div class="text-center">
+                    <img class="landing-icons" src="{% static 'images/thumb-31664_1280.png' %}" alt="Thumbs Up">
+                    <p class="pt-3">Fun!</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--./container-->
+</section>
+<!-- End Landing Content Two-->
 
 {% endblock %}
