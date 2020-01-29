@@ -155,6 +155,9 @@ input {
 .featured-lots {
     background-color: #F7F7F7;
 }
+.landing-icons {
+    height: 100px;
+}
 
 /*-------------------------------------------------------- Lot */
 .image-container {
@@ -255,14 +258,14 @@ input {
     background-color: #ffffff;
 }
 .event-summary-body {
-    display: flex;
+    display: block;
     -ms-flex-wrap: nowrap;
     -webkit-flex-wrap: nowrap;
     flex-wrap: nowrap;
 }
 .small-img {
     height: 200px;
-    width: 200px;;
+    width: 100%;
 }
 .data-container {
     display: inline-block;
@@ -433,5 +436,11 @@ input {
     }
     #shopping-cart {
         height: 20rem;
+    }
+    .med-img {
+        width: 200px
+    }
+    .event-summary {
+        width: 75%;
     }
 }

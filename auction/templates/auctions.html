@@ -15,36 +15,37 @@
 
     {% block search_bar %}{% include 'search_bar.html' %}{% endblock %}
 
-    {% for auction in current_items %}
-    <div class="event-summary">
-        {% if auction.lot.category == 'military' %}
-          <div class="online-lots-mil">Newage Auctions - MILITARY</div>
-          {% elif auction.lot.category == 'real estate' %}
-            <div class="online-lots-rle">Newage Auctions - REAL ESTATE</div>
-          {% elif auction.lot.category == 'weapons' %}
-            <div class="online-lots-wea">Newage Auctions - WEAPONS</div>
-        {% else %}
-          <div class="online-lots-cul">Newage Auctions - CULTURAL</div>
-        {% endif %}
-            <div class="text-center text-md-left event-summary-body">
-                <div class="auctions-image d-none d-md-block">
-                    <img class="small-img" src='{{ MEDIA_URL }}{{ auction.lot.image }}' alt="Auction event image">
-                </div>
-                <div class="data-container">
-                    <a href="{% url 'auction' auction.pk %}">
-                        <div class="name">Auction No. {{ auction.pk }}</div>
-                    </a>
-                    <div class="pb-2">{{ auction.description }}</div>
-                    <div class="py-3 text-center">
-                        <div><span class="time-ends"><b>Start:</b> {{ auction.time_starting }}</span></div>                                         
-                        <div><span class="time-ends"><b>End:</b> {{ auction.time_ending }}</span></div>
+    <div class="row justify-content-center">
+        {% for auction in current_items %}
+        <div class="event-summary mx-3">
+            {% if auction.lot.category == 'military' %}
+            <div class="online-lots-mil">Newage Auctions - MILITARY</div>
+            {% elif auction.lot.category == 'real estate' %}
+                <div class="online-lots-rle">Newage Auctions - REAL ESTATE</div>
+            {% elif auction.lot.category == 'weapons' %}
+                <div class="online-lots-wea">Newage Auctions - WEAPONS</div>
+            {% else %}
+            <div class="online-lots-cul">Newage Auctions - CULTURAL</div>
+            {% endif %}
+                <div class="text-center event-summary-body d-md-flex">
+                    <div class="auctions-image">
+                        <img class="small-img med-img" src='{{ MEDIA_URL }}{{ auction.lot.image }}' alt="Auction event image">
                     </div>
+                    <div class="data-container">
+                        <a href="{% url 'auction' auction.pk %}">
+                            <div class="name">Auction No. {{ auction.pk }}</div>
+                        </a>
+                        <div class="pb-2">{{ auction.description }}</div>
+                        <div class="py-3 text-center">
+                            <div><span class="time-ends"><b>Start:</b> {{ auction.time_starting }}</span></div>                                         
+                            <div><span class="time-ends"><b>End:</b> {{ auction.time_ending }}</span></div>
+                        </div>
+                    </div>
+
                 </div>
-
-            </div>
+        </div>
+        {% endfor %}
     </div>
-    {% endfor %}
-
     <!-- Pagination -->
     <div class="pagination">
         <span class="step-links">
