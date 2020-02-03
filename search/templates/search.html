@@ -15,38 +15,40 @@
 
     {% block search_bar %}{% include 'search_bar.html' %}{% endblock %}
 
-    {% for lot in current_items %}
-    <div class="event-summary">
-        <a href="{% url 'lot' lot.pk %}">
-        {% if lot.category == 'military' %}
-          <div class="online-lots-mil">Newage Auctions - MILITARY</div>
-          {% elif lot.category == 'real estate' %}
-            <div class="online-lots-rle">Newage Auctions - REAL ESTATE</div>
-          {% elif lot.category == 'weapons' %}
-            <div class="online-lots-wea">Newage Auctions - WEAPONS</div>
-        {% else %}
-          <div class="online-lots-cul">Newage Auctions - CULTURAL</div>
-        {% endif %}
-            <div class="event-summary-body">
-                <div class="auctions-image d-none d-md-block">
-                    <img class="small-img" src='{{ MEDIA_URL }}{{ lot.image }}' alt="Auction event image">
-                </div>
-                <div class="data-container">
-                    <div class="name">Lot No. {{ lot.pk }}</div>
-                        <div class="pb-2">{{ lot.description }}</div>
-                        {% if lot.auction %}
-                            <div class="time"><span class="time-ends"><b>Start:</b> </span>{{ lot.auction.time_starting }}</div>                                         
-                            <div class="time"><span class="time-ends"><b>End:</b> </span>{{ lot.auction.time_ending }}</div>
-                        {% else %}
-                            <p>On auction soon</p>
-                        {% endif %}
-                       
-                </div>
+    <div class="row justify-content-center">
+        {% for lot in current_items %}
+        <div class="event-summary mx-3">
+            <a href="{% url 'lot' lot.pk %}">
+            {% if lot.category == 'military' %}
+            <div class="online-lots-mil">Newage Auctions - MILITARY</div>
+            {% elif lot.category == 'real estate' %}
+                <div class="online-lots-rle">Newage Auctions - REAL ESTATE</div>
+            {% elif lot.category == 'weapons' %}
+                <div class="online-lots-wea">Newage Auctions - WEAPONS</div>
+            {% else %}
+            <div class="online-lots-cul">Newage Auctions - CULTURAL</div>
+            {% endif %}
+                <div class="event-summary-body d-md-flex">
+                    <div class="auctions-image d-none d-md-block">
+                        <img class="small-img med-img" src='{{ MEDIA_URL }}{{ lot.image }}' alt="Auction event image">
+                    </div>
+                    <div class="data-container">
+                        <div class="name">Lot No. {{ lot.pk }}</div>
+                            <div class="pb-2">{{ lot.description }}</div>
+                            {% if lot.auction %}
+                                <div class="time"><span class="time-ends"><b>Start:</b> </span>{{ lot.auction.time_starting }}</div>                                         
+                                <div class="time"><span class="time-ends"><b>End:</b> </span>{{ lot.auction.time_ending }}</div>
+                            {% else %}
+                                <p>On auction soon</p>
+                            {% endif %}
+                        
+                    </div>
 
-            </div>
-        </a>
+                </div>
+            </a>
+        </div>
+        {% endfor %}
     </div>
-    {% endfor %}
 
     <!-- Pagination -->
     <div class="pagination">
