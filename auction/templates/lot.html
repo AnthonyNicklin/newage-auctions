@@ -12,7 +12,7 @@
         <h1>Lot No. {{ lot.pk }}</h1>
     </div>
 
-    <a href="{% url 'all_lot_items' %}"><i class="fas fa-chevron-left my-3"></i> Back to listings</a>
+    <a href="{% url 'all_lot_items' %}" class="color-blue"><i class="fas fa-chevron-left my-3"></i> Back to listings</a>
 
 </div>
 <!--./container-->
@@ -36,12 +36,12 @@
                         <span class='lot-number'>Lot No. {{ lot.pk }}</span>
                     </span>
                     <div class="py-3 px-1">
-                        <h3 class="text-md-center text-bold">Lot Card</h3>
-                        <p><b>Origin</b></p>
+                        <h3 class="text-md-center bold">Lot Card</h3>
+                        <p class="bold">Origin</p>
                         <p> {{ lot.origin }}</p>
-                        <p><b>Age</b></p>
+                        <p class="bold">Age</p>
                         <p>{{ lot.age }} years old</p> 
-                        <p><b>Description</b></p>
+                        <p class="bold">Description</p>
                         <p>{{ lot.description }}</p>
                     </div>
                 </div>
@@ -61,13 +61,13 @@
 
         <div class="row my-4 p-1">
             <div class="co col-12 text-center">
-                <h1>Auction</h1>
+                <h1 class="bold">Auction</h1>
             </div>
 
             <div class="col col-12 text-center">
                 {% if lot.auction %}
-                    <p>This lot will be auctioned off in <a href="{% url 'auction' lot.auction.pk %}">
-                        <b>Auction No. {{ lot.auction.pk }}</b></a>
+                    <p>This lot will be auctioned off in <a href="{% url 'auction' lot.auction.pk %}" class="color-blue bold">
+                        Auction No. {{ lot.auction.pk }}</a>
                     {% if user.is_authenticated %}
                         <div class="d-none">
                     {% else %}
@@ -75,8 +75,8 @@
                     {% endif %}
                             <p>If you wish to take part in this auction then please 
                                 <a href="{% url 'login' %}">
-                                    <b>login</b></a> or click <a href="{% url 'registration' %}">
-                                    <b>here</b></a> to register for an account.
+                                    <span class="bold color-blue">login</span></a> or click <a href="{% url 'registration' %}">
+                                    <span class="bold color-blue">here</span></a> to register for an account.
                             </p>
                         </div>
                 {% else %}

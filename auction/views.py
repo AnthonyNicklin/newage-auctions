@@ -76,11 +76,11 @@ def auction(request, auction_id):
 
     if auction:
         if auction.time_ending > timezone.now():   
-            if bid:                                 # If bid[0] False create first bid for auction
+            if bid:                                 
                 latest_bid = bid[0]                 
             else:
-                bid_default = Bid()
-                bid_default.user = get_object_or_404(User, id=1)
+                bid_default = Bid()                                 # If bid[0] False create first bid for auction
+                bid_default.user = get_object_or_404(User, id=1)    # Set default user to user.id=1
                 bid_default.auction = auction
                 bid_default.bid_time = auction.time_starting
                 bid_default.bid_amount = 0.00
@@ -134,6 +134,8 @@ def bid(request, auction_id):
         bid_form = BidForm(request.POST)
 
     if bid_form.is_valid():
+        """ If form is valid create the bid only if higher then 
+        the current bid and the auction has started. """
         bid = Bid()
         if current_bid < bid_form.cleaned_data['bid_amount'] and \
             auction.time_starting < timezone.now():
@@ -144,7 +146,7 @@ def bid(request, auction_id):
             bid.save()
             auction.number_of_bids += 1
             auction.save()
-            messages.success(request, 'Bid successfull. Good Luck!')
+            messages.success(request, 'Bid successfully placed. Good Luck!')
         else:
             messages.error(request, 'Bid must be higher than current bid')
             return redirect('auction', auction_id=auction_id)

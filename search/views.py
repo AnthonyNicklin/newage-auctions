@@ -5,11 +5,11 @@ from django.db.models import Q
 from django.contrib import messages
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
-from auction.models import Lot
+from auction.models import Lot, Auction
 
 
-def keyword_search(request):
-    """ Use keyword submitted to return list of current auctions """
+def keyword_search_lots(request):
+    """ Use keyword submitted to return list of current lots """
 
     if request.method == 'GET':
         keyword = request.GET.get('q')
@@ -31,6 +31,41 @@ def keyword_search(request):
             page = request.GET.get('page')
 
             try:
+                lot_items = paginator.page(page)
+            except PageNotAnInteger:
+                # If the page is not an integer, deliver first page.
+                lot_items = paginator.page(1)
+            except EmptyPage:
+                # If page is not an integer, deliver first page.
+                lot_items = paginator.page(paginator.num_pages)
+
+            return render(request, 'lot_items.html', {'lot_items': lot_items})
+    else:
+        return redirect('all_auctions')
+
+
+def keyword_search_auctions(request):
+    """ Use keyword submitted to return list of auctions """
+
+    if request.method == 'GET':
+        keyword = request.GET.get('q')
+
+        keyword_obj = []
+
+        if keyword is None or keyword == "":
+            messages.error(request, 'Please enter in a keyword to search')
+            return redirect('all_auctions')
+
+        elif keyword:
+            keyword_lookup = Auction.objects.filter(Q(description__icontains=keyword))
+            for item in keyword_lookup:
+                keyword_obj.append(item)
+            
+            paginator = Paginator(keyword_obj, 10)
+
+            page = request.GET.get('page')
+
+            try:
                 current_items = paginator.page(page)
             except PageNotAnInteger:
                 # If the page is not an integer, deliver first page.
@@ -39,7 +74,7 @@ def keyword_search(request):
                 # If page is not an integer, deliver first page.
                 current_items = paginator.page(paginator.num_pages)
 
-            return render(request, 'search.html', {'current_items': current_items})
+            return render(request, 'auctions.html', {'current_items': current_items})
     else:
         return redirect('all_auctions')
 
@@ -69,3 +104,5 @@ def category(request, category):
         lot_items = paginator.page(paginator.num_pages)
 
     return render(request, 'category.html', {'lot_items': lot_items, 'category': category})
+
+

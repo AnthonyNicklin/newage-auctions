@@ -17,24 +17,24 @@
       {% for lot in lot_items %}
       <div class="event-summary mx-3">
           {% if lot.category == 'military' %}
-            <div class="online-lots-mil">NEWAGE AUCTIONS</div>
+            <div class="online-lots-mil">Newage Auctions - MILITARY</div>
             {% elif lot.category == 'real estate' %}
-              <div class="online-lots-rle">NEWAGE AUCTIONS</div>
+              <div class="online-lots-rle">Newage Auctions - REAL ESTATE</div>
             {% elif lot.category == 'weapons' %}
-              <div class="online-lots-wea">NEWAGE AUCTIONS</div>
+              <div class="online-lots-wea">Newage Auctions - WEAPONS</div>
             {% elif lot.category == 'cultural' %}
-              <div class="online-lots-cul">NEWAGE AUCTIONS</div>
+              <div class="online-lots-cul">Newage Auctions - CULTURAL</div>
           {% endif %}
           <div class="event-summary-body d-md-flex">
-            <div class="auctions-image">
-              <img class="small-img med-img" src='{{ MEDIA_URL }}{{ lot.image }}' alt="Lot image">
-            </div>
-            <div class="data-container-lots">
-              <span class="number">
-                <span class='lot-number'>Lot No. {{ lot.pk }}</span>
-              </span>
-              <a href="{% url 'lot' lot.pk %}">
-                <div class="name pl-3 pt-3">{{ lot.name }}</div>
+            <a href="{% url 'lot' lot.pk %}">
+              <div class="auctions-image">
+                <img class="small-img med-img" src='{{ MEDIA_URL }}{{ lot.image }}' alt="Lot image">
+              </div>
+              <div class="data-container-lots">
+                <span class="number">
+                  <span class='lot-number'>Lot No. {{ lot.pk }}</span>
+                </span>
+                <div class="name color-blue pl-3 pt-3">{{ lot.name }}</div>
               </a>
               <div class="pl-3 pt-1">{{ lot.description|truncatewords:25 }}</div>
               
@@ -49,10 +49,9 @@
                 {% endif %}
               </div>
                                                   
-              </div>
-    
-            </div>
+          </div>
         </div>
+      </div>
       {% endfor %}
     </div>
 
@@ -60,7 +59,7 @@
     <div class="pagination">
         <span class="step-links">
             {% if lot_items.has_previous %}
-                <a href="?page={{ lot_items.previous_page_number }}">previous</a>
+                <a href="?page={{ lot_items.previous_page_number }}"><i class="fas fa-angle-double-left"></i></a>
             {% endif %}
     
             <span class="current">
@@ -68,7 +67,7 @@
             </span>
     
             {% if lot_items.has_next %}
-                <a href="?page={{ lot_items.next_page_number }}">next</a>
+                <a href="?page={{ lot_items.next_page_number }}"><i class="fas fa-angle-double-right"></i></a>
             {% endif %}
         </span>
     </div>

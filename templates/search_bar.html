@@ -1,12 +1,17 @@
 {% block search_bar %}
+<!--
+    Search bar for searching lot items. Search bar renders in all_lots and 
+    category pages.
+-->
+
 <!-- Search Bar-->
 <div class="row justify-content-center mx-1">
 
     <div class="col col-12 justify-content-center filter p-3">
-        <form method="GET" action="{% url 'keyword_search' %}" value="{{ request.GET.q} ">
+        <form method="GET" action="{% url 'keyword_search_lots' %}" value="{{ request.GET.q} ">
             <div class="row form-group">
                 <div class="col-sm-12 col-md-6 offset-md-2 margin-bottom-1 margin-bottom-0">
-                    <p class="text-center">Search</p>
+                    <p class="text-center">Search Lots</p>
                     <input type="text" class="form-control" id="keyword-search" 
                         name="q" placeholder="Keyword" value="{{ request.GET.q }}">
                 </div>
@@ -23,3 +28,4 @@
 </div>
 <!--End of Search Bar -->
 {%  endblock %}
+

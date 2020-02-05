@@ -12,7 +12,7 @@
         <h1>Auction No. {{ auction.pk }}</h1>
     </div>
 
-    <a href="{% url 'all_auctions' %}"><i class="fas fa-chevron-left my-3"></i> Back to auctions</a>
+    <a href="{% url 'all_auctions' %}" class="color-blue"><i class="fas fa-chevron-left my-3"></i> Back to auctions</a>
 
 </div>
 <!-- /.container -->
@@ -37,20 +37,20 @@
                         <a href="{% url 'lot' auction.lot_id %}"><span class='lot-number'>Lot No. {{ auction.lot_id }}</span></a>
                     </span>
                     <div class="p-3">
-                        <h3 class="text-md-center text-bold">Auction Card</h3>
-                        <p><b>Current Bid</b></p>
+                        <h3 class="text-md-center bold">Auction Card</h3>
+                        <p class="bold">Current Bid</p>
                         <p>€{{ latest_bid.bid_amount }}</p>
-                        <p><b>Auction Starts</b></p>
+                        <p class="bold">Auction Starts</p>
                         <p>{{ auction.time_starting }}</p>
-                        <p><b>Auction Ends</b></p>
+                        <p class="bold">Auction Ends</p>
                         <p>{{ auction.time_ending }}</p>
-                        <p><b>Number of bids</b></p>
-                        <p> {{ auction.number_of_bids }}</p>
-                        <p><b>Origin</b></p>
-                        <p> {{ auction.lot.origin }}</p>
-                        <p><b>Age</b></p>
+                        <p class="bold">Number of bids</p>
+                        <p>{{ auction.number_of_bids }}</p>
+                        <p class="bold">Origin</p>
+                        <p>{{ auction.lot.origin }}</p>
+                        <p class="bold">Age</p>
                         <p>{{ auction.lot.age }} years old</p> 
-                        <p><b>Description</b></p>
+                        <p class="bold">Description</p>
                         <p>{{ auction.lot.description }}</p>
                     </div>
                 </div>
@@ -67,12 +67,12 @@
     <div class="container">
 
         <div class="row my-4 p-1">
-            <div class="co col-12 text-center">
+            <div class="col-12 text-center">
                 <h1>Bidding</h1>
             </div>
             {% if user.is_authenticated %}
                 <div class="col col-12 text-center">
-                    <p>The current bid is <b>€{{ latest_bid.bid_amount }}</b>. Place a bid
+                    <p>The current bid is <span class="bold">€{{ latest_bid.bid_amount }}</span>. Place a bid
                         higher then the current bid in order to win the auction.
                     </p>
                     <p>Good Luck!</p>
@@ -106,9 +106,9 @@
                 <div class="col col-12 text-center">
                     <p>The current bid is <b>€{{ latest_bid.bid_amount }}</b></p>
                     <p>If you wish to take part in this auction then please 
-                        <a href="{% url 'login' %}">
-                            <b>login</b></a> or click <a href="{% url 'registration' %}">
-                            <b>here</b></a> to register for an account.
+                        <a href="{% url 'login' %}" class="color-blue">
+                            <span class="bold color-blue">login</span></a> or click <a href="{% url 'registration' %}" class="color-blue">
+                            <span class="bold color-blue">here</span></a> to register for an account.
                     </p>
                 </div>
             {% endif %}
