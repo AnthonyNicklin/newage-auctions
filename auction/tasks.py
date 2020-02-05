@@ -12,7 +12,10 @@ logger = get_task_logger(__name__)
 @shared_task(name='auction.tasks.task_set_auction_to_expire') 
 def task_set_auction_to_expire():
     """
-    Set auction.expire to True if the auction is over
+    Set auction.expired to True if the auction is over.
+    Filter the bids for the auction, find the last bid made and set the winner
+    who bidded last.
+    If no bid found save the auction and log.
     """
     auctions = Auction.objects.all()
 

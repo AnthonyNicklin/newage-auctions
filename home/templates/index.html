@@ -31,33 +31,34 @@
 
             {% for lot in featured_lots %}
             <div class="col-sm-12 col-md-6 col-lg-4">
-                <div class="event-summary">
-                    {% if lot.category == 'military' %}
-                    <div class="online-lots-mil">MILITARY</div>
-                    {% elif lot.category == 'real estate' %}
-                        <div class="online-lots-rle">REAL ESTATE</div>
-                    {% elif lot.category == 'weapons' %}
-                        <div class="online-lots-wea">WEAPONS</div>
-                    {% else %}
-                    <div class="online-lots-cul">CULTURAL</div>
-                    {% endif %}
-                        <div class="text-center">
-                            <div class="auctions-image">
-                                <img class="small-img" src='{{ MEDIA_URL }}{{ lot.image }}' alt="Lot image">
-                            </div>
-                            <div class="data-container">
-                                <a href="{% url 'lot' lot.pk %}"><h5 class="card-title text-center">{{ lot.name }}</h5></a>
-                            </div>
+                <a href="{% url 'lot' lot.pk %}">
+                    <div class="event-summary">
+                        {% if lot.category == 'military' %}
+                        <div class="online-lots-mil">MILITARY</div>
+                        {% elif lot.category == 'real estate' %}
+                            <div class="online-lots-rle">REAL ESTATE</div>
+                        {% elif lot.category == 'weapons' %}
+                            <div class="online-lots-wea">WEAPONS</div>
+                        {% else %}
+                        <div class="online-lots-cul">CULTURAL</div>
+                        {% endif %}
+                            <div class="text-center">
+                                <div class="auctions-image">
+                                    <img class="small-img" src='{{ MEDIA_URL }}{{ lot.image }}' alt="Lot image">
+                                </div>
+                                <div class="data-container">
+                                    <h5 class="card-title text-center">{{ lot.name }}</h5>
+                                </div>
 
-                        </div>
-                </div>
+                            </div>
+                    </div>
+                </a>
             </div>
             {% endfor %}
 
         </div>
         <!--./row-->
-
-    <!--</div>-->
+    </div>
     <!----./container-->
 </section>
 <!--End Featured Lots-->
