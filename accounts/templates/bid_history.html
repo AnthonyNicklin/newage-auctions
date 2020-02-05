@@ -28,9 +28,9 @@
                     {% for bid in bid_items %}
                         <tr class="{% cycle 'bid-item-1' 'bid-item-2'%}">
                             <td>{{ bid.auction.pk }}</td>
-                            <td>{{ bid.auction.lot.name }}</td>
+                            <td class="bold">{{ bid.auction.lot.name }}</td>
                             <td>{{ bid.bid_time }}</td>
-                            <td>€{{ bid.bid_amount }}</td>
+                            <td class="bold">€{{ bid.bid_amount }}</td>
                         </tr>
                    {% endfor %}
                   </tbody>
@@ -41,7 +41,7 @@
             <div class="pagination">
                 <span class="step-links">
                     {% if bid_items.has_previous %}
-                        <a href="?page={{ bid_items.previous_page_number }}">Previous</a>
+                        <a href="?page={{ bid_items.previous_page_number }}"><i class="fas fa-angle-double-left"></i></a>
                     {% endif %}
             
                     <span class="current">
@@ -49,7 +49,7 @@
                     </span>
             
                     {% if bid_items.has_next %}
-                        <a href="?page={{ bid_items.next_page_number }}">Next</a>
+                        <a href="?page={{ bid_items.next_page_number }}"><i class="fas fa-angle-double-right"></i></a>
                     {% endif %}
                 </span>
             </div>
