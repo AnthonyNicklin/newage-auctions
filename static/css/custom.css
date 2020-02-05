@@ -3,7 +3,8 @@
 
 html
 body {
-    color: #100C08;
+    color: hsl(0, 0%, 20%);
+    font-weight: 500;
     margin: 0;
     padding: 0;
     display: flex;
@@ -19,18 +20,17 @@ main {
 }
  
 h1 {
-     margin-top: 0rem;
+     margin-top: 0;
     }
  
 p {
     font-size: 18px;
 }
-
 a {
     text-decoration: none !important;
-    color: #47525E
+    color: #262626
 }
-a:hover, a > .name:hover {
+a:hover, a > .name:hover, a > span:hover {
     color: dodgerblue;
 }
 .b-radius-10 {
@@ -40,7 +40,7 @@ a:hover, a > .name:hover {
     margin-bottom: 1rem;
 }
 .margin-top-0 {
-    margin-top: 0rem;
+    margin-top: 0;
 }
 .margin-top-1 {
     margin-top: 1rem;
@@ -49,7 +49,8 @@ a:hover, a > .name:hover {
     color: #ffffff;
 }
 .bold {
-    color: #100C08;
+    color: hsl(0, 0%, 16%);
+    font-weight: 700;
 }
 .btn-blue {
     background-color: #004390;
@@ -58,19 +59,23 @@ a:hover, a > .name:hover {
 input {
     box-shadow: 0 2px 0 rgba(0,0,0,.15);
 }
+.color-blue {
+    color: #004390;
+}
+
 /*------------------------------------------------------ To Top Button */
 #topBtn {
     background-color: #ffffff;
     display: none;
     position: fixed;
     bottom: 5em;
-    right: 0px;
+    right: 0;
     z-index: 99;
     border-radius: 10px;
-    border: 0.063em solid black; 
+    border: 0.063em solid #262626; 
 }    
 #topBtn:hover {
-    background-color: #000000;
+    background-color: #262626;
     cursor: pointer; 
 }
 #topBtn:hover .fa-arrow-up {
@@ -114,14 +119,14 @@ input {
 
 /*------------------------------------------------------- Headings */
 #page-heading {
-    border-bottom: 1px solid #000000;
-    margin: 50px 0px;
+    border-bottom: 1px solid #262626;
+    margin: 50px 0;
 }
 
 /*-------------------------------------------------------- Index */
 .category-box {
     font-size: 2.5rem;
-    border: 1px solid #000000;
+    border: 1px solid #262626;
     border-radius: 1rem;
     height: 8rem;
     padding-top: 2rem;
@@ -190,7 +195,7 @@ input {
 }
 .lots-number {
     position: relative;
-    right: 0px;
+    right: 0;
 }
 .lot-number {
     background-color: #004390;
@@ -273,7 +278,6 @@ input {
     padding: 1rem;
 }
 .name {
-    color: #004390;
     display: block;
     font-weight: bold;
     font-size: 1.6em;
@@ -371,11 +375,13 @@ input {
 .social-links a .fa-twitter:hover {
     color: #1da1f2;
 }
-/*---------------------------Shopping Cart*/
+/*---------------------------Empty results - Cart and Search pages*/
 #shopping-cart {
     height: 10rem;
 }
-
+#empty-search {
+    height: 10rem;
+}
 /*---------------------------Modal*/
 .modal {
     display: none;
@@ -402,7 +408,7 @@ input {
     font-weight: bold; 
 }
 .close-cross:hover {
-    color: #000000;
+    color: #262626;
     text-decoration: none;
     cursor: pointer; 
 }
@@ -422,19 +428,22 @@ input {
         margin: 1rem;
     }
     .margin-bottom-0 {
-        margin-bottom: 0rem;
+        margin-bottom: 0;
     }
     .margin-top-2 {
         margin-top: 2.6rem;
     }
     .margin-top-sm-0 {
-        margin-top: 0rem;
+        margin-top: 0;
     }
     #topBtn {
         padding: 0.2rem;
         right: 5px;
     }
     #shopping-cart {
+        height: 20rem;
+    }
+    #empty-search {
         height: 20rem;
     }
     .med-img {
