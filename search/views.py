@@ -18,7 +18,7 @@ def keyword_search_lots(request):
 
         if keyword is None or keyword == "":
             messages.error(request, 'Please enter in a keyword to search')
-            return redirect('all_auctions')
+            return redirect('all_lot_items')
 
         elif keyword:
             keyword_lookup = Lot.objects.filter(Q(name__icontains=keyword) | \
@@ -41,7 +41,7 @@ def keyword_search_lots(request):
 
             return render(request, 'lot_items.html', {'lot_items': lot_items})
     else:
-        return redirect('all_auctions')
+        return redirect('all_lot_items')
 
 
 def keyword_search_auctions(request):
