@@ -15,49 +15,60 @@
 
   {% block search_bar %}{% include 'search_bar.html' %}{% endblock %}
 
-  <div class="row justify-content-center">
-    {% for lot in lot_items %}
-      <div class="event-summary mx-3">
-          {% if lot.category == 'military' %}
-            <div class="online-lots-mil">Newage Auctions - MILITARY</div>
-            {% elif lot.category == 'real estate' %}
-              <div class="online-lots-rle">Newage Auctions - REAL ESTATE</div>
-            {% elif lot.category == 'weapons' %}
-              <div class="online-lots-wea">Newage Auctions - WEAPONS</div>
-          {% else %}
-            <div class="online-lots-cul">Newage Auctions - CULTURAL</div>
-          {% endif %}
-          <div class="event-summary-body d-md-flex">
-            <a href="{% url 'lot' lot.pk %}">
-              <div class="auctions-image">
-                <img class="small-img med-img" src='{{ MEDIA_URL }}{{ lot.image }}' alt="Lot image">
+  {% if lot_items %}
+    <div class="row justify-content-center">
+      {% for lot in lot_items %}
+        <div class="event-summary mx-3">
+            {% if lot.category == 'military' %}
+              <div class="online-lots-mil">Newage Auctions - MILITARY</div>
+              {% elif lot.category == 'real estate' %}
+                <div class="online-lots-rle">Newage Auctions - REAL ESTATE</div>
+              {% elif lot.category == 'weapons' %}
+                <div class="online-lots-wea">Newage Auctions - WEAPONS</div>
+            {% else %}
+              <div class="online-lots-cul">Newage Auctions - CULTURAL</div>
+            {% endif %}
+            <div class="event-summary-body d-md-flex">
+              <a href="{% url 'lot' lot.pk %}">
+                <div class="auctions-image">
+                  <img class="small-img med-img" src='{{ MEDIA_URL }}{{ lot.image }}' alt="Lot image">
+                </div>
+                <div class="data-container-lots">
+                  <span class="number">
+                    <span class='lot-number'>Lot No. {{ lot.pk }}</span>
+                  </span>
+                  <div class="name color-blue pl-3 pt-3">{{ lot.name }}</div>
+                </a>
+                <div class="pl-3 p-1">{{ lot.description|truncatewords:25 }}</div> 
+              
+                <div class="text-center py-3">
+                  {% if lot.auction %}
+                    <a href="{% url 'auction' lot.auction.pk %}">
+                      <div><b>Auction No. {{ lot.auction.pk }}</b></div>
+                      <div>Starts {{ lot.auction.time_starting }}</div>
+                    </a>
+                  {% else %}
+                    <div>On Auction Soon</div>
+                  {% endif %}
+                </div>
+                                                  
               </div>
-              <div class="data-container-lots">
-                <span class="number">
-                  <span class='lot-number'>Lot No. {{ lot.pk }}</span>
-                </span>
-                <div class="name color-blue pl-3 pt-3">{{ lot.name }}</div>
-              </a>
-              <div class="pl-3 p-1">{{ lot.description|truncatewords:25 }}</div> 
-            
-              <div class="text-center py-3">
-                {% if lot.auction %}
-                  <a href="{% url 'auction' lot.auction.pk %}">
-                    <div><b>Auction No. {{ lot.auction.pk }}</b></div>
-                    <div>Starts {{ lot.auction.time_starting }}</div>
-                  </a>
-                {% else %}
-                  <div>On Auction Soon</div>
-                {% endif %}
-              </div>
-                                                
-            </div>
 
-          </div>
-      </div>
-    {% endfor %}
-  </div>
-  
+            </div>
+        </div>
+      {% endfor %}
+    </div>
+
+  {% else %}
+    <div class="row justify-content-center">
+        <img id="empty-search" src="{% static 'images/seo-1970475_1280.png' %}" alt="Empty Search Result">
+    </div>
+
+    <div class="text-center">
+        <p class="pt-3">Sorry no Lots found.</p>
+    </div>
+    
+  {% endif %}
   <!-- Pagination -->
   <div class="pagination">
       <span class="step-links">
