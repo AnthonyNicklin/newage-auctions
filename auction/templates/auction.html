@@ -66,52 +66,60 @@
 <section id="bid">
     <div class="container">
 
+        {% if bid_form %}
         <div class="row my-4 p-1">
-            <div class="col-12 text-center">
+            <div class="col col-12 text-center">
                 <h1>Bidding</h1>
             </div>
-            {% if user.is_authenticated %}
-                <div class="col col-12 text-center">
-                    <p>The current bid is <span class="bold">€{{ latest_bid.bid_amount }}</span>. Place a bid
-                        higher then the current bid in order to win the auction.
-                    </p>
-                    <p>Good Luck!</p>
-                    <p class="text-secondary">Bids cannot be taken back once 
-                        submitted. Please ensure before bidding you have the means 
-                        and funds of paying the full amount of the bid you submit.
-                    </p>
+                {% if user.is_authenticated %}
+                    <div class="col col-12 text-center">
+                        <p>The current bid is <span class="bold">€{{ latest_bid.bid_amount }}</span>. Place a bid
+                            higher then the current bid in order to win the auction.
+                        </p>
+                        <p>Good Luck!</p>
+                        <p class="text-secondary">Bids cannot be taken back once 
+                            submitted. Please ensure before bidding you have the means 
+                            and funds of paying the full amount of the bid you submit.
+                        </p>
+                    </div>
                 </div>
-            </div>
 
-            <div class="row justify-content-center mx-1 my-2">
+                <div class="row justify-content-center mx-1 my-2">
 
-                <div class="col col-12 justify-content-center filter p-4">
-                    <form method="POST" action="{% url 'bid' auction_id=auction.pk %}">
-                        <p class="text-center">Bid</p>
-                        {% csrf_token %}
-                        {% for field in bid_form %}
-                        <div class="row">
-                            <div class="col-sm-12 col-md-6 offset-md-2">
-                                {{ field|attr:'class:form-control' }}
+                    <div class="col col-12 justify-content-center filter p-4">
+                        <form method="POST" action="{% url 'bid' auction_id=auction.pk %}">
+                            <p class="text-center">Bid</p>
+                            {% csrf_token %}
+                            {% for field in bid_form %}
+                            <div class="row">
+                                <div class="col-sm-12 col-md-6 offset-md-2">
+                                    {{ field|attr:'class:form-control' }}
+                                </div>
+
+                                <div class="col-sm-12 col-md-4 margin-top-sm-0 margin-top-1">
+                                    <button type="submit" class="btn btn-primary">Bid Now</button>
+                                </div>
+                            {% endfor %}
                             </div>
-
-                            <div class="col-sm-12 col-md-4 margin-top-sm-0 margin-top-1">
-                                <button type="submit" class="btn btn-primary">Bid Now</button>
-                            </div>
-                        {% endfor %}
-                        </div>
-                    </form>
-                </div>
+                        </form>
+                    </div>
+                {% else %}
+                    <div class="col col-12 text-center">
+                        <p>The current bid is <b>€{{ latest_bid.bid_amount }}</b></p>
+                        <p>If you wish to take part in this auction then please 
+                            <a href="{% url 'login' %}" class="color-blue">
+                                <span class="bold color-blue">login</span></a> or click <a href="{% url 'registration' %}" class="color-blue">
+                                <span class="bold color-blue">here</span></a> to register for an account.
+                        </p>
+                    </div>
+                {% endif %}
             {% else %}
-                <div class="col col-12 text-center">
-                    <p>The current bid is <b>€{{ latest_bid.bid_amount }}</b></p>
-                    <p>If you wish to take part in this auction then please 
-                        <a href="{% url 'login' %}" class="color-blue">
-                            <span class="bold color-blue">login</span></a> or click <a href="{% url 'registration' %}" class="color-blue">
-                            <span class="bold color-blue">here</span></a> to register for an account.
-                    </p>
+                <div class="col-12 text-center">
+                    <h1>Auction No. {{auction.pk }}</h1>
+                    <p>Auction starts on {{ auction.time_starting }}</p>
                 </div>
             {% endif %}
+
 
         </div>
         <!-- ./row -->
