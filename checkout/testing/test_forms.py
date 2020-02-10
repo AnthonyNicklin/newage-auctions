@@ -11,7 +11,8 @@ class TestMakePaymentForm(TestCase):
             'credit_card_number': '4242424242424242',
             'cvv': '235',
             'expiry_month': 12,
-            'expiry_year': '2022',
+            'expiry_year': 2022,
+            'stripe_id': 'stripe_id_enald3kLDD'
 
         })
         self.assertTrue(form.is_valid())

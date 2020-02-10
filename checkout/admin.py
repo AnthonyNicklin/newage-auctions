@@ -10,7 +10,7 @@ class OrderLineItemAdminInline(admin.TabularInline):
 
 class OrderAdmin(admin.ModelAdmin):
 
-    readonly_fields = ('payment_id', 'date')
+    readonly_fields = ('payment_id', 'date', 'total')
     inlines = (OrderLineItemAdminInline, )
 
 admin.site.register(Order, OrderAdmin)

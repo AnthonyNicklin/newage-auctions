@@ -10,10 +10,12 @@ class MakePaymentForm(forms.Form):
     credit_card_number = forms.CharField(
                                          label='Credit Card Number:',
                                          required=False,
-                                         help_text="We only accept Visa")
+                                         min_length=16,
+                                         max_length=16)
     cvv = forms.CharField(
                           label='Security code (CVV): ',
-                          required=False)
+                          required=False,
+                          max_length=5)
     expiry_month = forms.ChoiceField(
                                      label="Month",
                                      choices=MONTH_CHOICES,
@@ -22,10 +24,13 @@ class MakePaymentForm(forms.Form):
                                     label='Year',
                                     choices=YEAR_CHOICES,
                                     required=False)
+    stripe_id = forms.CharField(widget=forms.HiddenInput)
 
 
 class OrderForm(forms.ModelForm):
     class Meta:
         model = Order
         fields = ('full_name', 'phone', 'country', 'postcode',
+                  'town_or_city', 'street_address')
+        required = ('full_name', 'phone', 'country', 'postcode',
                   'town_or_city', 'street_address')

@@ -1,4 +1,3 @@
-import os
 import stripe
 from datetime import datetime
 
@@ -12,8 +11,8 @@ from .forms import MakePaymentForm, OrderForm
 from .models import OrderLineItem
 from auction.models import Auction
 
-stripe.api_key = os.environ.get('STRIPE_SECRET')
-STRIPE_PUBLISHABLE = os.environ.get('STRIPE_PUBLISHABLE')
+stripe.api_key = settings.STRIPE_SECRET
+STRIPE_PUBLISHABLE = settings.STRIPE_PUBLISHABLE
 
 
 @login_required()
@@ -33,15 +32,20 @@ def checkout(request):
         if order_form.is_valid() and payment_form.is_valid():
             try:
                 customer = stripe.Charge.create(
-                    amount=int(total * 100),
-                    currency="EUR",
-                    description=user.email,
-                    source="tok_visa",
-                    receipt_email=user.email
-                    
+                    amount = int(total * 100),
+                    currency = "EUR",
+                    description = user.email,
+                    card = payment_form.cleaned_data['stripe_id'],
                 )
-            except stripe.error.CardError:
-                messages.error(request, "Your card was declined!")
+            except stripe.error.CardError as e:
+                messages.error(request, str(e.error.message))
+                return redirect(reverse('checkout'))
+            except stripe.error.InvalidRequestError as e:
+                messages.error(request, str(e.error.message))
+                return redirect(reverse('checkout'))
+            except stripe.error.StripeError as e:
+                messages.error(request, str(e.error.message))
+                return redirect(reverse('checkout'))
             
             if customer.paid:
                 order = order_form.save(commit=False)
@@ -72,7 +76,7 @@ def checkout(request):
     context = {
         "order_form": order_form,
         "payment_form": payment_form,
-        "pk": STRIPE_PUBLISHABLE,
+        'publishable': STRIPE_PUBLISHABLE,
         "total": total
     }
     
