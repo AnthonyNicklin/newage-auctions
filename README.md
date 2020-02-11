@@ -29,7 +29,7 @@ This web application is run and administered by the owner of the website who is 
 
 ## UX
 
-Starting with a mobile first design approach to this project I started creating mockups and wireframes for mobile and small screens. I then moved onto creating mockups and wireframes for medium and larger screens. The design of the site is clean and simple. Mockups and wireframes can be viewed via this link - [Mockups/wireframes]().
+Starting with a mobile first design approach to this project I started creating mockups and wireframes for mobile and small screens. I then moved onto creating mockups and wireframes for medium and larger screens. The design of the site is clean and simple. Mockups and wireframes can be viewed via this link - [Mockups/wireframes](https://github.com/AnthonyNicklin/newage-auctions/tree/develop/mockups_wireframes).
 Below are user stories that were conducted in order to gain clear goals that needed to be achieved for this website.
 
 1. I want an online auction site.
@@ -192,10 +192,9 @@ Platforms:
 * Ubuntu 18.0
     * Google Chrome
     * Firefox
-* Windows 10
+* Windows 7
     * Google Chrome
     * Firefox
-    * Microsoft Edge
     * IE 11
 * Kindle Fire
     * Amazon Silk
@@ -281,8 +280,6 @@ I required my web application to set auctions to expire and also populate user s
 I have been unable to get stripe errors messages for errors that happen on the client-side to display. An example is, as this application uses the test api keys the card number 4242424242424242 will only work. When trying to submit another card number Stripes error messages are failing to display. After a lot of troubleshooting I have still been unable to overcome this but will continue to work on this problem.
 
 Stripe client-side error messages is the only bug that has not been resolved due to time left on the course.
-
-
 
 ## Deployment
 
@@ -398,7 +395,7 @@ To enable or disable Celery under the Resources tab click on the edit icon next 
 
 ### Content 
 
-Content written for lot items and auctions are completely fictional and not historic facts or were taken from various pages on https://www.wikipedia.org/.  
+Content written for lot items and auctions are completely fictional and not historic facts or were taken from various pages on [Wikipedia](https://www.wikipedia.org/). 
 
 ### Images
 
@@ -412,7 +409,7 @@ All images for this web application are being used under a free commercial licen
 * [Technology](https://pixabay.com/illustrations/technology-equipment-responsive-web-2468063/) (Device images icon)
 * [Fun](https://pixabay.com/vectors/thumbs-up-good-thumb-hand-gesture-31663/)
 
-All images for lot items were under free commercial license from Pixaby. 
+All images for lot items are under free commercial license from Pixaby. 
 
 ### Favicon 
 
@@ -422,7 +419,6 @@ I used a Favicon and App Icon Generator online to create the Favicon for this we
 
 #### User Profiles
 In order to expand Django’s built-in user authenication system I followed the tourial at [https://simpleisbetterthancomplex.com/tutorial/2016/07/22/how-to-extend-django-user-model.html](https://simpleisbetterthancomplex.com/tutorial/2016/07/22/how-to-extend-django-user-model.html) in order to add user profiles that where attached to the user account and created on user registraion. 
-
 
 ### Disclaimer
 
