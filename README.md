@@ -14,9 +14,10 @@
 4. [Database Schema](https://github.com/AnthonyNicklin/newage-auctions/tree/develop#database-schema)
 5. [Database Design](https://github.com/AnthonyNicklin/newage-auctions/tree/develop#database-design)
 6. [Technologies Used](https://github.com/AnthonyNicklin/newage-auctions/tree/develop#technologies-used)
-7. [Testing](https://github.com/AnthonyNicklin/newage-auctions/tree/develop#testing)
-8. [Deployment](https://github.com/AnthonyNicklin/newage-auctions/tree/develop#deployment)
-9. [Credits](https://github.com/AnthonyNicklin/newage-auctions/tree/develop#credits)
+7. [Application Logic](https://github.com/AnthonyNicklin/newage-auctions/tree/develop#application-logic)
+8. [Testing](https://github.com/AnthonyNicklin/newage-auctions/tree/develop#testing)
+9. [Deployment](https://github.com/AnthonyNicklin/newage-auctions/tree/develop#deployment)
+10. [Credits](https://github.com/AnthonyNicklin/newage-auctions/tree/develop#credits)
 
 ## Aim
 
@@ -138,6 +139,46 @@ Below are a list of the programming languages, technologies and frameworks used 
 * [DBDiagram](https://dbdiagram.io/home) 
     * A relational database diagram design tool used to create the database schema.
 
+## Application Logic
+
+### Apps
+
+#### Accounts
+The accounts app holds all the logic for anything to do with user accounts. I utilized Django's built-in user authentication system and added extra functionality  by attaching profiles to each user account. 
+
+#### Auction
+Lots and auctions are created and processed within the auction app. All CRUD operations are handled within the admin dashboard. Authenticated users can use the bid form at the bottom of each auction to place a bid only if higher then the current bid.
+
+A Celery beat is run every minute which fires a function to: 
+* Set auction to expired if the time_ending is less than the current date and time.
+* Find the winning bid and the user who placed this bid and set this user as the winning bidder. 
+
+The Celery function lives in [tasks.py](https://github.com/AnthonyNicklin/newage-auctions/blob/master/auction/tasks.py) and the Celery beat can be found in the [settings.py](https://github.com/AnthonyNicklin/newage-auctions/blob/master/newageauctions/settings.py).
+
+*Note to assessors, please use the following credentials in order to log into the admin dashboard: assessor / e3nod34LLer3
+
+**Note to assessors, to ensure you are able to review the payment process fully I have created multiple user accounts with auctions already in user shopping carts. Please use the following accounts:
+* James32  / kan34KJH34
+* Ben343 / lajfKj343a
+* Joun343 / kda793jKJ3
+* Smithy23 / kdjnf98KJ33
+
+From the date of submission I have staggered auctions to expire at different intervals from 2 days, 1 week, 2 weeks, 1 month and 2 months. You can amend the auction expiry times manually if required by logging into the admin dashboard > *Auction* > *Auctions* > Amend the time ending date and time and make sure the *Expired* checkbox is not ticked and *Paid* checkbox.
+
+If at any point you require items to populate back into a users shopping cart, log into the admin dashboard. Under Auction click on *Auctions* > Choose a auction > Tick *Paid* and then select the user account to populate their shopping cart. Also ensure the *Expired* checkbox is ticked.
+
+#### Cart
+The cart app renders the users shopping cart and also lets them remove an item if they wish to not go through with the purchase.
+
+#### Checkout
+The Checkout app handles the payment process. I have integrated Stripe payments and used their API as a secure way to process payments. The server-side logic is held in the [views.py](https://github.com/AnthonyNicklin/newage-auctions/blob/master/checkout/views.py) and the client-side logic is in [static/js/stripe.js](https://github.com/AnthonyNicklin/newage-auctions/blob/master/static/js/stripe.js).
+
+#### Home
+Home renders the home page for now. I created a reusable app for the home page as future features will include more pages and features that will be added to this app.
+
+#### Search
+The search app holds the search logic for categories, search auctions and search lots bar. Auctions and lots use keywords to search and then display the results back. Categories are simply filtered by the category and then rendered on a categories page.
+
 ## Testing
 
 I conducted testing across different platforms and web browsers in order to make sure the website looked great across each one. I also asked friends and family to test across their own devices and to give me honest opinions and feedback.
@@ -230,6 +271,17 @@ Automated tests were written using the Django test framework and are located in 
 ### Continuous Integration
 
 Throughout the development of the project after setting up Heroku, TRAVIS CI tool was utilised to ensure that the builds would be runnable on the Heroku application, the commands for this are contained within the Travis.yml file.
+
+### Issues encountered
+
+#### Running asynchronous tasks 
+I required my web application to set auctions to expire and also populate user shopping carts via an automated process. I found when researching how this can be done not be as straightforward as one would think. However, Celery came to the rescue. The initial set up for local development was OK but, I ran into issues when trying to deploy to Heroku. Heroku requires additional dynos and configuration which at first upsetted the way it was working locally. 
+
+#### Stripe client-side error messages
+I have been unable to get stripe errors messages for errors that happen on the client-side to display. An example is, as this application uses the test api keys the card number 4242424242424242 will only work. When trying to submit another card number Stripes error messages are failing to display. After a lot of troubleshooting I have still been unable to overcome this but will continue to work on this problem.
+
+Stripe client-side error messages is the only bug that has not been resolved due to time left on the course.
+
 
 
 ## Deployment
@@ -346,7 +398,7 @@ To enable or disable Celery under the Resources tab click on the edit icon next 
 
 ### Content 
 
-All content written on and for this web application is completely fictional and not historic fact. 
+Content written for lot items and auctions are completely fictional and not historic facts or were taken from various pages on https://www.wikipedia.org/.  
 
 ### Images
 
@@ -365,6 +417,12 @@ All images for lot items were under free commercial license from Pixaby.
 ### Favicon 
 
 I used a Favicon and App Icon Generator online to create the Favicon for this web application. The web site I used was [Favicon.ico & App Icon Generator](https://www.favicon-generator.org/).
+
+### Code
+
+#### User Profiles
+In order to expand Django’s built-in user authenication system I followed the tourial at [https://simpleisbetterthancomplex.com/tutorial/2016/07/22/how-to-extend-django-user-model.html](https://simpleisbetterthancomplex.com/tutorial/2016/07/22/how-to-extend-django-user-model.html) in order to add user profiles that where attached to the user account and created on user registraion. 
+
 
 ### Disclaimer
 
