@@ -27,6 +27,7 @@ class Lot(models.Model):
     featured = models.BooleanField(default=False)
 
     class Meta:
+        ordering = ['-id']
         verbose_name_plural = 'lot items'
 
     def __str__(self):
@@ -49,6 +50,7 @@ class Auction(models.Model):
     paid = models.BooleanField(default=False)
 
     class Meta:
+        ordering = ['-id']
         verbose_name_plural = "Auctions"
 
     def __str__(self):
