@@ -39,12 +39,24 @@ def checkout(request):
                 )
             except stripe.error.CardError as e:
                 messages.error(request, str(e.error.message))
+                messages.error(request, str(e.error.http_status))
+                messages.error(request, str(e.error.code))
+                messages.error(request, str(e.error.type))
+                messages.error(request, str(e.error.param))
                 return redirect(reverse('checkout'))
             except stripe.error.InvalidRequestError as e:
                 messages.error(request, str(e.error.message))
+                messages.error(request, str(e.error.http_status))
+                messages.error(request, str(e.error.code))
+                messages.error(request, str(e.error.type))
+                messages.error(request, str(e.error.param))
                 return redirect(reverse('checkout'))
             except stripe.error.StripeError as e:
                 messages.error(request, str(e.error.message))
+                messages.error(request, str(e.error.http_status))
+                messages.error(request, str(e.error.code))
+                messages.error(request, str(e.error.type))
+                messages.error(request, str(e.error.param))
                 return redirect(reverse('checkout'))
             
             if customer.paid:
